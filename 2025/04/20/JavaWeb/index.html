@@ -1,0 +1,2258 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="JavaWeb入门理解： 首先用idea创建了 SpringBoot 模型，模型中针对请求编写响应方法（到底是哪个请求是用注释表明，响应什么是用返回值表示·）。 然后从一般的浏览器访问此端口（似乎是用get方法明确请求），就可以得到SpringBoot的方法返回值。 http 超文本传输协议    用于浏览器和服务器的数据传输   http基于TCP协议  每次请求前进行三次握手   基于请求-响">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java web学习笔记">
+<meta property="og:url" content="http://example.com/2025/04/20/JavaWeb/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JavaWeb入门理解： 首先用idea创建了 SpringBoot 模型，模型中针对请求编写响应方法（到底是哪个请求是用注释表明，响应什么是用返回值表示·）。 然后从一般的浏览器访问此端口（似乎是用get方法明确请求），就可以得到SpringBoot的方法返回值。 http 超文本传输协议    用于浏览器和服务器的数据传输   http基于TCP协议  每次请求前进行三次握手   基于请求-响">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/xuanwo.jpg">
+<meta property="article:published_time" content="2025-04-20T06:02:13.010Z">
+<meta property="article:modified_time" content="2025-04-20T06:05:34.228Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/xuanwo.jpg">
+  
+  
+  
+  <title>java web学习笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>songlin&#39;s Room</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/reading/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>reading</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/java/" target="_self">
+                <i class="iconfont icon-code"></i>
+                <span>java</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/movie/" target="_self">
+                <i class="iconfont icon-image"></i>
+                <span>movie</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/wofo-far.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="java web学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">java web学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="JavaWeb"><a href="#JavaWeb" class="headerlink" title="JavaWeb"></a>JavaWeb</h1><p>入门理解：</p>
+<p>首先用idea创建了 SpringBoot 模型，模型中针对请求编写响应方法（到底是哪个请求是用注释表明，响应什么是用返回值表示·）。</p>
+<p>然后从一般的浏览器访问此端口（似乎是用get方法明确请求），就可以得到SpringBoot的方法返回值。</p>
+<h1 id="http"><a href="#http" class="headerlink" title="http"></a>http</h1><blockquote>
+<p>超文本传输协议    用于浏览器和服务器的数据传输</p>
+</blockquote>
+<ul>
+<li><p>http基于TCP协议</p>
+<ul>
+<li>每次请求前进行三次握手</li>
+</ul>
+</li>
+<li><p>基于请求-响应模型—–没有请求就不会有响应，一次请求对应一次响应</p>
+</li>
+<li><p>http是<strong>无状态</strong>协议——对事务处理没有记忆能力，每次请求-响应都是独立的</p>
+<ul>
+<li><p>多次请求之间无法数据共享</p>
+</li>
+<li><p>但速度会更快</p>
+</li>
+<li><p>因为前后独立，服务器无法记录cookies等必要信息</p>
+</li>
+<li><p>解决方法是—-新技术–会话</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="http请求协议"><a href="#http请求协议" class="headerlink" title="http请求协议"></a>http请求协议</h2><h4 id="请求格式："><a href="#请求格式：" class="headerlink" title="请求格式："></a>请求格式：</h4><ol>
+<li><p>请求行（请求数据的第一行）数据包括：</p>
+<p>请求方式，资源路径，协议</p>
+<blockquote>
+<p>GET &#x2F;index.html HTTP&#x2F;1.1</p>
+</blockquote>
+<p>但是经常被https协议加密导致看不到</p>
+<p><strong>资源路径中，后面打问号跟上get方式的请求内容</strong>（长度有限）</p>
+<blockquote>
+<p>网页访问客户端，是将自己的网址url并上要请求的参数，一起发送，于是就可以用这个“url&#x2F;请求”的格式模拟访问后端服务器。</p>
+</blockquote>
+</li>
+<li><p>请求头：键值对们</p>
+</li>
+</ol>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-05-24-20-01-16-image.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="3">
+<li>请求体：针对post类型的请求，存放请求参数（长度无限）</li>
+</ol>
+<blockquote>
+<p><em>有的被 https加密了，有的在谷歌浏览器可见，edge不可见</em></p>
+</blockquote>
+<hr>
+<h4 id="响应格式："><a href="#响应格式：" class="headerlink" title="响应格式："></a>响应格式：</h4><ol>
+<li><p>响应行：</p>
+<p>协议，响应状态码，对状态的描述</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://1.0.0.1/">http://1.1</a> 200 OK</p>
+</blockquote>
+</li>
+<li><p>响应头：键值对们</p>
+</li>
+<li><p>响应体（响应正文）：存放响应数据</p>
+</li>
+</ol>
+<ul>
+<li>响应状态码：</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-05-24-20-15-33-image.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>三百多表示，目标访问的服务器A的原数据已经转移了，A返回给客户端一个新服务器的位置。</li>
+</ol>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-05-24-20-20-05-image.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2152407">HTTP 响应状态码全解-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</blockquote>
+<p>常见响应头</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-05-24-20-34-20-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>响应头是前后端交互的关键部分，除去具体数据内容的一切需要的信息都在里面。</p>
+<h2 id="http协议解析"><a href="#http协议解析" class="headerlink" title="http协议解析"></a>http协议解析</h2><p>后端接收浏览器的请求，按照http协议解析出请求的内容，并按照协议将数据返回给浏览器。</p>
+<p>用Java原生的网络编程可以做：</p>
+<p>ServerSocket接收下字符串后，对各种情况的解析，解析后经过后端的逻辑判断，再写出一份符号http的响应数据并发回去。</p>
+<p>有点复杂</p>
+<p>而且解析的流程框架是不变的</p>
+<p>于是应运而生众多web服务器&#x2F;中间件——jetty，weblogic，websphere，<strong>Tomcat</strong></p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="Web服务器"><a href="#Web服务器" class="headerlink" title="Web服务器"></a>Web服务器</h1><p>逻辑是：</p>
+<ul>
+<li><p>web服务器作为一个软件程序，可以对http协议进行封装，<strong>使得本地程序通过web服务器可以轻松地访问与被访问</strong>（备有IP地址和端口，并且本地文件配置到web服务器内）。这样实质上就加入了整个互联网。</p>
+<p>于是作用分为对内对外</p>
+<blockquote>
+<p>对内：进出封装Http</p>
+<p>对外：通过互联网访问到本地资源的方式</p>
+</blockquote>
+</li>
+<li><p>web服务器的效果是监听本地计算机的某个端口，对访问来的请求进行解析，由后端程序处理解析出来的信息，生成返回的数据再由web服务器生成响应并发回去。</p>
+</li>
+<li><p><span style="color:red">所以可以把web服务器理解为一个网站（实则网站还要申请域名，dns等等），可以接收请求，返回数据。</span>不太对，web服务器是后端概念。</p>
+</li>
+<li><p>于是可以把某些文件配置到web服务器中，可以让找过来的请求能找到此文件（没有域名，只能按IP+端口号+文件夹，来访问）</p>
+</li>
+</ul>
+<h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h4 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h4><img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-05-25-12-34-59-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="290">
+
+<p>startup.bat启动tomcat，就可以通过访问此台电脑的8080端口进入tomcat</p>
+<ul>
+<li><p>tomcat的conf&#x2F;server.xml中的配置文件中可以修改默认端口号，防止冲突</p>
+</li>
+<li><p>http协议默认端口是80，于是如果http访问不加端口号，而tomcat默认改为80，则只需要访问到服务器。</p>
+</li>
+<li><p><em>原本据说要把 jdk的路径写入环境变量，但实际上没效果，最后的操作是：把 tomcat写进去，jdk也写进去，而且外层的环境变量和内存的 path都写了（内层的path写的是外层 +bin目录或者外层 + lib目录）</em></p>
+</li>
+</ul>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><h2 id="项目部署"><a href="#项目部署" class="headerlink" title="项目部署"></a>项目部署</h2><p>把项目文件放到webapps文件夹下，就可以在端口后添加路径，进行访问(不过似乎还要把原来引用本地的资源也部署到文件夹里，不然访问不到的)</p>
+<blockquote>
+<p><em>将一个测试的前端页面放在webapps里的Demo文件夹下</em></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/Demo/HTMLDemo1.html">你好李鑫</a></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/Demo/HTMLDemo1.html">http://localhost:8080/Demo/HTMLDemo1.html</a></p>
+</blockquote>
+<p><strong>一般而言的项目部署：</strong></p>
+<blockquote>
+<p>将<strong>war包</strong>放入webapps中，就相当于将某个程序可被访问</p>
+</blockquote>
+<h4 id="-3"><a href="#-3" class="headerlink" title=""></a></h4><h4 id="war包：（web-ARchive）"><a href="#war包：（web-ARchive）" class="headerlink" title="war包：（web ARchive）"></a>war包：（web ARchive）</h4><ul>
+<li><p>是一种特殊的jar包，用于打包和部署web程序（war，jar都是压缩包）。</p>
+</li>
+<li><p>war包里的一般组成</p>
+<ul>
+<li><p>web前端的程序资源（HTML文件，CSS文件，JS文件，imgs图片，Videos视频）</p>
+</li>
+<li><p>后端程序逻辑：Servlet类和Java类</p>
+</li>
+<li><p>依赖库：jar包</p>
+</li>
+<li><p>配置文件，其他资源文件（模板文件，日志文件…）</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>以下是基本的war包结构：</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vbnet">myapp.war<br>├── WEB-INF<br>│   ├── classes<br>│   │   ├── com<br>│   │   │   └── myapp<br>│   │   │       └── MyServlet.<span class="hljs-keyword">class</span><br>│   │   └── application-context.xml<br>│   ├── <span class="hljs-keyword">lib</span><br>│   │   ├── dependency1.jar<br>│   │   └── dependency2.jar<br>│   └── web.xml<br>├── index.html<br>├── style.css<br>└── images<br>    ├── logo.png<br>    └── banner.jpg<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs textile">逻辑整合：<br>1.Web服务器的主要目标是提供Web内容，包括网页、图像、视频、应用程序等。<br>    它们接收客户端的请求，处理请求，并将相应的内容发送回客户端。<br>2.也就是说，后端能够响应前端请求并返回数据的部分是web服务器————就是所有后端————<br>    tomcat中间件+后端程序逻辑+数据库<br>3.我们所说的浏览器是前端的组件，由它来发送http请求，接收响应（解释并渲染）<br>    浏览器和web服务器之间的关系是：B/S<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>起步依赖：关键的依赖，通过导入这个依赖可以顺带导入这个依赖依赖的依赖</p>
+</blockquote>
+<h3 id="-4"><a href="#-4" class="headerlink" title=""></a></h3><h3 id="黑马这缺心眼的老小子，经典的白雪"><a href="#黑马这缺心眼的老小子，经典的白雪" class="headerlink" title="黑马这缺心眼的老小子，经典的白雪"></a>黑马这缺心眼的老小子，经典的白雪</h3><p>Spring Boot框架已经整合好了Tomcat包，启动Spring Boot实际已经启动Tomcat，而且Spring Boot也会自动整合配置部署。</p>
+<h1 id="请求响应"><a href="#请求响应" class="headerlink" title="请求响应"></a>请求响应</h1><ol>
+<li><p>cs和bs</p>
+<ol>
+<li><p>cs：Client&#x2F;Server。将业务逻辑和数据部分配置在客户端，这样做的优点是用户体验较好，因为访问本地比较快，缺点是开发，维护比较麻烦。</p>
+<ul>
+<li><p>客户端负责用户界面，输入输出，通信，基本功能，离线功能</p>
+</li>
+<li><p>服务器负责业务逻辑，数据存储，客户端的通信（连接）</p>
+</li>
+</ul>
+</li>
+<li><p>bs：Browser&#x2F;Server。客户端只需要浏览器，应用程序的逻辑和数据都存储在服务器，优点是方便维护，缺点是访问较慢，体验一般。</p>
+<ul>
+<li><p>用户通过浏览器向服务器发送请求，并通过浏览器显示接收的web页面和资源。</p>
+</li>
+<li><p>客户端（浏览器）负责显示页面，输入输出</p>
+</li>
+<li><p>服务器负责一切。</p>
+</li>
+</ul>
+</li>
+<li><p>区别：</p>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs context">1.客户端功能：CS架构的客户端通常具有更多的功能和处理能力，可以执行复杂的任务，<br>    而BS架构的客户端（Web浏览器）功能相对有限，主要负责显示和交互用户界面。<br>2.业务逻辑处理：在CS架构中，业务逻辑主要由服务器端处理，而在BS架构中，<br>    业务逻辑通常由服务器端和客户端的JavaScript脚本共同处理。<br>3.可扩展性和部署：CS架构通常需要在客户端上安装和维护专门的客户端软件，<br>    而BS架构则无需在客户端进行安装，只需通过Web浏览器访问应用程序即可。<br>    这使得BS架构更具可扩展性和易于部署。<br>4.跨平台性：BS架构基于Web技术，可以在不同的操作系统和设备上运行，<br>    而CS架构的客户端软件通常需要特定的操作系统或设备支持。<br>5.BS架构通常使用HTTP协议进行客户端和服务器之间的通信，<br>    而CS架构的协议选择更加灵活，可以根据需求选择不同的通信协议。<br>    所以CS架构下客户端和服务器可以自定义协议，只要双方懂就行，于是不一定需要web服务器<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><h4 id="servlet-server-applet-运行在服务器端的小程序"><a href="#servlet-server-applet-运行在服务器端的小程序" class="headerlink" title="servlet   server applet(运行在服务器端的小程序)"></a>servlet   <em>server applet(运行在服务器端的小程序)</em></h4></li>
+</ol>
+<ul>
+<li><p>servlet是一个接口，里面定义了Java类被浏览器访问到（tomcat识别到）的规则。tomcat就是一个servlet容器。</p>
+</li>
+<li><p>似乎·在tomcat接收到浏览器的http请求后只是初级的解释了一手，具体里面包括http方法（get，post），URL路径，请求头，请求参数等等会封装成一个可访问的对象requestServlet，经过servlet内的逻辑来对此对象的属性调用，servlet调度下层控制层进行操作并返回数据，再由servlet返回给tomcat，tomcat封装成http格式返回给浏览器。</p>
+<p><mark>当初说的真对了</mark></p>
+</li>
+<li><p>所以说在servlet中有得到请求信息的方法：HttpServletRequest获取请求信息；HttpServletResponse生成并发送HTTP请求。（tomcat已经透明了，因为必须有tomcat接收）</p>
+</li>
+</ul>
+<h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><ul>
+<li><p>工作原理：</p>
+<p>Servlet接口定义了Servlet（内含逻辑的实现类）和Servlet容器之间的<strong>契约</strong>。即：<strong>容器将实现类加载到内存，并<mark>产生其实例对象</mark>供调用方法。</strong></p>
+<p><small>对于浏览器请求动态资源，需要先经过代码的逻辑才能决定返回什么响应，这些逻辑就是服务器的核心功能。但是这些代码的执行没有main方法，是依赖于tomcat容器的调用。而想要被tomcat识别并调用，需要符合一定规则（Java中符合规则就是实现接口）。较底层的规则——Servlet</small></p>
+</li>
+</ul>
+<blockquote>
+<p>在一个应用程序中，每种Servlet类型只能有一个实例</p>
+</blockquote>
+<p>  用户请求到容器，确定到容器中的某个对象。<strong>容器会封装好两个对象——ServletRequest和ServletResponse</strong>。</p>
+<p>  ServletRequest像是解析http的，后者像是打包成http的</p>
+<ul>
+<li><p>对每个应用程序，Servlet容器会创建一个ServletContext上下文对象（程序的运行环境），</p>
+</li>
+<li><p>对每个Servlet对象，会有一个ServletConfig对象封装其配置。</p>
+</li>
+</ul>
+<p>接口必要的三方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Servlet</span> &#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">(ServletConfig var1)</span> <span class="hljs-keyword">throws</span> ServletException;<br><br>    ServletConfig <span class="hljs-title function_">getServletConfig</span><span class="hljs-params">()</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">service</span><span class="hljs-params">(ServletRequest var1, ServletResponse var2)</span> <span class="hljs-keyword">throws</span> ServletException, IOException;<br><br>    String <span class="hljs-title function_">getServletInfo</span><span class="hljs-params">()</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><p>init():首次请求此Servlet时执行的初始化操作</p>
+</li>
+<li><p>service():每次请求Servlet时，调用此方法</p>
+</li>
+<li><p>destory():要销毁Servlet时调用。</p>
+</li>
+</ol>
+<p>还有非必要两方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">ServletConfig <span class="hljs-title function_">getServletConfig</span><span class="hljs-params">()</span>;<br><br>String <span class="hljs-title function_">getServletInfo</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><p>getServletConfig():返回这个对象的ServletConfig配置信息对象</p>
+<p>据说是由容器传给init方法的</p>
+</li>
+<li><p>getServletInfo():返回Servlet对象的一段描述</p>
+</li>
+</ol>
+<h5 id="ServletRequest接口"><a href="#ServletRequest接口" class="headerlink" title="ServletRequest接口"></a>ServletRequest接口</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ServletRequest</span> &#123;<br><br><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getContentLength</span><span class="hljs-params">()</span>;<span class="hljs-comment">//返回请求主体的字节数</span><br><br>    String <span class="hljs-title function_">getContentType</span><span class="hljs-params">()</span>;<span class="hljs-comment">//返回主体的MIME类型</span><br><br>    String <span class="hljs-title function_">getParameter</span><span class="hljs-params">(String var1)</span>;<span class="hljs-comment">//返回请求参数的值</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="ServletResponse接口"><a href="#ServletResponse接口" class="headerlink" title="ServletResponse接口"></a>ServletResponse接口</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ServletResponse</span> &#123;<br>    String <span class="hljs-title function_">getCharacterEncoding</span><span class="hljs-params">()</span>;<br><br>    String <span class="hljs-title function_">getContentType</span><span class="hljs-params">()</span>;<br><br>    ServletOutputStream <span class="hljs-title function_">getOutputStream</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException;<br><br>    PrintWriter <span class="hljs-title function_">getWriter</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setCharacterEncoding</span><span class="hljs-params">(String var1)</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setContentLength</span><span class="hljs-params">(<span class="hljs-type">int</span> var1)</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setContentType</span><span class="hljs-params">(String var1)</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setBufferSize</span><span class="hljs-params">(<span class="hljs-type">int</span> var1)</span>;<br><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getBufferSize</span><span class="hljs-params">()</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">flushBuffer</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">resetBuffer</span><span class="hljs-params">()</span>;<br><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">isCommitted</span><span class="hljs-params">()</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">reset</span><span class="hljs-params">()</span>;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">setLocale</span><span class="hljs-params">(Locale var1)</span>;<br><br>    Locale <span class="hljs-title function_">getLocale</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>常用：</p>
+<ul>
+<li>getWriter()，返回一个Java.io.PrintWriter对象：可以向客户端发送文本</li>
+</ul>
+<p>        <small>但默认编码是ISO-8859-1，会产生中文乱码</small></p>
+<ul>
+<li>getOutputStream()，返回二进制流，此方法用来发送二进制数据</li>
+</ul>
+<p><code>在发送任何HTML之前，应该先调用setContentType（）方法，设置响应的内容类型，并将“text/html”作为一个参数传入，这是在告诉浏览器响应的内容类型为HTML，需要以HTML的方法解释响应内容而不是普通的文本，或者也可以加上“charset=UTF-8”改变响应的编码方式以防止发生中文乱码现象。</code></p>
+<h5 id="ServletConfig接口"><a href="#ServletConfig接口" class="headerlink" title="ServletConfig接口"></a>ServletConfig接口</h5><p>既然是关于Servlet对象的配置信息，必然在初始化时完成——是由容器向init方法传入的。</p>
+<p><img src="https://img-blog.csdn.net/20180512175029254?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NzgyMDE5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload><br>关于初始化信息：</p>
+<p>tomcat容器扫描文件后进行初始化时，通过配置文件or直接完成属性的依赖注入。这些属性就是初始化参数。</p>
+<h5 id="ServletContext对象"><a href="#ServletContext对象" class="headerlink" title="ServletContext对象"></a>ServletContext对象</h5><p>上下文：代表容器的运行环境——每个应用程序拥有一个ServletContext对象（在分布式下将一个应用程序部署到多个容器时，每个JVM上的应用都有一个刻画环境的上下文对象）</p>
+<p><code>ServletContext</code><strong>提供了一种在Servlet之间共享信息的机制，它可以用来获取Web应用程序的全局信息、配置参数和执行环境。</strong></p>
+<p>有一点点像反射</p>
+<p>通过request的getServletContext方法即可获取此对象。</p>
+<p>方法小记：</p>
+<ol>
+<li>getMimeType（）：获取某文件的Mime类型</li>
+</ol>
+<blockquote>
+<p>MIME类型是“多用途Internet邮件扩展”（Multipurpose Internet Mail Extensions）的缩写。它是一种标准，用于标识在Internet上传输的文档的性质和格式。</p>
+<ul>
+<li><p>MIME类型由两部分组成：主类型和子类型</p>
+</li>
+<li><p>主要包括：</p>
+<p>文本类型：text&#x2F;plain、text&#x2F;html、text&#x2F;css、application&#x2F;json等。</p>
+<p>图像类型：image&#x2F;jpeg、image&#x2F;png、image&#x2F;gif等。</p>
+<p>音频类型：audio&#x2F;mpeg、audio&#x2F;wav、audio&#x2F;ogg等。</p>
+<p>视频类型：video&#x2F;mp4、video&#x2F;webm、video&#x2F;quicktime等。</p>
+<p>应用程序类型：application&#x2F;pdf、application&#x2F;zip、application&#x2F;msword等。</p>
+</li>
+</ul>
+</blockquote>
+<p>其实就是从文件后缀到类型的映射关系，这些映射关系记录在tomcat的配置文件config–&gt;web.xml下</p>
+<ol start="2">
+<li><p>getContextPath（）：获取请求路径的工程名？</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-22-09-37-05-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>毕竟是关于整个上下文的，就是关于整个应用程序环境的，得不到request的具体路径也合理</p>
+</li>
+</ol>
+<ul>
+<li><p>servlet可以通过配置实现加入容器，也可以通过注解形式</p>
+<p>通过配置文件大致要做的事情：</p>
+<ol>
+<li><p>将servlet类对应一个name</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-22-09-43-18-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>将servlet的name对应一个url</p>
+<img title="" src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-07-22-09-43-44-image.png" srcset="/img/loading.gif" lazyload alt="" data-align="inline">
+</li>
+<li><p>以上本质就是将访问8080的请求能根据子路径对应到某个类。</p>
+</li>
+<li><p>可选：</p>
+<ol>
+<li><p>初始化参数</p>
+</li>
+<li><p>配置过滤器</p>
+</li>
+<li><p>等等</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- 配置Servlet --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>com.example.MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>        <span class="hljs-comment">&lt;!-- 设置初始化参数 --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>myParam<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>Hello, this is an initialization parameter.<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- 配置Servlet映射 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/myservlet<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- 配置过滤器 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">filter</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">filter-name</span>&gt;</span>MyFilter<span class="hljs-tag">&lt;/<span class="hljs-name">filter-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">filter-class</span>&gt;</span>com.example.MyFilter<span class="hljs-tag">&lt;/<span class="hljs-name">filter-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- 配置过滤器映射 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">filter-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">filter-name</span>&gt;</span>MyFilter<span class="hljs-tag">&lt;/<span class="hljs-name">filter-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">filter-mapping</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<p>很类似Spring中配置bean.xml，通过配置文件决定加载哪些类到内存，继而由容器&#x2F;框架完成加载。</p>
+<p><mark>全是接口，难以实现</mark></p>
+<p>于是给出一些实现类(抽象类)</p>
+<ol>
+<li><p>GenericServlet</p>
+<p>思想有一点点像AdaptedMouse，将接口的全部接口方法都只做基本的实现，程序员不需要implements接口来实现所有类，而是extands这个GS把需要的类重写</p>
+<p>此方法有点抽象——表面上实现类ServletContext，但底层关于上下文的方法都靠init时传入的对象…不懂不懂</p>
+<p><code>&lt;u&gt;将init( )方法中的ServletConfig参数赋给了一个内部的ServletConfig引用从而来保存ServletConfig对象&lt;/u&gt;，不需要程序员自己去维护ServletConfig了。</code></p>
+</li>
+<li><p><em><strong><mark><u>HttpServlet</u></mark></strong></em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HttpServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">GenericServlet</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span><br><span class="hljs-comment">//表明HttpServlet是由GenericServlet扩展而来的</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20180513104757248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NzgyMDE5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload></p>
+<p>源码分析：</p>
+<ul>
+<li><p>关于service()方法的分析</p>
+<p>由于GS是抽象类，GS中的service方法就是抽象方法，定义了基本参数ServletRequest和ServletResponse，需要子类写完。</p>
+<p>HttpServlet的做法是：</p>
+<p>一方面要实现用ServletRequest和ServletResponse的service方法，一方面有更高级的httpServletRequest和httpServletResponse可以用。</p>
+<p>于是在属于实现的方法中通过强转将参数升级，接着传入用高级参数的方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs context">之所以能够这样强制的转换，<br>是因为在调用Servlet的Service方法时，<br>Servlet容器总会<br>传入一个HttpServletRequest对象和HttpServletResponse对象，<br>预备使用HTTP。因此，转换类型当然不会出错了。<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>流程：</p>
+<p>service方法是一个分流器，通过解析request参数中的请求方式，分流到其他方法中。</p>
+<blockquote>
+<p>doGet,doPost,doHead,doPut,doTrace,doOptions和doDelete</p>
+</blockquote>
+<p>于是对应继承的类而言——只需要重写常用的几个方法，doGet，doPost等即可。</p>
+<h5 id="HttpServletRequest接口"><a href="#HttpServletRequest接口" class="headerlink" title="HttpServletRequest接口"></a>HttpServletRequest接口</h5><p>封装了解析http请求的各种方法</p>
+<p><img src="https://img-blog.csdn.net/20180513130638615?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NzgyMDE5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload></p>
+<h5 id="通过request获得请求行"><a href="#通过request获得请求行" class="headerlink" title="通过request获得请求行"></a><strong>通过request获得请求行</strong></h5><p>假设查询字符串为：username&#x3D;zhangsan&amp;password&#x3D;123</p>
+<p>获得客户端的请求方式：String getMethod()</p>
+<p>获得请求的资源：</p>
+<p>String getRequestURI()</p>
+<p>StringBuffer getRequestURL()</p>
+<p>String getContextPath() —web应用的名称</p>
+<p>String getQueryString() —- get提交url地址后的参数字符串</p>
+<h5 id="通过request获得请求头"><a href="#通过request获得请求头" class="headerlink" title="通过request获得请求头"></a><strong>通过request获得请求头</strong></h5><p>long getDateHeader(String name)</p>
+<p>String getHeader(String name)</p>
+<p>Enumeration getHeaderNames()</p>
+<p>Enumeration getHeaders(String name)</p>
+<p>int getIntHeader(String name)</p>
+<p>referer头的作用：执行该此访问的的来源，做防盗链</p>
+<h5 id="通过request获得请求体"><a href="#通过request获得请求体" class="headerlink" title="通过request获得请求体"></a><strong>通过request获得请求体</strong></h5><p>请求体中的内容是通过post提交的请求参数，格式是：</p>
+<p>username&#x3D;zhangsan&amp;password&#x3D;123&amp;hobby&#x3D;football&amp;hobby&#x3D;basketball</p>
+<p>key                                              value</p>
+<p>username                                  [zhangsan]</p>
+<p>password                                   [123]</p>
+<p>hobby                                         [football，basketball]                                       </p>
+<p>以上面参数为例，通过一下方法获得请求参数：</p>
+<p>String getParameter(String name)</p>
+<p>String[] getParameterValues(String name)</p>
+<p>Enumeration getParameterNames()</p>
+<p>Map&lt;String,String[]&gt; getParameterMap()</p>
+<h4 id="乱码："><a href="#乱码：" class="headerlink" title="乱码："></a>乱码：</h4><p>前面说到从servletRequest获取的PrintWriter编码方式为ISO-8859-1，这里的一系列涉及编码的盲猜也统一是ISO的。</p>
+<p><strong>传输流程</strong>——</p>
+<p>前端初步向后端传输：转化成UTF-8，到达servlet，试图用ISO解码。</p>
+<p>解决方式——</p>
+<p>要么前端传来的变成ISO，要么后端解析时用UTF-8</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-17-15-31-image.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="HttpServletRsponse接口"><a href="#HttpServletRsponse接口" class="headerlink" title="HttpServletRsponse接口"></a>HttpServletRsponse接口</h5><p><img src="https://img-blog.csdn.net/20180513203525684?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NzgyMDE5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>方法：</p>
+<ul>
+<li><p>void addCookie(Cookie var1);</p>
+<p>&#x2F;&#x2F;给这个响应添加一个cookie</p>
+</li>
+<li><p>void addHeader(String var1, String var2);</p>
+<p>&#x2F;&#x2F;给这个请求添加一个响应头</p>
+</li>
+<li><p>void <strong>sendRedirect</strong>(String var1) throws IOException;</p>
+<p>&#x2F;&#x2F;发送一条响应码，讲浏览器跳转到指定的位置</p>
+</li>
+<li><p>void setStatus(int var1);</p>
+<p>&#x2F;&#x2F;设置响应行的状态码</p>
+</li>
+<li><p>PrintWriter getWriter()：</p>
+<p>获得字符流，通过字符流的write(String s)方法可以<strong>将字符串设置到response缓冲区</strong>中，随后Tomcat会将response缓冲区中的内容组装成Http响应返回给浏览器端。</p>
+<p>据说是会封装到http的响应头中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>    response.setContentType(<span class="hljs-string">&quot;text/html&quot;</span>); <span class="hljs-comment">// 设置响应内容类型为HTML</span><br><br>    <span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> response.getWriter();<br>    writer.println(<span class="hljs-string">&quot;&lt;html&gt;&quot;</span>);<br>    writer.println(<span class="hljs-string">&quot;&lt;body&gt;&quot;</span>);<br>    writer.println(<span class="hljs-string">&quot;&lt;h1&gt;Hello, this is the response body!&lt;/h1&gt;&quot;</span>);<br>    writer.println(<span class="hljs-string">&quot;&lt;/body&gt;&quot;</span>);<br>    writer.println(<span class="hljs-string">&quot;&lt;/html&gt;&quot;</span>);<br><br>    writer.close(); <span class="hljs-comment">// 关闭PrintWriter流</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>ServletOutputStream getOutputStream()：</p>
+<p>获得字节流，通过该字节流的write(byte[] bytes)可以向response缓冲区中写入字节，再由Tomcat服务器将字节内容组成Http响应返回给浏览器。</p>
+<p><strong>注意：虽然response对象的getOutSream（）和getWriter（）方法都可以发送响应消息体，但是他们之间相互排斥，不可以同时使用，否则会发生异常。</strong></p>
+</li>
+</ul>
+</li>
+<li><p>乱码：</p>
+<p><img src="https://img-blog.csdn.net/20180513205620262?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NzgyMDE5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload></p>
+<p>警惕servlet和前端浏览器使用的默认编码方式都不是UTF-8，那么要改UTF-8就要改两头</p>
+<ul>
+<li><p>servlet：</p>
+<p><img src="https://img-blog.csdn.net/20180513210445501?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NzgyMDE5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>浏览器通过设置请求头来改</p>
+<p><img src="https://img-blog.csdn.net/20180513210539156?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NzgyMDE5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<p>不过有前辈封装了两个方法：</p>
+<ul>
+<li><blockquote>
+<p>response.setContentType(“text&#x2F;html;charset&#x3D;UTF-8”)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>对于乱码，更改request是为了在后端处理中正确显示（IDE显示…）所以是更改方法直接传来的Request；而更改response是为了正确传下去（浏览器等显示）,所以对Filter而言是更改filterChain参数中的response。</p>
+</li>
+</ul>
+<h5 id="SUM-UP"><a href="#SUM-UP" class="headerlink" title="SUM UP"></a>SUM UP</h5><p><img src="https://img-blog.csdn.net/20180513204808318?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NzgyMDE5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>返回的信息——通过response对象写入response缓冲区的内容</p>
+<p>早期：写的内容进入返回体，直接呈现在前端页面</p>
+</li>
+</ul>
+<h4 id="beanUtils工具jar包"><a href="#beanUtils工具jar包" class="headerlink" title="beanUtils工具jar包"></a>beanUtils工具jar包</h4><ul>
+<li><p>来自apache</p>
+</li>
+<li><p>基础功能：request内含的参数通过getParamsMapping得到map对象，通过工具可以直接转化成一个实体类对象的属性。</p>
+</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-22-08-57-35-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>叫做beanutils就需要user类符合bean类的规范</li>
+</ul>
+<h1 id="框架——SpringBoot"><a href="#框架——SpringBoot" class="headerlink" title="框架——SpringBoot"></a>框架——SpringBoot</h1><p><small>回来吧我的SpringBoot，我最骄傲的信仰</small></p>
+<h5 id="javaBean"><a href="#javaBean" class="headerlink" title="javaBean"></a>javaBean</h5><p>bean是符合一些<strong>规范</strong>的java类，这些规范是为了让框架顺利调控类的实现、调用、相互关系等等</p>
+<p>规范：</p>
+<ol>
+<li><p>类必须被public修饰</p>
+</li>
+<li><p>必须提供空参的构造器</p>
+</li>
+<li><p>成员变量必须使用private</p>
+</li>
+<li><p>提供公共的setter和getter方法</p>
+</li>
+</ol>
+<p>或许不满足某一条程序可以跑通，但就怕设计人员把是否符合规范本身设计成报错点。</p>
+<p><strong>postman</strong></p>
+<p>给后端程序员测试后端程序用的。作用是模仿前端程序给后端接口发送请求，因为从浏览器的url请求只能执行get请求。</p>
+<p><em>postman有 cs的程序和 bs的 web界面，但为啥 web的不能发给 localhost？</em></p>
+<ol start="3">
+<li><h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="简单参数"><a href="#简单参数" class="headerlink" title="简单参数"></a>简单参数</h3><h2 id="get"><a href="#get" class="headerlink" title="get"></a><span style="color:blue">get</span></h2><ul>
+<li><p>原生方法：Java程序中声明controllerMapping方法来让浏览器可以直接访问到，然后在此方法中接收请求对象，得到对象的参数后经过逻辑程序，return些东西。</p>
+<ul>
+<li>这里的传参就是在url后紧跟。（get方法）</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-05-28-23-34-50-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>后端：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> HashMap&lt;String,String&gt; nameMap=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">static</span> HashMap&lt;Integer,String&gt; ageMap=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    <span class="hljs-keyword">static</span> &#123;<br>        nameMap.put(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>);<br>        nameMap.put(<span class="hljs-string">&quot;bob&quot;</span>,<span class="hljs-string">&quot;2&quot;</span>);<br>        nameMap.put(<span class="hljs-string">&quot;alice&quot;</span>,<span class="hljs-string">&quot;3&quot;</span>);<br>        nameMap.put(<span class="hljs-string">&quot;messi&quot;</span>,<span class="hljs-string">&quot;4&quot;</span>);<br><br>        ageMap.put(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;100&quot;</span>);<br>        ageMap.put(<span class="hljs-number">2</span>,<span class="hljs-string">&quot;200&quot;</span>);<br>        ageMap.put(<span class="hljs-number">3</span>,<span class="hljs-string">&quot;300&quot;</span>);<br>        ageMap.put(<span class="hljs-number">4</span>,<span class="hljs-string">&quot;400&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/simpleParam&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">simpleParam</span><span class="hljs-params">(HttpServletRequest httpServletRequest)</span>&#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> httpServletRequest.getParameter(<span class="hljs-string">&quot;name&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">age</span> <span class="hljs-operator">=</span> httpServletRequest.getParameter(<span class="hljs-string">&quot;age&quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> Integer.parseInt(age);<br>        System.out.println(<span class="hljs-string">&quot;成功&quot;</span>);<br>        <span class="hljs-keyword">return</span> nameMap.get(name)+<span class="hljs-string">&quot; : &quot;</span>+ ageMap.get(i);<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>SpringBoot中的方法：（<strong>自动接收参数+自动类型转化</strong>）</p>
+<p>后端语法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/simpleParam&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">simpleParam</span><span class="hljs-params">(String name,Integer age)</span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;成功&quot;</span>);<br>    <span class="hljs-keyword">return</span> nameMap.get(name)+<span class="hljs-string">&quot; : &quot;</span>+ ageMap.get(age);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>方法参数名只要和请求<strong>名字相同</strong>，SpringBoot会自动接收给此参数并转化到声明的类型。</p>
+<blockquote>
+<p>此时的形参，就是实参</p>
+</blockquote>
+<h2 id="post"><a href="#post" class="headerlink" title="post"></a><span style="color:blue">post</span></h2><p>后端的代码一致，前端发送的参数在请求体中</p>
+<p>也可以不一致——后端用PostMapping专门只接收Post请求</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230529183318760.png" srcset="/img/loading.gif" lazyload alt="image-20230529183318760"></p>
+</li>
+</ul>
+<p><em>解决形参名和请求中参数名字不一致——@requestParam（）</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/simpleParam&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">simpleParam</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(name = &quot;name&quot;,required = false)</span> String Username, Integer age)</span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;成功&quot;</span>);<br>    <span class="hljs-keyword">return</span> nameMap.get(Username)+<span class="hljs-string">&quot; : &quot;</span>+ ageMap.get(age);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>作用是将请求的参数映射到后端的形参中，也可以用于必要性声明（required&#x3D;true）</p>
+<h3 id="复杂参数"><a href="#复杂参数" class="headerlink" title="复杂参数"></a>复杂参数</h3><blockquote>
+<p>前端依旧挨个传，后端封装成对象接收（前端传的每个参数必须是基本数据类型）</p>
+<p>如果User里面一个引用对象没有属性，那传不传也没有意义</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230529185556530.png" srcset="/img/loading.gif" lazyload alt="image-20230529185556530"></p>
+<h3 id="数组参数"><a href="#数组参数" class="headerlink" title="数组参数"></a>数组参数</h3><ol>
+<li><p>get方法的写法：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230529225020030.png" srcset="/img/loading.gif" lazyload alt="image-20230529225020030"></p>
+</li>
+<li><p>post方法写法类似</p>
+</li>
+<li><p>后端</p>
+<ol>
+<li><p>用数组接收：对于这种一个key多个value的，springboot会自动识别为数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/arrayParam&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">arrayParam</span><span class="hljs-params">(String[] name)</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;成功&quot;</span>);<br>        StringBuffer sb=<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; name.length; i++) &#123;<br>            sb.append(nameMap.get(name[i]));<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>用集合接收：集合接收的话必须强制映射，因为springboot只会对基本数据类型进行自动转型（由String转到声明的类型，但引用数据类型好像不行）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/listParam&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">listParam</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam</span> List&lt;String&gt; name)</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;成功&quot;</span>);<br>        StringBuffer sb=<span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; name.size(); i++) &#123;<br>            sb.append(nameMap.get(name.get(i)));<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p><span style="color:green">始终注意参数名和请求里的参数名要相同，SpringBoot才会接收准</span></p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="时间参数"><a href="#时间参数" class="headerlink" title="时间参数"></a>时间参数</h3><p>由于前端传递的时间类型多种多样（一个String里表示时间），于是在后端要准确的接收需要预先声明时间的表示类型</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230529230542696.png" srcset="/img/loading.gif" lazyload alt="image-20230529230542696"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/time&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">time</span><span class="hljs-params">(<span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span> LocalDateTime time)</span>&#123;<br>        System.out.println(time);<br>        <span class="hljs-keyword">return</span> time.toString();<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意：pattern的参数是大写小写，哪个字母竟然还有影响</p>
+<h3 id="JSON参数"><a href="#JSON参数" class="headerlink" title="JSON参数"></a>JSON参数</h3><p>前端请求：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230529233017421.png" srcset="/img/loading.gif" lazyload alt="image-20230529233017421"></p>
+<p>注意：</p>
+<ul>
+<li>只能发post，还得选中raw和后面的文本类型是JSON</li>
+<li>JSON格式是：总体用{}，内层也用{}，所有key加双引号””,value是String也要””.</li>
+</ul>
+<p>后端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/jsonP&quot;)</span><br>   <span class="hljs-keyword">public</span> String <span class="hljs-title function_">jsonParam</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> User user)</span>&#123;<br>       System.out.println(user);<br>       <span class="hljs-keyword">return</span> user.toString();<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>参数要加注解</li>
+<li>前端传递的键，是接收对象的属性</li>
+</ul>
+<h3 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h3><p>参数直接写到路径里&#x2F;要把路径的最后部分作为参数</p>
+<p>前端：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230529234056935.png" srcset="/img/loading.gif" lazyload alt="image-20230529234056935"></p>
+<p>后端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/Demo/&#123;id&#125;&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">Demo</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Integer id)</span>&#123;<br>        System.out.println(id);<br>        <span class="hljs-keyword">return</span> id.toString();<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>记录：</p>
+<p><strong>动态参数</strong></p>
+<p>往往用{}包裹，内部是可识别其他属性的标识符</p>
+<ol>
+<li><p>在js的字符串中</p>
+<p>js定义字符串可以用’hello’,”hello”,`hello&#96;</p>
+<p>其中第三个用反引号表示时，内部识别${}，然后里面的内容既是一个普通的js属性</p>
+</li>
+<li><p>在mybatis的配置中</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-27-11-16-28-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>在此</p>
+</li>
+</ol>
+<p>or</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230529234235666.png" srcset="/img/loading.gif" lazyload alt="image-20230529234235666"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/Demo/&#123;path&#125;&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">Demo</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> String path)</span>&#123;<br>        System.out.println(path);<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;get it&quot;</span>;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p><em>可以切出路径来</em></p>
+<p>or</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230529234606995.png" srcset="/img/loading.gif" lazyload alt="image-20230529234606995"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/Demo/&#123;path1&#125;/&#123;path2&#125;&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">Demo</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> String path1,<span class="hljs-meta">@PathVariable</span> String path2)</span>&#123;<br>        System.out.println(path1+<span class="hljs-string">&quot;   &quot;</span>+ path2);<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;get it&quot;</span>;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p><em>获取多个路径</em></p>
+<h1 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h1><p>通过给<strong>方法或类</strong>添加注解@ReponseBody表示方法的返回值将直接作为http请求的返回值。</p>
+<p>通常在Controller类文件上添加@RestController注解：@RestController&#x3D;@Control+@ResponseBody</p>
+<h3 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h3><p>如果返回实体对象&#x2F;集合（引用数据类型），前端按照JSON接收</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs context">我们定义的响应方法，都叫做功能接口，@RequestMapping()里的路径就设置好了访问路径。<br>开发文档（YAPI）就是规定这些方法的路径，参数，返回值，具体实现由程序员们实现。<br></code></pre></td></tr></table></figure>
+
+<p>后端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/Demo2&quot;)</span><br>    <span class="hljs-keyword">public</span> List&lt;Address&gt; <span class="hljs-title function_">Demo2</span><span class="hljs-params">()</span>&#123;<br>        Address address1=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Address</span>();<br>        address1.setCity(<span class="hljs-string">&quot;北京&quot;</span>);<br>        address1.setProvince(<span class="hljs-string">&quot;河北&quot;</span>);<br>        Address address2=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Address</span>();<br>        address2.setProvince(<span class="hljs-string">&quot;上海&quot;</span>);<br>        address2.setCity(<span class="hljs-string">&quot;黄埔&quot;</span>);<br><br>        List&lt;Address&gt; list=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        list.add(address1);<br>        list.add(address2);<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>前端：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;province&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;河北&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;北京&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;province&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;上海&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;黄埔&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="后端的返回值多种多样，不适合前端解析，于是后端返回值规定统一形式——"><a href="#后端的返回值多种多样，不适合前端解析，于是后端返回值规定统一形式——" class="headerlink" title="后端的返回值多种多样，不适合前端解析，于是后端返回值规定统一形式——"></a><span style="color:red">后端的返回值多种多样，不适合前端解析，于是后端返回值规定统一形式——</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Result</span> &#123;<br><br>    Integer code;<br>    String msg;<br>    Object data;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getMsg</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> msg;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setMsg</span><span class="hljs-params">(String msg)</span> &#123;<br>        <span class="hljs-built_in">this</span>.msg = msg;<br>    &#125;<br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">getData</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> data;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setData</span><span class="hljs-params">(Object data)</span> &#123;<br>        <span class="hljs-built_in">this</span>.data = data;<br>    &#125;<br>    <span class="hljs-keyword">public</span> Integer <span class="hljs-title function_">getCode</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> code;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setCode</span><span class="hljs-params">(Integer code)</span> &#123;<br>        <span class="hljs-built_in">this</span>.code = code;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Result</span><span class="hljs-params">(Object data)</span> &#123;<br>        <span class="hljs-built_in">this</span>.code = <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">this</span>.msg = <span class="hljs-string">&quot;success&quot;</span>;<br>        <span class="hljs-built_in">this</span>.data = data;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Result <span class="hljs-title function_">success</span><span class="hljs-params">(Object data)</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Result</span>(data);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>需要注意的是：需要返回的属性必须要设置get方法，据说JSON序列化Result对象时，就是根据get方法得到各种属性，而非直接访问属性（get更规范吧）。</p>
+<p><em>事实证明给get方法随便改个名字也无法正常序列号——规范很标准</em></p>
+<hr>
+<h2 id="三层架构："><a href="#三层架构：" class="headerlink" title="三层架构："></a>三层架构：</h2><blockquote>
+<p>之前的操作在一个页面里面完成数据接收，逻辑处理，数据库交互，再次处理数据，响应返回。很明显写到一起犯了大忌——难debug，难维护，难读</p>
+</blockquote>
+<ul>
+<li><p>Controller 控制层：负责接收前端发送的请求，对请求进行处理，并响应数据</p>
+</li>
+<li><p>Service 业务逻辑层：处理具体的业务逻辑</p>
+</li>
+<li><p>Dao 数据访问层（data access object）:负责数据访问操作，包括数据的增删改查。</p>
+</li>
+</ul>
+<p><img src="https://img1.sycdn.imooc.com/5b24fa230001248b14151548.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>注意：</strong></p>
+<p>对于Dao层而言，可能接收来自各种方式的数据：XML，JSON，txt……所以可以定义接口来规定接收与返回的规范，在各种实现中完成不同的访问逻辑。</p>
+<p>Service层也类似，用接口写死的是层与层之间的规范，这是分层的必须条件。</p>
+<img title="" src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-05-31-17-29-36-image.png" srcset="/img/loading.gif" lazyload alt="" width="824">
+
+<hr>
+<h2 id="分层解耦："><a href="#分层解耦：" class="headerlink" title="分层解耦："></a>分层解耦：</h2><ul>
+<li><p><strong>内聚</strong>：一个Java文件&#x2F;类&#x2F;模块中操作的代码都只和事务的一部分相关，不相关的不在一个类中——高内聚</p>
+</li>
+<li><p><strong>耦合</strong>：表示各个层&#x2F;模块之间的依赖，关联程度</p>
+<p>表示这部分代码受外界变化的影响程度，<strong>外界一变就报错——高耦合</strong></p>
+<blockquote>
+<p>由于controller层创建了service层的对象，表示如果service层如果改变一个实现类，或者类名改变，controller中的代码也要变——下层对上层不完全透明。</p>
+</blockquote>
+</li>
+</ul>
+<p>开发原则：<span style="color:red"><em><strong>高内聚，低耦合</strong></em></span></p>
+<ul>
+<li><p>解决方案：</p>
+<blockquote>
+<p>既然创建指定下层对象会耦合，那就不主动挑下层的哪一个对象，而是让下层自己送上来一个实现类。这通过下层向一个容器中存储许多实现类，上层需要的话从容器中拿出对应的。</p>
+</blockquote>
+</li>
+<li><p>技术：</p>
+<ul>
+<li><p>控制反转（IOC）：指对象创建的控制权由程序自身转移到外部（容器）&#x2F;（上层转移到下层）。</p>
+</li>
+<li><p>依赖注入（DI）：容器为运行的程序提供需要的依赖资源。</p>
+</li>
+<li><p>bean对象：在容器中的对象们的统称。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="技术落地："><a href="#技术落地：" class="headerlink" title="技术落地："></a>技术落地：</h3><ul>
+<li><p>将需要放入容器的类加注解：@Component标识bean对象</p>
+<ul>
+<li>对要被用到的加@component，对不用的不加，感觉有点鸡肋</li>
+</ul>
+</li>
+<li><p>将在上层模块中声明的下层（容器中的）对象加注解：@Autowired</p>
+</li>
+</ul>
+<h2 id="IOC详解："><a href="#IOC详解：" class="headerlink" title="IOC详解："></a>IOC详解：</h2><p> 对于要放入IOC容器的类，声明的注解@Component是基础注解</p>
+<p>以下有三个特定情况的注解：</p>
+<ul>
+<li><p>@Controller：定义在控制器类中</p>
+</li>
+<li><p>@Service： 定义在业务类上</p>
+</li>
+<li><p>@Repository： 定义在数据访问类上</p>
+</li>
+<li><p>@Component： 用于其他类（如工具类）</p>
+</li>
+</ul>
+<h2 id="组件扫描："><a href="#组件扫描：" class="headerlink" title="组件扫描："></a>组件扫描：</h2><ul>
+<li><p>加载过程中，IOC容器对相应的包进行扫描，对其中有IOC注解的类进行IOC，标注为bean对象，加入到IOC容器中，但这个扫描的包应该扫描多少呢？</p>
+<ul>
+<li>默认情况在主函数上声明了@SpringBootApplication，其中包括了@ComponentScan（），设置的默认范围是本包和其子包，也可以显示的再声明一次，不过覆盖的声明既要包括目的包，也要包括本包。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="DI详解："><a href="#DI详解：" class="headerlink" title="DI详解："></a>DI详解：</h2><ul>
+<li>@Autowired 自动装配表示声明此注解的属性会自动在容器中寻找唯一适配的bean对象。</li>
+</ul>
+<ol>
+<li><p>不自动：不同@Autowired，用@Resource(name&#x3D;”beanName”)指定要注入的bean对象。</p>
+</li>
+<li><p>IOC容器中对象不唯一，由于@Autowired是根据类的类型在IOC中寻找，那如果类的对象（接口实现类）不唯一，需要设置偏好</p>
+<ol>
+<li><p>@Primary 在此bean类上设置优先</p>
+</li>
+<li><p>@Qualifier (“beanName”)，表明在选择时选取这个bean对象</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>                &gt;  <strong>beanName默认是类名小写</strong>，声明bean的时候可以添加name属性</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-05-31-19-48-49-image.png" srcset="/img/loading.gif" lazyload title="" alt="" data-align="right">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">过程梳理：<br><br><span class="hljs-number">1.</span>SpringBoot项目的主函数负责启动，用反射方式确定本类后启动run方法<br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-01-17-01-18-image.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs context">2. 编写三层结构：<br>    注意，每层的逻辑是先用接口规定规范（只会写方法名字，返回值，参数），<br>    再用实现类实现，在实现类中，声明要注入的对象（@Autowired），并将自<br>    身放入IOC容器中（@Component/@Service/@Repository）<br><br><br>    Dao层在函数中访问数据，并返回，本身不要求对数据的逻辑处理<br>    Service层用Dao对象调Dao方法，得到自定义类型的数据，操作后返回给上层自定义的数据<br>    Controller层用Service层对象调用它规定的方法，最后将数据封装成Result对象<br></code></pre></td></tr></table></figure>
+
+<h2 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h2><blockquote>
+<p>数据库连接池是一个容器，负责分配，管理数据库连接（Connection）</p>
+</blockquote>
+<h4 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h4><p>在系统初始化的时候，将数据库连接作为对象，存储在内存中。</p>
+<p>设想是：当用户需要访问数据库时，避免次次建立新连接——取而代之是从连接池中取出一个空闲的连接对象。使用完毕后，安安静静放回去就好。</p>
+<p>所以问题的难点是：<strong>连接的建立，断开，使用，由连接池自身如何管理。</strong></p>
+<p>在此之上有更丰富的设计：连接池可以控制连接的上下限数，每个连接的最大使用次数，最大空闲时间等。</p>
+<h4 id="优势："><a href="#优势：" class="headerlink" title="优势："></a>优势：</h4><ol>
+<li>资源重用</li>
+<li>提高系统响应速度</li>
+<li>避免数据库连接遗漏——一个客户端始终占线导致一个连接无法使用，而mybatis可以检测无效连接时长</li>
+</ol>
+<h4 id="标准接口：DataSource"><a href="#标准接口：DataSource" class="headerlink" title="标准接口：DataSource"></a>标准接口：DataSource</h4><h4 id="常见产品：-Druid德鲁伊-，Hikari追光者"><a href="#常见产品：-Druid德鲁伊-，Hikari追光者" class="headerlink" title="常见产品： Druid德鲁伊 ，Hikari追光者"></a>常见产品： Druid德鲁伊 ，Hikari追光者</h4><p>连接池产品就是实现类DataSource接口的类，不过能够将复杂的逻辑封装到统一的方法中</p>
+<h1 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h1><ul>
+<li>mybatis是一个持久层的框架，用于简化JDBC的操作</li>
+</ul>
+<blockquote>
+<p>web开发三层架构：控制层（controller）， 服务层（server），持久层（dao）</p>
+<ol>
+<li>控制层：负责接收用户请求，根据请求内容调度服务层</li>
+<li>服务层：程序的核心业务逻辑</li>
+<li>持久层：负责与数据库进行交互（原生JDBC也是在此操作）</li>
+</ol>
+<p>每层对上层而言提供功能接口。</p>
+</blockquote>
+<blockquote>
+<p>官网：<a target="_blank" rel="noopener" href="https://blog.mybatis.org/">The MyBatis Blog</a></p>
+</blockquote>
+<ul>
+<li><p>JDBC存在的问题：</p>
+<ul>
+<li>将数据库<strong>连接</strong>的代码和<strong>操作数据</strong>的代码写到一起，但理应分开：</li>
+</ul>
+<blockquote>
+<p>不应该将数据库连接信息写死在java代码中——<strong>硬编码</strong></p>
+<p>因为对于经常变动连接关系的业务而言，每次变动数据库，就要对程序重新编译，打包，执行</p>
+</blockquote>
+<ul>
+<li>对结果的解析很繁琐，很臃肿（resultSet）</li>
+<li><strong>频繁地连接与释放</strong>连接造成资源浪费，性能降低</li>
+</ul>
+</li>
+<li><p>myBatis解决：</p>
+<ul>
+<li>配置文件application.properties</li>
+<li><strong>结果行自动封装成对象</strong>，各行又组织成集合</li>
+<li>用<strong>连接池技术</strong>解决频繁地连接</li>
+</ul>
+</li>
+<li><p>mybatis与连接池：</p>
+<p>mybatis支持三种内置的数据源类型</p>
+<ul>
+<li><p>Pooled：采用池的思想的数据源</p>
+</li>
+<li><p>UnPooled：没有采用池的思想的数据源</p>
+</li>
+<li><p>JDNI：采用服务器提供的JDNI技术实现</p>
+<p>(Java Naming and Directory Interface,Java命名和目录接口)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li><p>准备工作（在springBoot工程中使用）：创建SpringBoot工程，准备好数据库表，对表的内容在Java中设置好实体类对象（每个属性是一个字段）</p>
+</li>
+<li><p>引入MySQL依赖，配置mybatis。</p>
+<p>引入依赖：mybatis的包和MySQL的jar包（创建工程时选入）</p>
+<p>因为mybatis替代了JDBC，所以JDBC需要的基本信息mybatis都要完成：</p>
+<p><span style="color:red">驱动+地址url和端口+用户名+密码</span></p>
+<p>通过写到mybatis的配置文件：application.properties中完成配置。（在IDE中会显示的）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230527233600442.png" srcset="/img/loading.gif" lazyload alt="image-20230527233600442"></p>
+</li>
+<li><p>编写sql语句：<strong>写的是接口</strong>：相当于是对服务层调用而言，要实现的接口。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230527233940855.png" srcset="/img/loading.gif" lazyload alt="image-20230527233940855"></p>
+<p>那么是谁实现的呢？<strong>mybatis底层</strong>来实现的这个接口</p>
+<p><strong>此接口，就是彼接口</strong></p>
+</li>
+</ol>
+<blockquote>
+<p>maven项目需要手写pom.xml，但是在springBoot中设计了UI可以选哎</p>
+</blockquote>
+<ol start="4">
+<li><p>编写测试用例：</p>
+<p>在test包下试图调用上面的接口——测试是在Controller层</p>
+<ul>
+<li>问题1：由于是接口无法实例化对象</li>
+<li>问题2：需要解耦，不能创建对象</li>
+</ul>
+<blockquote>
+<p>在IOC容器中找需要的接口实现类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SpringBootTest</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoForMyBatisApplicationTests</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserMapper userMapper;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testListStudent</span><span class="hljs-params">()</span>&#123;<br>        List&lt;User&gt; list = userMapper.list();<br>        list.stream().forEach(user -&gt; &#123;<br>            System.out.println(user.toString());<br>        &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="IDEA操作数据库的逻辑："><a href="#IDEA操作数据库的逻辑：" class="headerlink" title="IDEA操作数据库的逻辑："></a>IDEA操作数据库的逻辑：</h3><p><code>idea内通过编写测试用例，调用mapper接口方法，来调用mybatis底层的实现类进行操作</code></p>
+<ul>
+<li><p>IDEA会扫描要操作的数据库</p>
+<p>IDEA内导入数据库后，可以动态提示表名，表结构，主键…</p>
+</li>
+</ul>
+<hr>
+<p><span style="color:blue">打包成jar包的文件就可以在命令行启动了</span></p>
+<blockquote>
+<p>java -jar + jar’s name</p>
+</blockquote>
+<hr>
+<h3 id="预编译："><a href="#预编译：" class="headerlink" title="预编译："></a>预编译：</h3><p>指在编译java中的mapper接口时，<strong>将语句和参数分开准备。</strong></p>
+<p><small>由于语句有可能有许多类似或一致的，每条sql都<strong>加载新的语句</strong>或许不如找找匹配自身的语句。</small></p>
+<p>加载新的语句包括：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-27-15-33-14-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>预编译的过程就是将这类语句模板化&#x2F;参数化，执行完以上流程。</p>
+<p>？？？</p>
+<p>优势：</p>
+<ol>
+<li><p>性能更高：sql查询时的缓存机制是：对一条语句进行解析，优化，编译，再配合参数一起执行，于是就可以把同样类型不同参数的语句缓存起来——形式就是预编译。</p>
+<p>原来sql语句优化并不都需要参数，某些根据语法就可以选择路径，但像limit需要知道参数…</p>
+</li>
+<li><p>更加安全：可以防止sql注入</p>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> `name` <span class="hljs-keyword">FROM</span> student <span class="hljs-keyword">WHERE</span> name<span class="hljs-operator">=</span>&quot;卡沙&quot; <span class="hljs-keyword">and</span> home<span class="hljs-operator">=</span><span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;1&#x27;</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>    例中or和and并排最后执行，但1&#x3D;1必然成立，于是无论前面对不对，判断都能过</p>
+<p>    问题在于：查询语句和参数最后都拼接到一起，再进行查询优化，没有明确的区分</p>
+<p>但在预编译下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> `name` <span class="hljs-keyword">FROM</span> student <span class="hljs-keyword">WHERE</span> name<span class="hljs-operator">=</span> ? <span class="hljs-keyword">and</span> home<span class="hljs-operator">=</span> ?<br></code></pre></td></tr></table></figure>
+
+<p>参数传入之前的语句就已经进行解析、优化、编译了，事后再将占位符替换回参数就不会发生注入问题。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-15-17-22-56-image.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="预编译的问号产生的一个问题："><a href="#预编译的问号产生的一个问题：" class="headerlink" title="预编译的问号产生的一个问题："></a>预编译的问号产生的一个问题：</h5><p>在进行模糊匹配like时，因为一旦把占位符？传入模式串’’中，？的意义就会被覆盖。</p>
+<p>解决方法有：</p>
+<ul>
+<li><p>用${}代替#{}。</p>
+</li>
+<li><p>用concat()拼接%，？，%，因为cancat在？被替换成实际参数时才执行，所以可行。</p>
+</li>
+</ul>
+<h4 id="mybatis中数据库表字段名与类属性名不一致的问题："><a href="#mybatis中数据库表字段名与类属性名不一致的问题：" class="headerlink" title="mybatis中数据库表字段名与类属性名不一致的问题："></a>mybatis中数据库表字段名与类属性名不一致的问题：</h4><p>在select时我们试图用一个user对象自动接收一行的信息，使每个属性分别对应一个字段。</p>
+<p>但mybatis只可能处理名字一致的属性，名字不同的则不会赋给此返回对象。</p>
+<p>格外注意：Java的习惯是驼峰命名，sql的习惯的下划线命名，于是多个单词的属性往往不对应。</p>
+<p><span style="color:red">不合理，IDEA必有快捷方式</span></p>
+<p><strong>解决方法：</strong></p>
+<ol>
+<li><p>给字段起别名：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Select(select id,username,password,name,gender,dept_id deptId,create_time  createTime from Emp where id = &#x27;1&#x27;)</span><br><span class="hljs-keyword">public</span> Emp <span class="hljs-title function_">getById</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>通过@Results和@Result注解，手动映射封装</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Result(&#123;</span><br><span class="hljs-meta">    @Result(column = &quot;dept_id&quot; property = &quot;deptId&quot;),</span><br><span class="hljs-meta">    @Result(column = &quot;create_time&quot; property = &quot;createTime&quot;)</span><br><span class="hljs-meta">&#125;)</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在application.properties中配置自动转化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">mybatis.configuration.map-underscore-to-camel-<span class="hljs-keyword">case</span>=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="用xml配置文件编写sql语句"><a href="#用xml配置文件编写sql语句" class="headerlink" title="用xml配置文件编写sql语句"></a>用xml配置文件编写sql语句</h3><p>逻辑：</p>
+<p><code>Dao层的接口方法每个都配置注解，看起来有点臃肿，惯用想法是分离到别的文件里</code></p>
+<p><code>给每个接口方法都配置一个具体的执行sql，调用方法时只要把参数传进去就好</code></p>
+<p><code>而这些具体的sql，统一写到另一个xml文件中</code></p>
+<blockquote>
+<p>实际上是将每个mapper文件都配置一个mapper.xml，以下注意点是确保映射mapper能找到配置mapper.</p>
+</blockquote>
+<p>注意点：</p>
+<ul>
+<li><p>xml映射文件的名称和mapper接口名称一致，并且虽然xml在resources下，mapper在java源代码下，但二者形散神居，任要在同一个目录下<span style="color:red">同包同名</span></p>
+</li>
+<li><p>xml映射文件的namespace属性和mapper接口全限定名一致</p>
+</li>
+<li><p>xml映射文件的sql语句的id和mapper接口中方法名一致，并声明确定的返回类型（一行的数据应该投影到什么类型）</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;com.example.demoformybatis.mapper.UserMapper&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectConditional&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.example.demoformybatis.pojo.User&quot;</span>&gt;</span><br>        select * from student where name like concat(&#x27;%&#x27;,#&#123;name&#125;,&#x27;%&#x27;) and age &gt; #&#123;age&#125; and sex = #&#123;sex&#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h2><ul>
+<li><p>&lt;if&gt; ：用于选择某段话是否要加入sql</p>
+</li>
+<li><p>&lt;where&gt;：用于替代where，作用是动态地决定‘and’是否保留</p>
+</li>
+<li><p>&lt;set&gt;：用于代替set，作用是决定”，“是否保留</p>
+</li>
+<li><p>&lt;foreach&gt; :用于生成数组对象</p>
+</li>
+<li><p>&lt;sql&gt; and &lt;include&gt;: 用于提炼公用sql语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">&lt;</span><span class="hljs-keyword">sql</span> id<span class="hljs-operator">=</span>&quot;commonSelect&quot;<span class="hljs-operator">&gt;</span><br>        <span class="hljs-keyword">select</span> id,name,home,age,sex,hobby<br>    <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span><span class="hljs-keyword">sql</span><span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">&lt;</span><span class="hljs-keyword">select</span> id<span class="hljs-operator">=</span>&quot;selectConditional&quot; resultType<span class="hljs-operator">=</span>&quot;com.example.demoformybatis.pojo.User&quot;<span class="hljs-operator">&gt;</span><br>        <span class="hljs-operator">&lt;</span>include refid<span class="hljs-operator">=</span>&quot;commonSelect&quot;<span class="hljs-operator">&gt;</span><span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>include<span class="hljs-operator">&gt;</span><br>        <span class="hljs-keyword">from</span> student<br>        <span class="hljs-operator">&lt;</span><span class="hljs-keyword">where</span><span class="hljs-operator">&gt;</span><br>            <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;name != null&quot;<span class="hljs-operator">&gt;</span><br>            name <span class="hljs-keyword">like</span> concat(<span class="hljs-string">&#x27;%&#x27;</span>, #&#123;name&#125;, <span class="hljs-string">&#x27;%&#x27;</span>)<br>            <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>            <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;age != null&quot;<span class="hljs-operator">&gt;</span><br>        <span class="hljs-keyword">and</span> age <span class="hljs-operator">&gt;</span> #&#123;age&#125;<br>            <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>            <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;sex != null&quot;<span class="hljs-operator">&gt;</span><br>            <span class="hljs-keyword">and</span> sex <span class="hljs-operator">=</span> #&#123;sex&#125;<br>            <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>        <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span><span class="hljs-keyword">where</span><span class="hljs-operator">&gt;</span><br>    <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span><span class="hljs-keyword">select</span><span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">&lt;</span><span class="hljs-keyword">update</span> id<span class="hljs-operator">=</span>&quot;update&quot;<span class="hljs-operator">&gt;</span><br>        <span class="hljs-keyword">UPDATE</span> student<br>        <span class="hljs-operator">&lt;</span><span class="hljs-keyword">set</span><span class="hljs-operator">&gt;</span><br><span class="hljs-comment">--             只能去逗号，不能负责加逗号，下面的,是必须的</span><br>            <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;name!=null&quot;<span class="hljs-operator">&gt;</span>name <span class="hljs-operator">=</span> #&#123;name&#125;,<span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>            <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;age != null&quot;<span class="hljs-operator">&gt;</span>age <span class="hljs-operator">=</span> #&#123;age&#125;,<span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>            <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;home != null&quot;<span class="hljs-operator">&gt;</span>home <span class="hljs-operator">=</span> #&#123;home&#125;,<span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>            <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;hobby != null&quot;<span class="hljs-operator">&gt;</span>hobby <span class="hljs-operator">=</span> #&#123;hobby&#125;,<span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>            <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;sex != null&quot;<span class="hljs-operator">&gt;</span>sex <span class="hljs-operator">=</span> #&#123;sex&#125;<span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>        <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span><span class="hljs-keyword">set</span><span class="hljs-operator">&gt;</span><br>        <span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">=</span> #&#123;id&#125;;<br>    <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span><span class="hljs-keyword">update</span><span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><code>test里面的属性，来自函数调用时传入的参数，和后面的查询语句里的字段并非相同</code></p>
+<p><code>也就是说：mapper.xml文件里，在标签中的都是和上层挂钩的，在标签外的sql语句才是要传给下层的。</code></p>
+<h2 id="开发！"><a href="#开发！" class="headerlink" title="开发！"></a>开发！</h2><ul>
+<li><p>一般前端怎么发post：——打包成一个请求体</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> url = <span class="hljs-string">&#x27;https://example.com/api/endpoint&#x27;</span>;<br><span class="hljs-keyword">const</span> data = &#123; <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;john&#x27;</span>, <span class="hljs-attr">password</span>: <span class="hljs-string">&#x27;pass123&#x27;</span> &#125;;<br><br><span class="hljs-title function_">fetch</span>(url, &#123;<br>  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,<br>  <span class="hljs-attr">headers</span>: &#123;<br>    <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span><br>  &#125;,<br>  <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(data)<br>&#125;)<br>  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())<br>  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 处理响应数据</span><br>  &#125;)<br>  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 处理错误</span><br>  &#125;);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;axios&#x27;</span>;<br><br><span class="hljs-keyword">const</span> url = <span class="hljs-string">&#x27;https://example.com/api/endpoint&#x27;</span>;<br><span class="hljs-keyword">const</span> data = &#123; <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;john&#x27;</span>, <span class="hljs-attr">password</span>: <span class="hljs-string">&#x27;pass123&#x27;</span> &#125;;<br><br>axios.<span class="hljs-title function_">post</span>(url, data)<br>  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 处理响应数据</span><br>  &#125;)<br>  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> &#123;<br>    <span class="hljs-comment">// 处理错误</span><br>  &#125;);<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>以上fetch和axios都是发送异步请求的函数&#x2F;包，但区别在于，fetch是浏览器原生的，axios是另外的库。</p>
+<h3 id="RESTful开发规范——关于CRUD（约定，不是规定）"><a href="#RESTful开发规范——关于CRUD（约定，不是规定）" class="headerlink" title="RESTful开发规范——关于CRUD（约定，不是规定）"></a>RESTful开发规范——关于CRUD（约定，不是规定）</h3><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-22-17-57-10-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>略有讲究：查和删只需要传一点点参数，所以用原生get，改和增要传好多，所以要用原生post在body里面传递</code></p>
+<p>restful中路径资源一般写成复数</p>
+<ul>
+<li><p>如何限制接口方法只能响应某种类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(value = &#x27;/webURL&#x27;,method = RequestMethod.GET)</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>或者：(源码实现就是上面的方法，相当于小语法糖)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&#x27;/webURL&#x27;)</span><br><span class="hljs-meta">@PostMapping(&#x27;/webURL&#x27;)</span><br><span class="hljs-meta">@putMapping(&#x27;/webURL&#x27;)</span><br><span class="hljs-meta">@deleteMapping(&#x27;/webURL&#x27;)</span><br><span class="hljs-comment">//由此就将前端相同url路径的访问分流到不同的后端接口</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>后端如何接收JSON对象来着？</p>
+<p>是用一个对应的实体类对象接收，并声明注释@RequestBody</p>
+<p><code>因为JSON是写在Request中Body里面的（post请求），所以这么声明也有点道理</code></p>
+</li>
+<li><p>在RESTful中，由于crud的url路径前面部分都是一致的，所以可以提取到类名处声明</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-22-19-57-46-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>前端分页的逻辑：</p>
+<p>古早版本中，我在前端用了巨臃肿的逻辑，先是把数据库的信息在挂载时就访问到参数里（这样写和直接写到前端其实没有区别），然后许多个v-if判断某些数据是否需要展示。</p>
+<p>这样的问题在于：</p>
+<ol>
+<li><p>写死每页的个数了</p>
+</li>
+<li><p>所有逻辑和数据都加载到了前端，而实际上只需要一页的数据</p>
+</li>
+<li><p>对crud很不友好哎</p>
+</li>
+</ol>
+<p><b>新版本：</b></p>
+</li>
+</ul>
+<p>既然前端只需要得到一页的数据（就是当下展示的哪一页），前端传递给后端需要的位置，后端分页查询到确定的，定量的数据后返回前端并展示。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-22-20-14-38-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>分析好前端需要后端传什么，后端又需要前端传什么</p>
+<ul>
+<li><p>前端需要具体x页的y条数据，还需要总的记录数n</p>
+</li>
+<li><p>后端需要从多少开始查(x-1)*y,查多少y。</p>
+</li>
+</ul>
+</li>
+<li><p>Controller层的接口方法怎么设置默认值？</p>
+<p>java中本身就没有像py里设置默认值的方式，但可以从逻辑上简单实现</p>
+<ol>
+<li><p>方法体内声明(很局限，没有人往方法里面传null的)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">(<span class="hljs-type">int</span> l1,<span class="hljs-type">int</span> l2)</span>&#123;<br>    <span class="hljs-keyword">if</span>(l1 == <span class="hljs-literal">null</span>) l1=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span>(l2 == <span class="hljs-literal">null</span>) l2=<span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>方法重载（洋人思维就是<strong>地道</strong>）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">(<span class="hljs-type">int</span> l1)</span>&#123;<br>    test(l1,<span class="hljs-number">0</span>)<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">(<span class="hljs-type">int</span> l1,<span class="hljs-type">int</span> l2)</span>&#123;<br>    <span class="hljs-comment">//code</span><br>&#125;    <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在springboot中，声明@RequestParam(defaultValue&#x3D;’’0’’)</p>
+</li>
+</ol>
+</li>
+<li><p>pageHelper：</p>
+<p>功能：屏蔽分页查找的逻辑，只要输入起步位置（从第几页开始），pageSize，然后查找全部需要行，工具包就会自动分页。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br>   <span class="hljs-keyword">public</span> List&lt;yuangongsalary&gt; <span class="hljs-title function_">getSalary</span><span class="hljs-params">(Integer currentPage, Integer pageSize)</span> &#123;<br>       PageHelper.startPage(currentPage,pageSize);<br>       List&lt;yuangongsalary&gt; data = mapper.getsalary();<br>       Page&lt;yuangongsalary&gt; page= (Page&lt;yuangongsalary&gt;) data;<br>       <span class="hljs-keyword">return</span> page.getResult();<br>   &#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="文件上传："><a href="#文件上传：" class="headerlink" title="文件上传："></a>文件上传：</h2><blockquote>
+<p>客户端将本地的图片，视频，音频等文件上传到服务器，供其他用户浏览或下载</p>
+</blockquote>
+<p><code>之前在Swing中的JFileChooser仅仅是打开文件和在本地操作，配合socket或许可以实现上传</code></p>
+<ul>
+<li><p>前端文件上传三要素</p>
+<ul>
+<li><p>输入框（文件选择器）</p>
+</li>
+<li><p>所在表单的请求方式为post</p>
+</li>
+<li><p>确定编码形式（大型二进制文件需要特殊编码）</p>
+</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-24-16-06-19-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>mutipart&#x2F;form-data:</p>
+<ul>
+<li><p>如果用默认编码，前端发送的请求只会包含文件的名字</p>
+</li>
+<li><p>在此编码下，前端的请求会分为多个部分，按照表单的input框。所选文件的全部内容也会在post的body中被传递</p>
+</li>
+</ul>
+</li>
+<li><p>后端接受</p>
+</li>
+</ul>
+<blockquote>
+<p>MultipartFile类接收</p>
+</blockquote>
+<p>要点：</p>
+<ol>
+<li><p>获取原始文件名等方法封装在MultipartFile中</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-24-16-56-52-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<ul>
+<li><p>如果据此来给保存文件命名的话，可能会重复冲突</p>
+</li>
+<li><p>如果根据当下时间来命名的话，也有可能因为两个客户端同时访问而从冲突</p>
+</li>
+<li><p><strong>于是根据UUID保存文件</strong></p>
+</li>
+<li><p>但保存文件仅有名字不够，还需要对应的文件后缀，这可以从原始文件名截取</p>
+</li>
+<li><p>于是拼接二者，构成文件名</p>
+</li>
+<li><p>通过MultipartFile中的transferTo()方法保存文件&#x2F;或者自己写一个写入文件操作</p>
+</li>
+</ul>
+<p>问题：</p>
+<ol>
+<li>springBoot配置问题</li>
+</ol>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-24-17-03-34-image.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li><p>如果一次请求有多个文件，可以按照数组&#x2F;集合接收</p>
+</li>
+<li><p>文件保存到服务器并不地道，因为服务器主要是服务用的，保存的位置有两种选择</p>
+<ol>
+<li><p>自己&#x2F;企业搭建集群，用于存储文件|FastDFS，MinIO</p>
+</li>
+<li><p>使用云服务|阿里云，百度云，腾讯云，华为云…</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="阿里云OSS"><a href="#阿里云OSS" class="headerlink" title="阿里云OSS"></a>阿里云OSS</h2><blockquote>
+<p>云服务包括互联网行业各种服务，简单来说：通过互联网租用大厂已经铺好的路</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-24-17-55-55-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>OSS：对象存储服务（Object Storage Service）</p>
+<p>云端基本思路：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-24-17-59-02-image.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>SDK:Software Development Kit 软件开发工具包  其中包含软件开发的依赖(jar包)，代码示例等待</p>
+</blockquote>
+<p>OSS基本思路：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-24-18-01-23-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>oss操作流程：</p>
+<ol>
+<li><p>服务端将文件上传到OSS（客户端要先发给服务器，因为只有服务端有权限&#x2F;密钥操作OSS）</p>
+</li>
+<li><p>通过OSS给Java的API进行操作，可以上传文件，字符串，流…</p>
+<p>此处将上传方法集成出了工具类，用依赖注入方式使用工具方法</p>
+</li>
+<li><p>OSS针对每个文件会配置一个访问URL，客户端可据此访问到。</p>
+</li>
+</ol>
+<h3 id="OSS云存储代码分析"><a href="#OSS云存储代码分析" class="headerlink" title="OSS云存储代码分析"></a>OSS云存储代码分析</h3><ul>
+<li><p>通过OssClient客户端对象进行访问，创建时匹配参数（endpoint，accessId，assessKey）</p>
+</li>
+<li><p>ossClient来创建桶，存入项目，遍历桶，删除项目…</p>
+</li>
+<li><p>配置操作的参数——是通过发起Request直接调整后台，来使ossClient访问参数更改。</p>
+</li>
+</ul>
+<h1 id="配置文件-application-propoties"><a href="#配置文件-application-propoties" class="headerlink" title="配置文件  application.propoties"></a>配置文件  application.propoties</h1><ul>
+<li><p>目前的问题：</p>
+<ol>
+<li><p>存在硬编码：既将某些和逻辑无关的参数写在负责逻辑处理的Java源代码中。</p>
+<ul>
+<li>不易修改，也不易统一，也不易统一修改</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>配置方法：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-26-17-19-31-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<p>        K&#x3D;V：key随意取，尽力和业务逻辑相关</p>
+<ul>
+<li><p>引入方法：</p>
+<ol>
+<li><p>@Value(“$(key)”) 声明在变量之上</p>
+</li>
+<li><p>用@ConfigurationProperties（prefix &#x3D; “…”）注解自动注入</p>
+<ul>
+<li>参数前缀是要注入的一批配置信息的公共前缀</li>
+<li>下面声明的属性名需要和配置文件中的key一致</li>
+</ul>
+<p><mark>注意哦:</mark> 这样做其实又将原本配置在每个属性上的语句整体进行操作，但一个Java文件中可能不止引入一个大前缀下的配置信息，如果有多个大前缀下的信息要引入，可能引发冲突</p>
+<p>于是地道的做法是：声明配置类：AliOSSProperties.java，其中声明一个大前缀的属性，给属性注入配置信息，并且设置get&#x2F;set方法便于调用</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230626180254650.png" srcset="/img/loading.gif" lazyload alt="image-20230626180254650"></p>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>yml配置文件&#x2F;yaml</p>
+<ul>
+<li><p>文件名：application.yml&#x2F;application.yaml</p>
+</li>
+<li><p>配置内容格式：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-26-17-28-02-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>各种配置方式对比：</p>
+</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-06-26-17-31-54-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>yml语法：</p>
+<ol>
+<li><p>大小写敏感</p>
+</li>
+<li><p>数值前面必须有空格，作为分隔符</p>
+</li>
+<li><p>使用缩进表示层级关系（据说不能用Tab，但IDEA会把Tab转化到定量空格）</p>
+</li>
+<li><p>注释符号是 # （WC！py！）</p>
+</li>
+</ol>
+</li>
+<li><p>yml数据格式：</p>
+</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment">#对象/Map集合 1:1/二元数据</span><br><span class="hljs-attr">user:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">Bob</span><br>    <span class="hljs-attr">age:</span> <span class="hljs-number">14</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-number">123456</span><br><br><span class="hljs-comment">#数组/List/Set集合 一元数据</span><br><span class="hljs-attr">hobby:</span><br>    <span class="hljs-string">-java</span><br>    <span class="hljs-string">-game</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">sport</span><br></code></pre></td></tr></table></figure>
+
+<p>          </p>
+<p>          </p>
+<h1 id="登录与校验："><a href="#登录与校验：" class="headerlink" title="登录与校验："></a>登录与校验：</h1><ul>
+<li><p>要为登录功能新开一个Controller，因为从访问路径考虑，不同功能要整合到同一大路径下，而登录功能与原本的职工Controller，部门Controller，上传文件Controller功能并无交集（对前端而言发送的请求路径大不相同）。</p>
+<p><code>上传文件的Controller：</code></p>
+<p><code>Controller层的作用就是接收前端的信息，而对于前端发来的文件，后端需要传递给OSS，基本逻辑可以在控制层实现，但如果要对文件进行操作再上传，相比要进入service层了</code></p>
+</li>
+</ul>
+<h3 id="会话："><a href="#会话：" class="headerlink" title="会话："></a>会话：</h3><p>会话：</p>
+<ul>
+<li><p>用户打开浏览器，访问web服务器的资源，会话便建立了。直到有一方断开连接，会话结束。<strong>在一次会话中可以包含多次请求和响应。</strong></p>
+</li>
+<li><p>会话是浏览器和后端服务器间的关系，浏览器访问一台服务器下多个方法&#x2F;资源属于一次会话。</p>
+</li>
+</ul>
+<h5 id="会话跟踪："><a href="#会话跟踪：" class="headerlink" title="会话跟踪："></a>会话跟踪：</h5><ul>
+<li><p>一种维护浏览器状态的方法，服务器要识别多次请求是否来自于同一个浏览器，以便在同一次会话的多次请求间共享数据。</p>
+</li>
+<li><p>技术落地</p>
+<ol>
+<li><p>客户端会话跟踪技术：<strong>Cookie</strong></p>
+</li>
+<li><p>服务端会话跟踪技术：<strong>Session</strong></p>
+</li>
+<li><p><strong>令牌</strong>技术</p>
+</li>
+</ol>
+</li>
+</ul>
+<h5 id="Cookie：（信息保存在客户端，请求顺带发送）"><a href="#Cookie：（信息保存在客户端，请求顺带发送）" class="headerlink" title="Cookie：（信息保存在客户端，请求顺带发送）"></a>Cookie：（信息保存在客户端，请求顺带发送）</h5><blockquote>
+<p>Cookie本身是http协议原生支持的方法，通过调用请求和响应内置API即可。</p>
+<p>请求头中有Cookie：name&#x3D;value，响应头中有Set-Cookie : name&#x3D;value</p>
+<p>服务器响应时传递set-Cookie，客户端发送内嵌此cookie的html</p>
+</blockquote>
+<p><strong>Cookie工作流程简述：</strong></p>
+<p>cookie本身是一个k-v形式的字符串，在浏览器和网站服务器之间交流</p>
+<ol>
+<li><p>当浏览器登录GitHub：携带用户名，密码的请求发给GitHub后台</p>
+</li>
+<li><p>GitHub返回一个成功登录的响应，此响应内嵌一个身份认证信息——cookie。</p>
+</li>
+<li><p>cookie被浏览器记录在缓存中，并标记为来自GitHub的cookie</p>
+</li>
+<li><p>接下来浏览器对GitHub的访问携带cookie，后台通过cookie识别到身份后，进行逻辑上的区分</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-26-08-38-42-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<p><strong>注意：</strong></p>
+<ul>
+<li><p>有些网站的cookie是分批次返回的，访问到网站不同区域返回不同的cookie，可能是网站要检测，伪装成cookie。</p>
+</li>
+<li><p>技术——利用cookie伪造身份</p>
+<p>谷歌插件cookie editor导入&#x2F;导出Cookie</p>
+</li>
+<li><p>记录黑客手段：避免在网站动态加载任何html格式 XSS攻击</p>
+<p>类似SQL注入</p>
+<ul>
+<li><p>假如v-html或者v-bind将一串html形式的字符串绑定到某标签，渲染此标签时，该字符串内的模拟标签也会被加载。</p>
+</li>
+<li><p>如果业务上存在用户输入——且某黑客用户按照html格式输入黑客网站+获取当前cookie的JS代码，即可能悄悄更改源码，诱导其他用户进入危险网站。</p>
+</li>
+<li><p>一般通过JS代码可以获取当前cookie，</p>
+<p>document.cookie</p>
+<p>但只要将cookie细则加上http only限制，仅限http访问使用，可以避免cookie失窃</p>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="Cookie-in-Java"><a href="#Cookie-in-Java" class="headerlink" title="Cookie in Java"></a>Cookie in Java</h6><ul>
+<li><p>发现原来SpringBoot的Controller也可以直接接收HttpServletRequest和HttpServletResponse对象，这个API又要解析，又要转型，还要映射，真狠了。</p>
+</li>
+<li><p>在给浏览器的响应中设置Cookie（感觉在过滤器中有大用）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-30-10-43-32-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>在浏览器的请求中查看Cookie</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-30-10-44-45-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<p>优点：HTTP协议中支持的技术，许多解析，添加操作封装在协议中。</p>
+<p>缺点：</p>
+<ol>
+<li><p>移动端无法使用Cookie</p>
+</li>
+<li><p>不安全（因为数据存储在浏览器，是面向客户的），用户自己可以禁用Cookie（导致后端策略失效）</p>
+</li>
+<li><p>Cookie不能跨域</p>
+</li>
+</ol>
+<h5 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h5><p>流程：</p>
+<ol>
+<li><p>浏览器第一次访问后台时，后台建立Session对象（有唯一的SessionId）</p>
+</li>
+<li><p>后台对浏览器的响应中，通过Cookie形式传递Session信息</p>
+</li>
+<li><p>然后浏览器保留SessionId，在接下来的访问中携带SessionId作为标识符</p>
+</li>
+</ol>
+<h6 id="Session-in-Java"><a href="#Session-in-Java" class="headerlink" title="Session in Java"></a>Session in Java</h6><ul>
+<li>建立Session对象&#x2F;设置Session对象</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-30-11-08-22-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>获取Session对象</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-30-11-09-42-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以直接接收HttpSession，也可以从HttpServletRequest中解析出HttpSession</p>
+<p>优点：Session的信息存储在服务器端，一般用户访问不到</p>
+<p>缺点：</p>
+<ol>
+<li><p>如何后端服务器是用集群做的负载均衡，则后端存储的Session信息需要同步</p>
+<p><code>只要信息存储在前端就不需要考虑集群的复制-----Jwt令牌</code></p>
+<p><code>单个服务器自然也不考虑</code></p>
+</li>
+<li><p>由于底层是Cookie，所以Cookie的毛病它也有</p>
+</li>
+<li><p>Session Fixation（Session固定–表示黑客用正常用户的Session访问）</p>
+<p><img src="https://img-blog.csdnimg.cn/a0880a2b662c44159897ae3a4f235baf.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+</li>
+</ol>
+<h5 id="令牌"><a href="#令牌" class="headerlink" title="令牌"></a>令牌</h5><p>流程：</p>
+<p>整体流程还是类似</p>
+<ol>
+<li><p>用户登录发给后端服务器信息，后端生成一个身份标识令牌，发回给客户端</p>
+</li>
+<li><p>客户端将其保存到本地，可以是存储在Cookie中，或localStorage或sessionStorage</p>
+</li>
+<li><p>客户端再发送请求时，将令牌添加到请求头或请求参数中</p>
+</li>
+<li><p>服务器接收到请求，解析令牌，<strong>验证有效性合法性</strong></p>
+</li>
+</ol>
+<p><code>大致流程和Cookie类似，但并没有限制在Cookie中，似乎更加灵活</code></p>
+<h3 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h3><blockquote>
+<p>JSON Web Token </p>
+</blockquote>
+<p>是一个由三部分组成的字符串</p>
+<ol>
+<li><p>Header（头）记录令牌类型，签名算法等</p>
+<blockquote>
+<p>例如：{“alg”:”HS256”,”type”:”jwt”}</p>
+</blockquote>
+</li>
+<li><p>Payload（有效数据），携带一些自定义信息，默认信息等</p>
+<blockquote>
+<p>例如：{“id”:”1”,”username”:”Tom”}</p>
+</blockquote>
+</li>
+<li><p>Signature（签名），防止Token被篡改，确保安全。将header，payload</p>
+<p>将Header和Payload通过Header中alg声明的算法加密。</p>
+</li>
+</ol>
+<p>结果：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230913211329335.png" srcset="/img/loading.gif" lazyload alt="image-20230913211329335"></p>
+<p>过程：</p>
+<p>前两部分的JSON通过Base64编码到字符串</p>
+<p>Base64：</p>
+<p>基于二进制的数据表示方法</p>
+<p>将字符串先转化成二进制表示，再用包含64个符号的字符集来表示</p>
+<p>64：a-z，A-Z，0-9，+，&#x2F;</p>
+<h4 id="项目流程"><a href="#项目流程" class="headerlink" title="项目流程"></a>项目流程</h4><p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230913211856943.png" srcset="/img/loading.gif" lazyload alt="image-20230913211856943"></p>
+<blockquote>
+<p>但使用JWT需要通信双方提前共享密钥，才能实现数据的加密和不被篡改</p>
+<p>不过通信中必然需要数据加密</p>
+</blockquote>
+<h1 id="Spring之间的关系"><a href="#Spring之间的关系" class="headerlink" title="Spring之间的关系"></a>Spring之间的关系</h1><ul>
+<li>Spring Framework是最基础的，最核心的Spring框架。</li>
+<li>SpringMVC是Spring Framework中关于web开发提出的解决方法，简化了原始servlet，身份类似JDBC Template</li>
+<li>Mybatis还是Mybatis</li>
+</ul>
+<p>以上三者就是SSM</p>
+<ul>
+<li>SpringBoot整合了SSM，提炼出较为简单的逻辑。</li>
+</ul>
+<h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><p><big>理解版本一：</big></p>
+<p><small>从一个域名发送请求到另一个域名，可能包括AJAX请求，图片请求，字体请求等</small></p>
+<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>浏览器如果要将html文件加载到用户的计算机上，就先要鉴别此文件有无<strong>潜在的安全风险</strong>。</p>
+<ol>
+<li><p>防止跨站请求伪造（CSRF）：</p>
+<p>假如某网站用其用户的身份（留在浏览器缓存的cookie），以用户的名义请求别的网站（攻击者引导用户访问恶意网站），——禁止跨域——禁止外来有权限地址进行访问。</p>
+<p>详细不明，略难</p>
+</li>
+<li><p>为了保护用户信息的安全</p>
+<p>前提：各个网站对同一用户的cookie虽有不同，但内含信息一致，可以伪造；</p>
+<p>假如没有同源政策，A，B网站都拥有用户WSL的cookie，则A可以用用户的身份访问B。</p>
+<p>同源政策限制了网站只能加载自己的内容（来自同源的服务器上的内容）。</p>
+<p>详细不明，略难</p>
+</li>
+</ol>
+<p><big>理解版本二：</big></p>
+<p><small>跨域是浏览器对JavaScript的限制，禁止对非同源的资源进行请求</small></p>
+<p><small>也就是说：不经过浏览器就不会有跨域问题——Java后台访问数据库、Nacos…</small></p>
+<h4 id="跨域资源共享（CORS）"><a href="#跨域资源共享（CORS）" class="headerlink" title="跨域资源共享（CORS）"></a>跨域资源共享（CORS）</h4><p>是一种基于HTTP头的机制，允许服务器标识除了他自己以外的其他源（域、协议、端口），使得浏览器允许访问加载这些源的资源。</p>
+<blockquote>
+<p> 官网：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">跨源资源共享（CORS） - HTTP | MDN (mozilla.org)</a></p>
+</blockquote>
+<h4 id="跨域流程："><a href="#跨域流程：" class="headerlink" title="跨域流程："></a>跨域流程：</h4><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-09-57-32-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>有一系列简单请求，不需要提前发送预检请求</p>
+<p>需要同时满足多个条件（也就是各个方面都很简单）</p>
+</li>
+</ul>
+<ol>
+<li><p>请求方法限制</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-10-02-19-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>仅有部分标头允许人为设置（请求头限制）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-10-02-33-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>传输媒体类型限制</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-10-04-57-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>else<img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-10-05-17-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-09-57-32-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>在此图中：禁止跨域即第二步服务器响应的信息中不包含CORS</p>
+</li>
+</ol>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ol>
+<li><p>Nginx 代理</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-10-10-29-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>思路：</p>
+<p>既然浏览器对服务器的直接访问不成，就加个中介代理，经过代理获取服务器资源。</p>
+</li>
+<li><p>修改第二步的响应头，添加CORS，允许跨域</p>
+<p>思路：</p>
+<ul>
+<li><p>在网关中配置Filter，目的是为了为每个响应头添加允许跨域的信息</p>
+</li>
+<li><p>具体操作：</p>
+<p>在网关微服务中创建一个配置类对象CrosWebFilter，据说只要将此对象加入容器中，即可完成添加配置信息</p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p><strong>同源政策</strong>：协议+域名+端口三者相同</p>
+<p>既然是浏览器的政策，那么在不涉及浏览器时的前后端交互中并不影响</p>
+</li>
+<li><p>据说有三个标签是允许跨域的：</p>
+<p>&lt;img&gt;,&lt;link&gt;,&lt;script&gt;里面的src和href</p>
+</li>
+<li><p>常见跨域场景</p>
+<p>当协议，子域名，主域名，端口号中任意一个不同时，都算不同域</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/5/23/1638b3579dde630e~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<p>Attention：</p>
+<p>域名和域名对应的ip也不行</p>
+<ul>
+<li>跨域时，请求能发出去，服务端能收到请求，并能正常返回结果，只是结果被浏览器拦截了</li>
+</ul>
+<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p>Servlet Filter接口，用于在Servlet容器中对http请求和响应进行拦截和处理。</p>
+<p>用于访问控制，安全验证，日志记录，字符编码转化等功能</p>
+<p>Filter接口定义的<strong>三个方法</strong></p>
+<ol>
+<li><p>init方法——Filter被初始化时调用，用于进行一些初始化操作</p>
+</li>
+<li><p>doFilter方法——对http请求和响应进行拦截和处理的核心方法，对请求进行修改或过滤，对响应进行修改或增强</p>
+<p>参数：request，response，chain</p>
+</li>
+<li><p>destory方法——Filter被销毁时调用，进行一些清理操作</p>
+</li>
+</ol>
+<p>Filter接口的实现类常常在web.xml文件中进行配置，指定要拦截的URL模式，以及要使用的过滤器。</p>
+<p>&#x2F;&#x2F;也可以用注解形式</p>
+<p> @webFilter（）</p>
+<p>常用属性</p>
+<ol>
+<li><p>filterName：过滤器名称：用于在web.xml文件或其他注解中引用</p>
+</li>
+<li><p>value&#x2F;urlPatterns：过滤的URL模式，是一个字符串or字符串数组</p>
+</li>
+<li><p>despatcherTypes：指定过滤器处理的请求类型，如REQUEST,FORWARD.INCLUDE,ASYNC.</p>
+</li>
+<li><p>initParams:过滤器的初始化参数</p>
+</li>
+<li><p>asyncSupported：指定该过滤器是否支持异步请求</p>
+</li>
+</ol>
+<ul>
+<li><p>流程：</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/af77915066b316e67892cbfd7b25635f.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>客户端请求访问容器中的web资源</p>
+</li>
+<li><p>Servlet容器接收请求，针对本次请求，创建一个request和response对象</p>
+</li>
+<li><p>请求在到达web资源之前，先调用Filter的doFilter()方法，检查其中对request对象的操作（修改请求头和请求正文等预处理）</p>
+</li>
+<li><p>在Filter的doFilter()方法内，调用FilterChain.doFilter()方法，将请求传递给下一个过滤器或者目标资源。</p>
+</li>
+<li><p>目标资源（servlet）生成相应，返回到客户端之前，还会再执行Filter的doFilter()方法，检查对response对象的修改（修改响应头和响应正文）</p>
+</li>
+<li><p>响应信息返回客户端</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>生命周期：</p>
+<ol>
+<li>Filter实例在Servlet容器启动时创建，由Servlet容器负责创建和管理。</li>
+</ol>
+<ul>
+<li><p>过滤器链传递</p>
+<p><img src="https://img-blog.csdnimg.cn/20210216225626609.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+</li>
+</ul>
+<p>mapping到同一访问路径的过滤器们的顺序和在web.xml中配置的顺序相关。</p>
+<p>在基于注解的配置中：</p>
+<p>竟然是根据类名的字典序？？？？？不如配置文件一根毛</p>
+<ul>
+<li><p>过滤器的路径配置</p>
+<p>&lt;url-pattern&gt;</p>
+<ul>
+<li><p>完全路径匹配：以&#x2F;开始，比如&#x2F;aaa，&#x2F;register.html</p>
+</li>
+<li><p>目录匹配：以&#x2F;开始，以*结束，比如&#x2F;*，&#x2F;aaa&#x2F;*</p>
+</li>
+<li><p>扩展名匹配：以*开始，扩展名结尾，比如*.jsp，*.html</p>
+</li>
+</ul>
+<p>&lt;servlet-name&gt;</p>
+<ul>
+<li>按照servlet的名称进行对servlet的拦截</li>
+</ul>
+<p>&lt;dispatcher&gt;</p>
+<p>用来描述过滤器对不同类型的请求是否过滤</p>
+<ol>
+<li><p>REQUEST：默认拦截请求</p>
+</li>
+<li><p>FORWARD：过滤转发</p>
+<p>转发：据说是在服务器内部将请求从一个servlet传递给另一个servlet的机制</p>
+</li>
+<li><p>INCLUDE：过滤包含</p>
+<p>包含：据说是当一个servlet包含另一个servlet的响应内容时的机制</p>
+</li>
+<li><p>ERROR：表示过滤器将在请求处理过程中发生错误时进行过滤，即请求由于某种原因而无法正常处理，比如抛出了异常。</p>
+</li>
+<li><p>ASYNC：表示过滤器将在异步Servlet请求调度时进行过滤。</p>
+<p>异步：一种在Servlet容器中启动的，可以在后台异步处理的请求。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="过滤器-令牌实现身份验证"><a href="#过滤器-令牌实现身份验证" class="headerlink" title="过滤器+令牌实现身份验证"></a>过滤器+令牌实现身份验证</h3><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-14-15-40-09-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>对所有请求都要附加token，后台的拦截器会拦截所有请求，根据token选择是否放行</code></p>
+<blockquote>
+<p>还有实现方式：</p>
+<p>网关  | 网关更关注将请求路由到各个微服务，不过也能配置网关的Filter</p>
+</blockquote>
+<h2 id="Spring-Boot原理初识"><a href="#Spring-Boot原理初识" class="headerlink" title="Spring Boot原理初识"></a>Spring Boot原理初识</h2><h4 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h4><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-01-10-20-29-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>表示当同一个配置在多个文件中有不同内容时，优先选择哪个</p>
+<blockquote>
+<p>开发中一般用统一的格式配置</p>
+<p>除非~~~优先级高的定义Nacos的位置，优先级较低的定义需要Nacos配置文件中信息的配置。</p>
+</blockquote>
+<h4 id="以项目运行环境配置"><a href="#以项目运行环境配置" class="headerlink" title="以项目运行环境配置"></a>以项目运行环境配置</h4><ul>
+<li>Spring Boot支持<strong>Java系统属性</strong>和<strong>命令行参数</strong>的方式进行配置</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-01-10-26-58-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>系统属性更核心的功能是改变JVM内存配置</p>
+<h4 id="Spring-boot项目运行逻辑"><a href="#Spring-boot项目运行逻辑" class="headerlink" title="Spring boot项目运行逻辑"></a>Spring boot项目运行逻辑</h4><ul>
+<li><p>IDEA中调用SpringApplication.run()时并不会执行完整的项目运行逻辑，而是直接运行SpringBoot程序</p>
+</li>
+<li><p>企业生产环境中，会将应用程序打包成jar包，并在生产服务器上进行部署和运行</p>
+</li>
+</ul>
+<p>过程：</p>
+<ol>
+<li><p>Maven或者Gradle对项目进行打包（Package），之后便可在target文件夹下找到jar包</p>
+</li>
+<li><p>运行jar包</p>
+<ol>
+<li><p>JVM启动</p>
+</li>
+<li><p>在jar的清单文件（META-INF&#x2F;MANIFEST.MF）中，找到指定的主类（调用SpringApplication.run()）</p>
+</li>
+<li><p>初始化主类和Spring Boot运行环境</p>
+</li>
+<li><p>自动配置和依赖注入</p>
+</li>
+<li><p>启动Tomcat等嵌入式web服务器</p>
+</li>
+<li><p>监听端口</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="Spring-boot-中bean的管理"><a href="#Spring-boot-中bean的管理" class="headerlink" title="Spring boot 中bean的管理"></a>Spring boot 中bean的管理</h4><ul>
+<li><h5 id="获取Bean"><a href="#获取Bean" class="headerlink" title="获取Bean"></a>获取Bean</h5><p>由于Spring项目启动时，会把bean都创建好放在IOC容器中，可以<strong>主动获取这边bean</strong></p>
+<blockquote>
+<p>主动获取bean和被动注入bean是两种获取容器中对象的方式</p>
+</blockquote>
+<p>方法：</p>
+<ol>
+<li><p>获取容器对象</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-01-10-51-46-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>由容器找寻bean</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-01-10-47-37-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+</li>
+<li><h5 id="Bean的作用域"><a href="#Bean的作用域" class="headerlink" title="Bean的作用域"></a>Bean的作用域</h5><p>Spring支持五种作用域</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-01-10-54-37-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-01-10-55-24-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>当作用域为singleton单例：每次调用bean都会获取容器中唯一的一个对象</p>
+</li>
+<li><p>当作用域为prototype非单例，每次调用bean都会创建一个新的bean对象</p>
+</li>
+<li><p>关于@Lazy</p>
+<p>是将bean的创建延迟到第一次使用bean对象（而非项目启动时）</p>
+</li>
+<li><h5 id="第三方bean对象"><a href="#第三方bean对象" class="headerlink" title="第三方bean对象"></a>第三方bean对象</h5><p>在导入的jar包中，有时需要创建其中某个对象，但又要避免显式的new，这个jar包又不会自动的创建bean对象，就需要手动将其中对象加入到IOC容器中</p>
+<p>做法：</p>
+<p>在项目启动类中声明要注入的对象，于是便在同一时期将此对象和其他bean对象一同加入到IOC中</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-01-11-04-21-image.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>但在开发中一般不会在启动类写太多东西，而是将此写在配置类中</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-01-11-07-06-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>bean对象的名字是方法名</p>
+</li>
+<li><p>bean对象创建是如果需要其他bean作为参数，直接写，SpringBoot完成依赖注入</p>
+</li>
+</ul>
+<p>配置类：</p>
+<p>在Spring Boot启动阶段运行（和写在启动类中效果一致）</p>
+<p>常见配置：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-01-11-11-03-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<h3 id="Spring-Boot-原理"><a href="#Spring-Boot-原理" class="headerlink" title="Spring Boot 原理"></a>Spring Boot 原理</h3><p><code>早期开发是基于Spring Framework核心框架，难点在于需要进行繁琐的依赖管理和配置管理（包括bean），而在Spring4之后出现了简化SpringFramework开发的————Spring Boot。</code></p>
+<p>Spring Boot提供了两个关键功能来简化SF——<strong>起步依赖</strong> + <strong>自动配置</strong></p>
+<ul>
+<li><h4 id="起步依赖"><a href="#起步依赖" class="headerlink" title="起步依赖"></a>起步依赖</h4><p>通过引入一个spring-boot-starter-web来引入web开发需要的基础依赖，通过maven的依赖传递实现</p>
+<p>主要实现也就是把核心几个依赖预定义（管理）了，感觉没什么技术含量</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-02-09-26-48-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><h4 id="自动配置"><a href="#自动配置" class="headerlink" title="自动配置"></a>自动配置</h4><p>SpringBoot在Spring容器启动后，自动将一些配置类、bean对象加载到IOC容器中，不需要手动声明</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-02-09-41-11-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>IOC中有一些基础功能类的bean对象，可以在程序中直接Autowired</p>
+</li>
+<li><h3 id="自动配原理"><a href="#自动配原理" class="headerlink" title="自动配原理"></a>自动配原理</h3></li>
+<li><p>依赖的包怎么创建成bean对象？</p>
+<ol>
+<li><p>扩展包扫描</p>
+<p>原本启动类会对其所在包和子包进行包扫描，并将声明了bean类注解的类创建为bean对象，于是只要让启动类也扫描一遍依赖包即可</p>
+<p>启动类的扫描范围确实不大，即使它能够更大，但是却选择不大</p>
+<p>解决方法：</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-09-02-09-56-31-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="462">
+</li>
+<li><p>@Import导入</p>
+<p>使用@Import导入的类会被Spring加载到IOC容器中。</p>
+<p>由于包扫描存在几点问题：</p>
+<ol>
+<li><p>由上操作下（确定包扫描范围）耦合度较高，需要控制反转</p>
+</li>
+<li><p>全包扫描性能损耗略大，整个包未必有几个bean对象</p>
+</li>
+</ol>
+<p>使用@Import只能明确导入哪几个类，似乎也没解决第一个问题</p>
+<p>导入形式：</p>
+<ol>
+<li><p>导入普通类</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-09-02-10-08-07-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="434">
+</li>
+<li><p>导入配置类</p>
+<p>配置类中声明的bean对象即完成注入IOC</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-09-02-10-08-40-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="409">
+</li>
+<li><p>导入ImportSelector接口的实现类</p>
+<p>通过某些逻辑得到要创建bean对象的类名</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-02-10-09-31-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>使用@EnableXXX注解，注解中封装有@Import注解</p>
+<p>由于由上层确定下层要导入那些类太繁琐，于是将导入的选择交给下层完成</p>
+<p>下层创建注解@EnableXXX，封装有@Import注解，明确在自己的包内哪些需要被Import。上层只需要对整个包声明@EnableXXX即可完成导入需要的类</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><h4 id="源码分析："><a href="#源码分析：" class="headerlink" title="源码分析："></a>源码分析：</h4><ol>
+<li>启动类进入关键配置@SpringBootApplication</li>
+</ol>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-02-10-32-47-image.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li><p>分析此注解的几个注解</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-09-02-10-34-05-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="479">
+
+<p> @Target,@Retention,@Documented,@Inherited是元注解</p>
+<p> @SpringBootConfiguration 中封装有@Configration，表示此类是个配置类，可以声明@bean对象</p>
+<p> @CompoentScan中明确包扫描范围</p>
+<p> @EnableAutoConfigration 表示与自动配置相关</p>
+</li>
+<li><p>进入@EAC</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-09-02-10-37-33-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="480">
+
+<p>关注@Import，通过此@Import导入的类，可以一直向上传递到启动类（也是配置类），于是就可以加入IOC</p>
+</li>
+<li><p>进入AutoConfigrationImportSelector</p>
+<p>是ImportSelector的子孙类</p>
+<p>核心方法：</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-09-02-10-40-29-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="575">
+
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-02-10-40-59-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-02-10-41-21-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>概述：</p>
+<p>从两个文件（SpringBoot3中仅有一个）中加载某些东西，最后selectImports()中作为字符串返回，表示需要加载这些类</p>
+<p>文件：</p>
+<blockquote>
+<p>META-INF&#x2F;spring&#x2F;org.springframework.boot.autoconfigure.AutoConfiguration.imports</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-02-10-45-38-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>装有每个导入依赖的XXXAutoConfigration类的全类型</p>
+</li>
+<li><p>随便进入一个</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-02-10-47-45-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现XXXAutoConfigration全是配置类，需要对外暴露的bean对象全部在此声明。</p>
+<p>且需要注意：@ConditionalXXX表示此类在某些条件下加载bean，某些条件下不加载bean</p>
+</li>
+<li><p>问题：</p>
+<p>此文件中并不包含导入的依赖，而全是org.springframework的类，表示此文件只是在项目启动前就存在的基础配置文件。</p>
+<p>关于导入的依赖是如何成为bean的，暂不明</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="自定义starter"><a href="#自定义starter" class="headerlink" title="自定义starter"></a>自定义starter</h2><p><code>是将较为公共的代码封装起来，形成对上方便可用的依赖，项目中一般会将此起名为starter</code></p>
+<p><code>spring-boot-starter-web,mybatis-spring-boot-starter,pagehelper-spring-boot-starter...</code></p>
+<p>命名规范：</p>
+<p>SpringBoot官方提供：按照<strong>spring-boot-starter-XXX</strong></p>
+<p>其他组织提供：按照<strong>XXX-spring-boot-starter</strong></p>
+<h4 id="举例说明starter基本模式"><a href="#举例说明starter基本模式" class="headerlink" title="举例说明starter基本模式"></a>举例说明starter基本模式</h4><blockquote>
+<p>mybatis</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-04-09-14-32-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>此依赖的jar包中没有源代码，只有pom文件，表示此依赖类似聚合项目，仅是将各种可能的依赖包裹起来</p>
+<p>pom中关键依赖： 是关于将此jar包的bean对象自动配置进IOC的</p>
+<blockquote>
+<p>起名就叫autoconfigure，表示此依赖是整个starter的bean的自动配置</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-04-09-16-13-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>在此jar中存在META-INF&#x2F;spring&#x2F;org.springframework.boot.autoconfigure.AutoConfigration.Imports文件</p>
+<p>各个依赖里竟然都叫这个</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-04-09-19-42-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>文件里定义了配置类的全路径</p>
+<h3 id="具体实现说明"><a href="#具体实现说明" class="headerlink" title="具体实现说明"></a>具体实现说明</h3><blockquote>
+<p>封装阿里云OSS</p>
+</blockquote>
+<ol>
+<li><p>外层聚合项目，内层核心autoConfigure项目</p>
+</li>
+<li><p>autoconfigure：</p>
+<p>在此项目中完成对象+逻辑的使用，并且对象通过配置类暴露到IOC中</p>
+<ul>
+<li><p>由于此项目需要通过固定格式的配置文件将对象暴露，并且上层Spring也扫描不到项目的bean，于是项目整体结构就不按照容器化进行</p>
+<p>但也没有像原生Java一样随便new，而是在配置文件中声明bean时，通过set方法手动注入依赖对象。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-04-10-01-35-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Spring-Security"><a href="#Spring-Security" class="headerlink" title="Spring Security"></a>Spring Security</h2><p>核心功能：</p>
+<ul>
+<li><p><strong>认证</strong>：验证某个用户能否访问系统 | 根据用户名密码来完成认证功能</p>
+</li>
+<li><p><strong>授权</strong>：验证某个用户是否有权限执行某个操作 | 系统中角色权限分层</p>
+</li>
+</ul>
+<p>保护思想：</p>
+<ul>
+<li>通过添加一系列<strong>过滤器</strong>&#x2F;拦截器进行保护，对请求进行过滤</li>
+</ul>
+<p>封装逻辑：</p>
+<ul>
+<li><p>如果是基于Session，那么Spring security会对cookie里的sessionId进行解析，找到服务器中存储的session信息，加以判断当前用户是否符合要求</p>
+</li>
+<li><p>如果是基于token，则会解析出token，然后将当前请求加入到Spring security管理的权限信息中去</p>
+</li>
+</ul>
+<p>认证与授权的思路：</p>
+<p><strong>如果系统的模块众多，每个模块都需要进行授权与认证，所以选择基于token的形式进行授权与认证。用户根据用户名和密码认证成功，然后获取当前用户角色的一系列权限值，并以用户名为key，权限列表为value下形式存储在redis缓存中，根据用户名相关信息生成token返回，浏览器将token记录到cookie中去，每次调用api接口都默认将token携带到header中，Spring security解析header头获取token信息，解析token获取当前用户名，根据用户名就可以从redis中获取权限列表，这样Spirng security就能判断当前请求有无权限访问了</strong></p>
+<p>spring的starter设计思想：</p>
+<p>导入依赖包后，由于有自动配置文件，默认AOP下添加了许多功能</p>
+<h4 id="认证流程："><a href="#认证流程：" class="headerlink" title="认证流程："></a>认证流程：</h4><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-10-19-09-15-22-image.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h1 id="-5"><a href="#-5" class="headerlink" title=""></a></h1><h3 id="网络安全："><a href="#网络安全：" class="headerlink" title="网络安全："></a>网络安全：</h3><ol>
+<li><p>CSRF <strong>跨站请求伪造</strong> 攻击</p>
+<p>指构建恶意页面，引导用户访问对应网站执行操作的方式：</p>
+<p>例如：</p>
+<p><code>同一个浏览器中，用户刚刚登录了银行，在浏览器中保存了cookie或者sessionId或者token，恶意网站表面的一个按钮/输入框其实通向银行后台，当点击按钮/提交表单时，对外界而言和在银行网站进行并无区别</code></p>
+<p>当代浏览器的解决措施：</p>
+<ul>
+<li>当访问不同站点（目的服务器）时，自动屏蔽别的cookie | sameSite</li>
+</ul>
+</li>
+<li><p>SFA <strong>会话固定</strong> 攻击</p>
+<p>指黑客将自己的JSessionId给用户让用户登录，后来黑客就可以用此JSessionId直接进入登录状态</p>
+<p>常用场景：</p>
+<p><code>黑客将恶意页面中填充一段JS脚本，用来设置Cookie中的SessionId为自己的</code></p>
+<p>解决措施：</p>
+<ul>
+<li><p>让浏览器对Session设置为禁止修改（HttpOnly）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-10-20-09-07-07-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>httpOnly表示只能通过http协议读&#x2F;写到，从而屏蔽js脚本</p>
+</li>
+</ul>
+</li>
+<li><p>XSS 跨站脚本 攻击</p>
+<p>攻击者在合法网站中注入恶意脚本代码来攻击用户</p>
+<p>常见类型：</p>
+<p><code>脚本注入：在实现发帖行为时，帖子可能用户怎么写就在DOM中怎么展示，一旦用户写一些掺杂JS脚本的HTML语法，&lt;p onload=&quot;alert(&#39;yes!&#39;)&quot;&gt;&lt;/p&gt;，就会导致界面上允许运行恶意代码</code></p>
+</li>
+</ol>
+<h3 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>java web学习笔记</div>
+      <div>http://example.com/2025/04/20/JavaWeb/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

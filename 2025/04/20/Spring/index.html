@@ -1,0 +1,1552 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Spring！三层和MVC 理解1：两种不同的设计逻辑  三层：Controller，service，dao  MVC： 运行流程： 前端发送给Controller请求，C接收请求将需求交给Model，model完成业务逻辑并访问数据库，将得到的数据返回给C，C要将数据交给View打包成视图，再返回到C，由C返回给客户端。  此版本其实是上一版本，在前后端不分离的时期，View视图层使用JSP写的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring学习笔记">
+<meta property="og:url" content="http://example.com/2025/04/20/Spring/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Spring！三层和MVC 理解1：两种不同的设计逻辑  三层：Controller，service，dao  MVC： 运行流程： 前端发送给Controller请求，C接收请求将需求交给Model，model完成业务逻辑并访问数据库，将得到的数据返回给C，C要将数据交给View打包成视图，再返回到C，由C返回给客户端。  此版本其实是上一版本，在前后端不分离的时期，View视图层使用JSP写的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/xuanwo.jpg">
+<meta property="article:published_time" content="2025-04-20T06:03:02.197Z">
+<meta property="article:modified_time" content="2025-04-20T06:07:12.731Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/xuanwo.jpg">
+  
+  
+  
+  <title>Spring学习笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>songlin&#39;s Room</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/reading/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>reading</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/java/" target="_self">
+                <i class="iconfont icon-code"></i>
+                <span>java</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/movie/" target="_self">
+                <i class="iconfont icon-image"></i>
+                <span>movie</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/wofo-far.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Spring学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Spring学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Spring！"><a href="#Spring！" class="headerlink" title="Spring！"></a>Spring！</h1><h3 id="三层和MVC"><a href="#三层和MVC" class="headerlink" title="三层和MVC"></a>三层和MVC</h3><ul>
+<li><p>理解1：两种不同的设计逻辑</p>
+</li>
+<li><p>三层：Controller，service，dao</p>
+</li>
+<li><p>MVC：</p>
+<p>运行流程：</p>
+<p>前端发送给Controller请求，C接收请求将需求交给Model，model完成业务逻辑并访问数据库，将得到的数据返回给C，C要将数据交给View打包成视图，再返回到C，由C返回给客户端。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230705210004961.png" srcset="/img/loading.gif" lazyload alt="image-20230705210004961"></p>
+<p>此版本其实是上一版本，在前后端不分离的时期，View视图层使用JSP写的。</p>
+<p>后端将数据封装成JSP视图后，再一起发送到浏览器用于展示（有点后端前移的意思）。</p>
+<p>model中，由javabean实现，其中有实体bean，业务bean，即包括三层中的业务逻辑层和数据访问层</p>
+</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-05-11-23-33-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>又一理解（来自黑马）：</p>
+<ul>
+<li><p>三层分为表现层，业务层，持久层</p>
+</li>
+<li><p>每层的框架分别是SpringMVC，Spring Framework，Mybatis</p>
+</li>
+<li><p>表现层中的SpringMVC分为C，M，V，其中的面向业务层</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>两种理解似乎是一致的：第一种理解的Model层可以涵盖service层和dao层。第二种理解不过是把三层中Controller层按照业务流程分开三步</p>
+<p>是否要经过view层渲染？在前后端分离开发模式下似乎淘汰了</p>
+<h5 id="最新理解："><a href="#最新理解：" class="headerlink" title="最新理解："></a>最新理解：</h5><p>springMVC就是Controller层的框架</p>
+<p>古早前后端不分离版本：springMVC还要用JSP负责写view层。</p>
+<p>最新版本前后端分离中：springMVC不需要JSP写view，而是要将内容转化成JSON，交由前端解析+渲染</p>
+<h4 id="spring框架与用servlet开发："><a href="#spring框架与用servlet开发：" class="headerlink" title="spring框架与用servlet开发："></a>spring框架与用servlet开发：</h4><p>关系暂不明</p>
+<ul>
+<li><p>入门开发步骤</p>
+<ol>
+<li><p>创建Spring6父工程（项目project），工程下有多个Spring子模块（module）</p>
+<p>父工程下new module：每个module是一个功能或组件。相对独立：有自己的文件解构：配置文件，资源文件。。。可以独立的测试和部署</p>
+<p>微服务？</p>
+</li>
+<li><p>创建类，定义属性和方法</p>
+</li>
+<li><p>按照Spring要求，创建配置文件（xml格式）</p>
+</li>
+<li><p>在Spring配置文件中配置相关信息——声明bean对象</p>
+</li>
+<li><p>测试</p>
+<ul>
+<li><p>加载spring配置文件，用创建对象的方式</p>
+</li>
+<li><p>由此文件对象，获取想要创建的对象（文件里的bean）</p>
+</li>
+<li><p>使用对象调用方法实现逻辑</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>入门程序分析</p>
+<ol>
+<li><p>程序执行了对象的无参构造方法</p>
+</li>
+<li><p>没有new，怎么创建的对象——反射</p>
+<ul>
+<li><p>在加载配置文件bean.xml时进行解析，目的是获得bean标签的属性值。关键属性值：id和class</p>
+</li>
+<li><p>使用反射，根据class类全路径创建对象（Class字节码文件映射到Class对象）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Class</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> Class.forName(class属性值)<br></code></pre></td></tr></table></figure>
+
+<p>由此Class对象获取类对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> (User)c.getDeclaredConstructor().newInstance();<br></code></pre></td></tr></table></figure>
+
+<p>于是反射的结果任然是创造对象</p>
+<p>正常是由对象实体编译到class文件，反射是由class文件试图回到对象实体：</p>
+<p>这就有一个问题：</p>
+<p>原本的类没有用到全部的属性和方法，属性或许有默认值还有价值，但你没用到的方法是否不会参与编译呢？</p>
+<p>结果是<strong>所有东西都参与编译</strong>——javaC编译时不清楚哪个用了没有。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<ol start="3">
+<li>配置的bean对象放在Map集合中，k：String&#x3D;bean对象的唯一标识：id，v：BeanDefinition&#x3D;bean的表述信息类，内含许多属性，包括唯一路径，是否为单例，作用域，name…人为描述——刻画想要怎样的bean对象</li>
+</ol>
+<ul>
+<li><p>Log4j2：Apache下开源的日志记录组件 </p>
+<ul>
+<li><p>日志信息有优先级，不同级别的信息表示此条日志的重要性，级别高的会自动屏蔽级别低的日志</p>
+<ol>
+<li>TRACE</li>
+<li>DEBUG</li>
+<li>INFO</li>
+<li>WARN</li>
+<li>ERROR</li>
+<li>FATAL</li>
+</ol>
+</li>
+<li><p>日志信息输出位置：可选在控制台or文件中</p>
+</li>
+<li><p>日志信息输出格式可调：日期形式…(log4j2只是一个日志框架，其中许多参数赋默认值，却可调整)</p>
+</li>
+<li><p>分为自动写入和手动写入</p>
+<p>手动写入：也是通过调用对象的方法来实现（为什么不设置成静态？）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LoggerFactory.getLogger(TestUser.class)<br><br>logger.info(<span class="hljs-string">&quot;sth&quot;</span>)<br>logger.warn(<span class="hljs-string">&quot;sth&quot;</span>)。。。<br></code></pre></td></tr></table></figure>
+
+<p>没想到不分层的逻辑也不new对象，也用了工厂模式+反射</p>
+<p>一旦new就会耦合，就要避免</p>
+</li>
+<li><p>log4j是日志框架的实现，slf4j是日志框架的接口，向下处理实现的操作对上屏蔽。</p>
+<p>在运行时通过反射找到具体的日志实现</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j-slf4j2-impl<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.19.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>此依赖就是slf4j到log4j2的桥接器坐标</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="IoC"><a href="#IoC" class="headerlink" title="IoC"></a>IoC</h2><p><code>一种设计思想--是用来设计出松耦合的程序</code></p>
+<p>权力由上层交给下层，下层交给IoC容器</p>
+<p>思想：将Java对象的实例化和初始化交给IoC容器，而避免手动new对象，容器内即负责实例化和初始化对象，也管理对象之间的依赖关系（like A需要调用B的方法，只要AB都在IoC中，容器即可完成A对B的调用）</p>
+<p>在IoC容器中的对象成为Spring Bean，这和new出来的对象没有区别</p>
+<p>Ioc流程说明：</p>
+<ol>
+<li><p>xml配置文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;bean id=<span class="hljs-string">&quot;myBean&quot;</span> class=<span class="hljs-string">&quot;com.example.MyBean&quot;</span>&gt;<br>        &lt;!-- 设置属性值 --&gt;<br>        &lt;property name=<span class="hljs-string">&quot;propertyName&quot;</span> value=<span class="hljs-string">&quot;propertyValue&quot;</span> /&gt;<br>&lt;/bean&gt;<br></code></pre></td></tr></table></figure>
+
+<p>其中定义了id和BeanDefinition（底层是k-v）</p>
+</li>
+<li><p>通过接口实现类从map中读取需要的bean（接口定义要读取需要的bean，实现类里区分从xml或者注解读取）。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230707192615033.png" srcset="/img/loading.gif" lazyload alt="image-20230707192615033"></p>
+</li>
+<li><p>将读取的bean的id和Definition加载到IoC容器，接下来进行<strong>实例化</strong></p>
+</li>
+<li><p>Spring中通过BeanFactory+反射创建对象</p>
+</li>
+<li><p>对象初始化——成为最终对象</p>
+</li>
+<li><pre><code class="language-java">user user = (user)context.getBean(&quot;id&quot;);
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">   <br>   获取真对象<br>- <span class="hljs-keyword">Bean管理：对象的创建过程和Bean属性的注入过程</span><br><span class="hljs-keyword"></span><br>- IoC容器要对读取的<span class="hljs-keyword">beanDefinition实例化，而IoC的两种实现方式有：</span><br><span class="hljs-keyword"></span>  <br>  <span class="hljs-number">1</span>. <span class="hljs-keyword">BeanFactory（程序内部使用的接口，不面向开发人员）</span><br><span class="hljs-keyword"></span>  <br>  <span class="hljs-number">2</span>. ApplicationContext：<span class="hljs-keyword">BeanFactory的子接口，是BeanFactory的上层</span><br><span class="hljs-keyword"></span>     <br>     ![image<span class="hljs-number">-20230707194632359</span>](C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image<span class="hljs-number">-20230707194632359</span>.png)<br>  <br>  <span class="hljs-number">3</span>. ApplicationContext：此接口的实现类们实现了从不同位置，不同方式创建IoC容器<br>     <br>     ![image<span class="hljs-number">-20230707195239359</span>](C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image<span class="hljs-number">-20230707195239359</span>.png)<br>     <br>     ClassPathXml...从类文件下找到配置文件<br>     <br>     FileSystemXml...从文件系统路径下找到配置文件<br>     <br>     ConfigurableApplication...子接口，包含扩展方法，功能更加强大<br>     <br>     web...为web应用准备<br><br>- 从IoC容器获取<span class="hljs-keyword">Bean对象的三种方式：（根据id，根据class，两者同时）</span><br><span class="hljs-keyword"></span>  <br>  ```<span class="hljs-keyword">java</span><br><span class="hljs-keyword"></span>          ApplicationContext <span class="hljs-built_in">context</span> = new ClassPathXmlApplicationContext(<span class="hljs-string">&quot;bean.xml&quot;</span>);<br>          iocDemo1 demo1 = (iocDemo1) <span class="hljs-built_in">context</span>.getBean(<span class="hljs-string">&quot;Demo1&quot;</span>);<br>          System.out.println(demo1);<br>          iocDemo1 demo2 = <span class="hljs-built_in">context</span>.getBean(iocDemo1.class);<br>          System.out.println(demo2);<br>          iocDemo1 demo3 = <span class="hljs-built_in">context</span>.getBean(<span class="hljs-string">&quot;Demo1&quot;</span>,iocDemo1.class);<br>          System.out.println(demo3);<br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+<p>  有冲突，会报错——配置文件可以同class，但不能据此找bean</p>
+<ul>
+<li><p>从IoC容器获取Bean对象也可以多态——容器中有实现类的bean，从容器中get的依据是接口的class。</p>
+<p>但由于获取bean对象返回的都是唯一对象，于是如果接口存在多个实现类则Spring无法挑选</p>
+<ul>
+<li><p>而且只能根据接口.class来获取，不能用接口名</p>
+</li>
+<li><p>源代码：<mark>扫描context里bean对象时使用instanceof方法选出和传入class匹配的bean</mark></p>
+<p>而传id自然只能由id扫描到自身，无法扫描到实现类了</p>
+</li>
+</ul>
+</li>
+<li><p>配置文件里可以有id相同的bean，也可以有同一接口的不同实现类的bean，在配置文件中不会报错，但挑选方式（getBean）时要避免相应的错误</p>
+</li>
+</ul>
+<h2 id="DI依赖注入"><a href="#DI依赖注入" class="headerlink" title="DI依赖注入"></a>DI依赖注入</h2><p><code>指Spring创建对象的过程中，将对象依赖的属性通过配置进行注入</code>   配置？</p>
+<p>常见注入方法：set注入和构造注入</p>
+<p>注入引用类型的属性，实际就是维护bean对象之间的关系</p>
+<p>无论是用setter，还是构造方法，在原生代码中都需要new获取对象，于是在Spring中就是需要配置bean</p>
+<ol>
+<li><p>根据Setter：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">iocDemo2</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Person</span>&#123;<br><br>    String name;<br>    String age;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setAge</span><span class="hljs-params">(String age)</span> &#123;<br>        <span class="hljs-built_in">this</span>.age = age;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;Demo2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.example02.iocDemo2&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;age&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;21&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;wsl&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br>name表示setter方法中后单词小写<br>要求类文件中有set方法（以及无参构造/或者没有构造器，默认无参）<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>根据构造器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;Demo2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.example02.iocDemo2&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">constructor-arg</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;age&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;22&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">constructor-arg</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">constructor-arg</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;wsl&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">constructor-arg</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br>要求类文件中有含参构造<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li><p>特殊值处理：</p>
+<ol>
+<li><p>null值：</p>
+<p>由于xml文件里，属性的标准写法是k&#x3D;“v”，于是无论右侧是不是字符串都只能按照字符串写。</p>
+<p>表示null用内嵌标签：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"> <span class="hljs-tag">&lt;<span class="hljs-name">constructor-arg</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;birthday&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">null</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">null</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">constructor-arg</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>标签冲突（&lt;&gt;）：</p>
+<p>转义！</p>
+<p><constructor-arg name="name" value="3 &lt; 4"></constructor-arg></p>
+<p>&amp;lt；表示&lt;,  &amp;gt; 表示&gt;</p>
+<p>或者：CDATA区&#x2F;CDATA节</p>
+<p>​        C表示Character纯文本，不会被识别为其他有含义的符号</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">constructor-arg</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>&lt;![CDATA[a&lt;b]]&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">constructor-arg</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>注入的属性是引用数据类型（对象）</p>
+<p>方法：</p>
+<ol>
+<li><p>引用外部bean</p>
+<p>用property标签的ref属性，将别的bean对象的id传进来，就能识别到是哪个对象</p>
+</li>
+<li><p>内部bean</p>
+<p>在bean内部某个property中定义需要的bean对象</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708094017029.png" srcset="/img/loading.gif" lazyload alt="image-20230708094017029"></p>
+</li>
+<li><p>级联属性配置</p>
+<p>在bean中像设置引用对象的某个属性时使用</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;Demo2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.example02.iocDemo2&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;age&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;21&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;wsl&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;main&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;main&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;main.mainName&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;www&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br>但前提是：Demo2中的main属性需要设置get方法<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>注入的属性是引用数据类型（数组）</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708100044822.png" srcset="/img/loading.gif" lazyload alt="image-20230708100044822" style="zoom: 60%;" />
+</li>
+<li><p>注入的属性是引用数据类型（List&lt;引用&gt;）</p>
+</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708100447939.png" srcset="/img/loading.gif" lazyload alt="image-20230708100447939"></p>
+<ul>
+<li><p>注入的属性是引用数据类型（List&lt;基本&gt;）</p>
+<p>那么list标签内就用value即可</p>
+</li>
+</ul>
+<ul>
+<li><p>注入的属性是引用数据类型（Map&lt;引用&gt;）</p>
+<p>property属性标签—&gt;map集合标签—&gt;entry个例标签—&gt;key标签 and ref标签</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708102644334.png" srcset="/img/loading.gif" lazyload alt="image-20230708102644334" style="zoom: 50%;" />
+</li>
+<li><p>注入的属性是引用数据类型（Map&lt;基本&gt;）</p>
+<p>property属性标签—&gt;map集合标签—&gt;entry个例标签—&gt;key标签 and value标签</p>
+</li>
+<li><p>简便办法——用工具标签</p>
+<ul>
+<li><p>前提：在bean.xml配置文件中引入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:util</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/util&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans</span></span><br><span class="hljs-string"><span class="hljs-tag">       http://www.springframework.org/schema/beans/spring-beans.xsd</span></span><br><span class="hljs-string"><span class="hljs-tag">       http://www.springframework.org/schema/util</span></span><br><span class="hljs-string"><span class="hljs-tag">       http://www.springframework.org/schema/beans/spring-util.xsd&quot;</span></span><br><span class="hljs-tag">&gt;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>xmlns（xml nameSpace ）用于指定默认的命名空间——bean标签</li>
+<li><code>xsi</code> 是 XML Schema Instance 的简写。前面指定命名空间，后面在schemaLocation中声明xsi的属性：格式是：namespaceURI   schemaLocation</li>
+</ul>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708105144561.png" srcset="/img/loading.gif" lazyload alt="image-20230708105144561" style="zoom:67%;" />
+
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708105209418.png" srcset="/img/loading.gif" lazyload alt="image-20230708105209418" style="zoom:67%;" />
+</li>
+<li><p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708105241006.png" srcset="/img/loading.gif" lazyload alt="image-20230708105241006"></p>
+</li>
+</ul>
+</li>
+<li><p>P命名空间——</p>
+<ol>
+<li><p>配置导入P空间文件</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708105934770.png" srcset="/img/loading.gif" lazyload alt="image-20230708105934770"></p>
+</li>
+<li><p>p注入</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708110139958.png" srcset="/img/loading.gif" lazyload alt="image-20230708110139958"></p>
+<p>不写property，而是在bean标签内由p:属性注入</p>
+<p>上面的配置就像是给bean标签定义属性p，而p又识别出bean对象的属性作为自己的属性</p>
+<p>在p：后，每个bean对象的属性都有本身和ref两种，用于确定是注入字面量还是引用类型</p>
+</li>
+</ol>
+</li>
+<li><p>引入外部属性文件——</p>
+<p>需求背景是：某些特定的值比较固定，且逻辑上可以和别的区分开，于是写到外部再引入进来</p>
+<p>​                        例如数据库容器配置文件。</p>
+<p>做法：</p>
+<ol>
+<li><p>确保项目里有JDBC对myBatis的依赖</p>
+</li>
+<li><p>编写jdbc.properties,内部写连接数据库的必要信息（id，密码，路径，驱动…）</p>
+</li>
+<li><p>引入命名空间<context>，做法与引入<list><map>一致，在配置文件中用context引入属性文件</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708112024055.png" srcset="/img/loading.gif" lazyload alt="image-20230708112024055"></p>
+</li>
+<li><p>然后就可以通过配置文件名来调用其里面k-v形式的内容</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708112205072.png" srcset="/img/loading.gif" lazyload alt="image-20230708112205072"></p>
+</li>
+</ol>
+</li>
+<li><p>bean的作用域——scope属性限制是单例还是多例</p>
+<ol>
+<li><p>scope&#x3D;”singleton”：在IoC容器中，这个bean对象始终为单例</p>
+<p>在IoC容器初始化时创建</p>
+</li>
+<li><p>scope&#x3D;”prototype”：在IoC容器中，这个bean对象可以有多个</p>
+<p>在获取bean时创建</p>
+</li>
+</ol>
+</li>
+<li><p>单例：（默认）</p>
+<ul>
+<li>每次请求获取该对象，都会得到同一个对象实例（context.forName(…）</li>
+<li>常常用在表示程序中共享的某种资源或状态（对程序任何位置都是一致的）</li>
+<li>可以节省资源</li>
+</ul>
+</li>
+<li><p>多例：</p>
+<ul>
+<li>每次请求获取对象实例时都会创建一个新的对象实例（独立的）.</li>
+<li>常常用于表示具有不同状态或不同上下文的对象</li>
+</ul>
+</li>
+</ul>
+<h3 id="bean-生命周期"><a href="#bean-生命周期" class="headerlink" title="bean 生命周期"></a>bean 生命周期</h3><p><small>用property 写法</small></p>
+<ol>
+<li>bean对象创建（调用无参构造）</li>
+<li>给bean对象设置相关属性（通过setter将property注入）</li>
+<li>bean后置处理器（初始化之前）</li>
+<li>bean对象的初始化</li>
+<li>bean后置处理器（初始化之后）</li>
+<li>bean对象创建完成，可以使用</li>
+<li>bean对象销毁（配置指定销毁方法）（需要依赖IoC关闭方法）</li>
+<li>IoC容器关闭</li>
+</ol>
+<ul>
+<li><p>后置处理器</p>
+<p>是一种特殊的Bean，可以对其他Bean进行定制化的处理。</p>
+<p>关键两个方法：</p>
+<ol>
+<li><p>postProcessBeforeInitialization（Object bean，String beanName）{}</p>
+<p>在目标bean初始化方法执行前调用</p>
+<p>可以修改属性值，执行初始化之前的准备工作等</p>
+</li>
+<li><p>postProcessAfterInitialzation(Object bean,String beanName){}</p>
+<p>初始化之后执行…</p>
+</li>
+</ol>
+<p>作用：拦截所有的Bean创建过程（是这个bean所在配置文件的所有bean）</p>
+</li>
+</ul>
+<h3 id="FactoryBean机制"><a href="#FactoryBean机制" class="headerlink" title="FactoryBean机制"></a>FactoryBean机制</h3><ul>
+<li>是一种特殊的bean，获取该bean时，创建的实例是其getObject()方法中返回的别的实例bean。这样做会把复杂组件创建的详细过程和繁琐细节都屏蔽。,并且给bean添加更多的定制和控制操作。</li>
+<li>是Spring整合第三方框架的常用机制</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">myFactoryBean</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">FactoryBean</span>&lt;Person&gt; &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Person <span class="hljs-title function_">getObject</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>();<br>    &#125;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Class&lt;?&gt; getObjectType() &#123;<br>        <span class="hljs-keyword">return</span> Person.class;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="基于xml配置文件的自动注入"><a href="#基于xml配置文件的自动注入" class="headerlink" title="基于xml配置文件的自动注入"></a>基于xml配置文件的自动注入</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;controller&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;Three.Controller&quot;</span> <span class="hljs-attr">autowire</span>=<span class="hljs-string">&quot;byType&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;controller&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>某些要手动注入的基本数据类型可以手动写入</p>
+<p>某些在同一个bean文件下的引用数据类型可以自动装配</p>
+<ul>
+<li>byType：根据声明类型识别</li>
+<li>byName：根据声明name识别</li>
+</ul>
+<p>自动注入要求开启setter方法，其实是通过setter方法注入的属性（property）</p>
+<h1 id="基于注解的Bean管理"><a href="#基于注解的Bean管理" class="headerlink" title="基于注解的Bean管理"></a>基于注解的Bean管理</h1><p>注解：</p>
+<p>注解是代码中的一种特殊标记，可以在编译，类加载，运行时被读取并执行相应的处理。通过注解：在不改变原有代码和逻辑的情况下，在源代码中嵌入补充信息。</p>
+<p>作用范围：类上，属性上，方法上</p>
+<h3 id="初步思路："><a href="#初步思路：" class="headerlink" title="初步思路："></a>初步思路：</h3><ol>
+<li>引入依赖</li>
+<li>在bean.xml文件中开启组件扫描（确定IoC容器要扫描那些个包的注解）<ul>
+<li><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708171511383.png" srcset="/img/loading.gif" lazyload alt="image-20230708171511383"></li>
+<li>也可以用某些语法设置排除某些包，包括某些包</li>
+</ul>
+</li>
+<li>使用注解定义bean</li>
+<li>依赖注入</li>
+</ol>
+<h3 id="依赖注入的注解："><a href="#依赖注入的注解：" class="headerlink" title="依赖注入的注解："></a>依赖注入的注解：</h3><ol>
+<li><p>@Autowired</p>
+<p>默认是根据类型自动装配</p>
+<p>源码：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708172003366.png" srcset="/img/loading.gif" lazyload alt="image-20230708172003366"></p>
+<p>@Target（）元注解表示限制此注解的作用范围</p>
+<blockquote>
+<p>@Target({ElementType.<em>CONSTRUCTOR</em>, ElementType.<em>METHOD</em>, ElementType.<em>PARAMETER</em>, ElementType.<em>FIELD</em>, ElementType.<em>ANNOTATION_TYPE</em>})</p>
+</blockquote>
+<p>constructor：构造函数</p>
+<p>method：普通方法</p>
+<p>parameter：参数</p>
+<p>field：成员变量</p>
+<p>annotation_type：其他注解</p>
+<p>Type：类，接口，枚举类型上</p>
+</li>
+</ol>
+<ul>
+<li><p>required（）参数表示</p>
+<p>required() 表示被注入的对象是否要求存在（即自动注入的必要性）</p>
+<h4 id="Autowired定义在哪里："><a href="#Autowired定义在哪里：" class="headerlink" title="@Autowired定义在哪里："></a><strong>@Autowired定义在哪里：</strong></h4></li>
+</ul>
+<ol>
+<li><p>定义在类属性上（常规）</p>
+</li>
+<li><p>定义在setter方法上</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708173221479.png" srcset="/img/loading.gif" lazyload alt="image-20230708173221479" style="zoom: 50%;" />
+</li>
+<li><p>定义在构造方法上</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708173345132.png" srcset="/img/loading.gif" lazyload alt="image-20230708173345132" style="zoom:50%;" />
+</li>
+<li><p>定义在形参上</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708173449310.png" srcset="/img/loading.gif" lazyload alt="image-20230708173449310" style="zoom:45%;" />
+</li>
+<li><p>类中只有一个含参构造时，可以不写@Autowired</p>
+</li>
+<li><p>由于原本自动注入默认是根据类型识别，但如果一个下层接口有多个实现类，获取要再根据name注入。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708174024755.png" srcset="/img/loading.gif" lazyload alt="image-20230708174024755"></p>
+<p>value表示要注入的类的名字——默认是类名开头小写。</p>
+</li>
+<li><p>@Resource</p>
+<p>是JDK自带的注解，java版本在8-11即可不用引入依赖</p>
+<p>@R可以和JavaEE，Spring框架一起使用，因为是自带的，@A是Spring框架特定的注解，更丰富更灵活，和Spring更适合</p>
+<ol>
+<li><p>@R默认按照name查找，name找不到再按照类型查找。</p>
+<p>如果@R()参数中没有指定name，根据属性名查找，再找不到根据类型…</p>
+</li>
+<li><p>@R只能标注在字段属性上，和setter方法上，@A更多</p>
+</li>
+<li><p>@R由于直接根据name，不需要@Qualifier从多中选一</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="全注解开发："><a href="#全注解开发：" class="headerlink" title="全注解开发："></a>全注解开发：</h3><p><small>用配置类来代替bean.xml配置文件</small></p>
+<p>配置类：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708191338655.png" srcset="/img/loading.gif" lazyload alt="image-20230708191338655"></p>
+<p>测试类：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708191426017.png" srcset="/img/loading.gif" lazyload alt="image-20230708191426017"></p>
+<h1 id="手写IoC容器"><a href="#手写IoC容器" class="headerlink" title="手写IoC容器"></a>手写IoC容器</h1><h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><ul>
+<li><p>步骤</p>
+<ol>
+<li><p>获取类的class对象（字节码文件——包含类的解构和元数据信息，可以映射成一个类对象，于是可以调用方法）</p>
+<p>方法：</p>
+<ul>
+<li><p>类名.class</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708192430303.png" srcset="/img/loading.gif" lazyload alt="image-20230708192430303"></p>
+</li>
+<li><p>对象.getClass()</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708192438909.png" srcset="/img/loading.gif" lazyload alt="image-20230708192438909"></p>
+</li>
+<li><p>Class.forName(“全路径”)</p>
+<p>全路径指在此模块中找到此类的路径：用.分离</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708192446339.png" srcset="/img/loading.gif" lazyload alt="image-20230708192446339"></p>
+</li>
+</ul>
+</li>
+<li><p>由class类实例化成对象</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230708192913516.png" srcset="/img/loading.gif" lazyload alt="image-20230708192913516"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Class&lt;?&gt; clazz = MyClass.class; <span class="hljs-comment">// MyClass为要实例化的类的字节码文件</span><br>Constructor&lt;?&gt; constructor = clazz.getConstructor(parameterTypes); <span class="hljs-comment">// parameterTypes为构造函数的参数类型数组</span><br><span class="hljs-type">Object</span> <span class="hljs-variable">obj</span> <span class="hljs-operator">=</span> constructor.newInstance(arguments); <span class="hljs-comment">// arguments为构造函数的实际参数数组</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>getConstructor()不会获取原本类中声明为private的构造方法，只会拿到public</p>
+</li>
+<li><p>getDeclaredConstructor()会</p>
+</li>
+<li><p>获取的构造器对象，拥有几个属于构造器独特的方法——</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709093748273.png" srcset="/img/loading.gif" lazyload alt="image-20230709093748273"></p>
+</li>
+</ul>
+</li>
+<li><p>反射时默认用的无参构造（原本类中也默认有无参构造）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Constructor&lt;reflect.car&gt; constructor1 = carClass.getConstructor();<br>reflect.<span class="hljs-type">car</span> <span class="hljs-variable">car1</span> <span class="hljs-operator">=</span> constructor1.newInstance();<br>System.out.println(car1);<br></code></pre></td></tr></table></figure>
+
+<p>可以使用有参构造（条件是原本类中也有含参构造）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Constructor&lt;car&gt; constructor = carClass.getConstructor(String.class, String.class, String.class);<br><span class="hljs-type">car</span> <span class="hljs-variable">car</span> <span class="hljs-operator">=</span> constructor.newInstance(<span class="hljs-string">&quot;马自达&quot;</span>, <span class="hljs-string">&quot;阿特兹&quot;</span>, <span class="hljs-string">&quot;混动红&quot;</span>);   System.out.println(car);<br></code></pre></td></tr></table></figure>
+
+<p>注意：如果原本类的构造是<strong>private</strong>的，不仅需要用declaredConstructor，还要设置可行性为true</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>​                <img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709100824508.png" srcset="/img/loading.gif" lazyload alt="image-20230709100824508" style="zoom: 80%;" /></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Constructor&lt;car&gt; constructor = carClass.getDeclaredConstructor(String.class, String.class, String.class);<br>constructor.setAccessible(<span class="hljs-literal">true</span>);<br><span class="hljs-type">car</span> <span class="hljs-variable">car</span> <span class="hljs-operator">=</span> constructor.newInstance(<span class="hljs-string">&quot;马自达&quot;</span>, <span class="hljs-string">&quot;阿特兹&quot;</span>, <span class="hljs-string">&quot;混动红&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>由class类获取属性（参数）</p>
+<ol>
+<li><p>常规方法只能获取public的属性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Field[] fields = carClass.getFields();<br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709102137763.png" srcset="/img/loading.gif" lazyload alt="image-20230709102137763"></p>
+</li>
+<li><p>得到所有的属性：（public&#x2F;private）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Field[] fields = carClass.getDeclaredFields();<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>设置属性值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">Field[] fields = carClass.getDeclaredFields();<br><span class="hljs-keyword">for</span> (Field f:fields) &#123;<br>    <span class="hljs-keyword">if</span>(f.getName().equals(<span class="hljs-string">&quot;subName&quot;</span>))&#123;<br>        f.set(car,<span class="hljs-string">&quot;昂克赛拉&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意：如果subName是private的，需要先setAccessible（ture）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709103111254.png" srcset="/img/loading.gif" lazyload alt="image-20230709103111254"></p>
+<p>感觉很怪——从属性对象中调用方法设置类的属性，有点倒反天罡</p>
+<p>不过毕竟这个属性来自字节码文件，并不属于哪一个对象</p>
+</li>
+<li><p>得到所有方法，以及执行某个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (Method m:methods<br>     ) &#123;<br>    System.out.println(m.getName());<br>    <span class="hljs-keyword">if</span>(m.getName().equals(<span class="hljs-string">&quot;say&quot;</span>))&#123;<br>        m.setAccessible(<span class="hljs-literal">true</span>);<br>        m.invoke(car,<span class="hljs-string">&quot;say it！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>invoke中第一个参数为执行的对象，后面的可变参数是m的参数</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="细说编译过程："><a href="#细说编译过程：" class="headerlink" title="细说编译过程："></a>细说编译过程：</h3><ul>
+<li><p>Java总览：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-12-19-22-57-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>Java编译器是唯一能识别.java文件的存在——导致其必然作用</p>
+</li>
+<li><p>Java编译器的作用是：</p>
+<ol>
+<li><p>检查符合规范</p>
+</li>
+<li><p>编译成class文件</p>
+</li>
+</ol>
+</li>
+<li><p>JDK和 JRE</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-12-19-27-31-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>Java Development Kit（Java开发工具包）——包含Java从开发到运行的各种工具</p>
+</li>
+<li><p>Java Running Environment（Java运行环境）——只包含运行必要的工具（包括基础类库，JVM）</p>
+</li>
+<li><p>二者的差集就和开发相关：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-12-19-31-44-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>关键模块：</p>
+<ol>
+<li><p>JavaC：用于编译源代码生成class文件</p>
+</li>
+<li><p>JavaP：用于反编译，根据class文件，反解析出其中信息</p>
+</li>
+<li><p>javadoc：生成java文档</p>
+</li>
+</ol>
+</li>
+<li><p>编译阶段：源码通过javac到达.class</p>
+</li>
+<li><p>运行阶段：.class文件在JVM中运行</p>
+</li>
+</ul>
+</li>
+<li><p>Java虚拟机只认.class字节码文件，所以只要能有合适的编译器把某种语言写的源代码编译成字节码，JVM就是通用的</p>
+<p>Kolin，Scala成也JVM，败也JVM</p>
+</li>
+<li><p>Lombok，AspectJ等直接修改字节码文件来修改程序：Lombok将注解生成字节码，AspectJ是在编译时由注解确定织入代码的切点和内容，进行对.class文件的<strong>字节码增强技术</strong></p>
+</li>
+</ul>
+<h5 id="字节码增强技术："><a href="#字节码增强技术：" class="headerlink" title="字节码增强技术："></a>字节码增强技术：</h5><ul>
+<li><p>本质就是指通过修改已编译的字节码文件来实现对程序行为的增强或修改的技术。</p>
+</li>
+<li><p>据说可以实现热部署</p>
+</li>
+</ul>
+<h3 id="编译！"><a href="#编译！" class="headerlink" title="编译！"></a>编译！</h3><ul>
+<li><p>常见编译器：javac（自带），ecj（Eclipse Compiler for Java）</p>
+</li>
+<li><p>流程：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-12-19-51-29-image.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>词法分析&amp;语法分析</p>
+<ul>
+<li><p>词法分析·：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-12-19-52-11-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>语法分析：（抽象语法树：Abstract Ayntax Tress AST）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-12-19-52-27-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><small>WC!数据标注的短语结构树！文本挖掘抄袭Javac！</small></p>
+</li>
+<li><p>所以起名有问题逃不过词法分析或语法分析，例如数据类型错会在第一个报错，变量名起冲突会在第二个报错</p>
+</li>
+</ul>
+</li>
+<li><p>填充符号表</p>
+<ul>
+<li><p>由符号地址（位置）和其信息构成的map</p>
+</li>
+<li><p>作用是明确任何符号的作用范围（关联）、重复声明、类型匹配</p>
+</li>
+<li><p>任何符号：类名、方法名、变量名</p>
+</li>
+<li><p>Attention：类的信息包括有无构造器，于是对于没有写构造器的类，会在此添加默认无参构造。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="开写！"><a href="#开写！" class="headerlink" title="开写！"></a>开写！</h3><blockquote>
+<p>@Bean注解：</p>
+</blockquote>
+<ul>
+<li><p>步骤： </p>
+<ol>
+<li><p>创建两个自定义注解</p>
+<p>@Bean：类似@Component，标记此类也要加入IoC容器，成为bean对象</p>
+<p>@Di：类似@Autowired，标记此处需要被注入某个bean</p>
+</li>
+<li><p>创建bean容器接口：手写ApplicationContext，定义方法，返回bean对象</p>
+</li>
+<li><p>实现bean容器接口：<strong>手写AnnotationConfigApplicationContext()</strong>，</p>
+<p>具体要做：</p>
+<ol>
+<li><p><strong>根据规则加载bean</strong></p>
+<p>规则：扫描某个包和其子包，看类上是否有@Bean注解，如果有就把这个类通过反射实例化</p>
+</li>
+<li><p>返回bean对象</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>细说怎么扫描文件夹——反射构造bean对象并添加到IoC中</p>
+<ol>
+<li><p>参数接收的是com.itheima.Spring类似的路径，需要转成com&#x2F;itheima&#x2F;Spring</p>
+</li>
+<li><p>遍历此文件夹下所有文件，找到class文件</p>
+<ol>
+<li><p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709152921153.png" srcset="/img/loading.gif" lazyload alt="image-20230709152921153"></p>
+<p>urls中是下一层的所有文件&#x2F;文件夹</p>
+</li>
+<li><p>由于url编码会将一些特殊字符（如&#x2F;）转化成%加两个十六进制数，于是需要转回来</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709153145902.png" srcset="/img/loading.gif" lazyload alt="image-20230709153145902"></p>
+</li>
+<li><p>对于n个可进入的文件&#x2F;文件夹url，为了避免bug，要进行许多判断</p>
+<ul>
+<li><p>是文件夹则再进入</p>
+</li>
+<li><p>文件夹为空则回溯</p>
+</li>
+<li><p>是文件还需判断是不是.class文件</p>
+</li>
+<li><p>关键：对于符合条件的文件，需要转回.分割的路径，回Java逻辑下判断</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709154510127.png" srcset="/img/loading.gif" lazyload alt="image-20230709154510127"></p>
+</li>
+<li><p>如果该文件是个接口，则跳过</p>
+</li>
+<li><p>在.class中判断上面是否有注解@Bean</p>
+<p>暴力调用方法</p>
+</li>
+<li><p>如果有就实例化，加入map</p>
+<p>还需进行一步：当前class对象是否是实现类，如果是，则加入IoC容器的形式应该是接口类做key，实现类做value</p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>学到的地方：写方法时分离出另一个方法的思考</p>
+<ul>
+<li><p>原本方法内要迭代，写出去迭代的具体方法便于修改迭代参数</p>
+</li>
+<li><p><strong>将相对独立的方法分离出去</strong></p>
+<p>原本方法接收path，初步操作得到url的枚举类型，但这种不常见的类型尽量在原方法中就屏蔽掉不要传给分离的方法，是变成常见类型后分离出较为抽象的逻辑构成另一个方法。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>@Di注解</p>
+</blockquote>
+<ul>
+<li><p>思路：</p>
+<p>在ApplicationContext的构造函数中，刚刚完成了填充map，map中存有各个bean对象，但这些对象的属性（引用属性）都没有被注入，于是在构造中要完成遍历+注入。</p>
+<p><mark>ATTENTION:</mark> 不存在只需要被注入而本身不放入容器的类。</p>
+<p>因为IoC容器的bean管理就是管理内部的bean对象（配置方式的bean.xml）之间相互关系。</p>
+<p>即：<strong>需要被注入，自身一定要也在容器中</strong>。</p>
+<p>过程：</p>
+<ul>
+<li><p>遍历map集合，得到其中每个value——bean对象</p>
+</li>
+<li><p>遍历每个bean对象的每个属性，检测是否有@Di注解</p>
+</li>
+<li><p>如果有，依赖注入——实际就是调用field的set方法（此时因为每个对象都被放松成Obj，所以没法调用自身的setter，Spring给出的方法是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java）">field.set(obj,map.get(field.getType()));<br></code></pre></td></tr></table></figure>
+
+<p><small>感觉底层也应该是调的setter，可能用instanceof暴力匹配？</small></p>
+<p>逻辑：每个要注入的字段field，根据自身的类型在map中找到符合的对象，由此field调用注入方法。</p>
+</li>
+</ul>
+</li>
+<li><p>切记注意私有属性或方法要用declared</p>
+</li>
+</ul>
+<hr>
+<h1 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h1><h3 id="代理模式："><a href="#代理模式：" class="headerlink" title="代理模式："></a>代理模式：</h3><p>提出背景：为了解决多个功能混合在一个方法中，而并非每个功能都是核心功能。同时避免仅仅用分离出抽象方法但任然在一个类中导致的臃肿。</p>
+<p>代理模式：</p>
+<p>通过在上层调用与下层执行之间加一层代理，来使下层执行的逻辑更加清晰——分离出核心代码。</p>
+<p>据说还可以实现解耦</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709194318447.png" srcset="/img/loading.gif" lazyload alt="image-20230709194318447"></p>
+<p>当初说创建新线程也用了代理模式：</p>
+<p>是由于实现runnable接口的类本身没有start方法，需要用new Thread()作为代理调用Thread的start方法。</p>
+<p>这里的代理更像是有能力的类包装没能力的类，一起带飞，</p>
+<p>其实也就是外层代理重写内层核心类的方法，包装成需要的结构</p>
+<p>通过调用外层代理类的方法，间接调用核心类方法。</p>
+<h3 id="静态代理："><a href="#静态代理：" class="headerlink" title="静态代理："></a>静态代理：</h3><p>代码写死</p>
+<h3 id="动态代理："><a href="#动态代理：" class="headerlink" title="动态代理："></a>动态代理：</h3><p><small>静态代理是在代码运行之前，代理的模式已经确定（写死）——外层代理能做的事情是有限的，动态代理在代码运行时才创建代理对象（即明确代理能做的事情），相较而言较为动态</small></p>
+<ul>
+<li><p>方法：</p>
+<p><strong>实例化时返回代理对象</strong></p>
+<p>newProxyInstance(ClassLoader loader，Class&lt;?&gt;[] interfaces，InvocationHander h)</p>
+<p>通过代理对象使用原本方法即可自动调用包装后的方法</p>
+<p>invocationHander接口的实现类需要重写invoke()方法——即为包装的逻辑</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709202626943.png" srcset="/img/loading.gif" lazyload alt="image-20230709202626943"></p>
+<p>参数中：</p>
+<ul>
+<li><p>proxy表示代理的对象</p>
+</li>
+<li><p>method表示代理可能调用的方法（在此重写为Method类型）便于调用</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230709203400562.png" srcset="/img/loading.gif" lazyload alt="image-20230709203400562"></p>
+<p><code>反射思想————通过属性/方法改变类（倒反天罡！两极反转！）</code></p>
+<p>target即代理的对象</p>
+</li>
+<li><p>args表示method的参数</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="AOP概念》Aspect-Oriented-Programming"><a href="#AOP概念》Aspect-Oriented-Programming" class="headerlink" title="AOP概念》Aspect Oriented Programming"></a>AOP概念》Aspect Oriented Programming</h3><p>通过预编译和运行期间动态代理方式，在不修改源代码的情况下，给程序动态统一添加额外功能的技术。</p>
+<p>利用AOP可以对业务逻辑的各个部分进行隔离，使得业务逻辑各部分间耦合度降低，提高程序可重用性。</p>
+<ul>
+<li><p>横切关注点：分散在各个模块中，解决同一问题的非核心业务的部分</p>
+<p>如：用户验证、日志管理、事务处理、数据缓存等</p>
+<p>这种思路可以使用多个横切关注点对相关方法进行不同层面的<strong>增强</strong></p>
+</li>
+<li><p>通知（增强）：要添加的功能模块——安全&#x2F;事务&#x2F;日志……</p>
+<p>通知方法：实现此通知的方法</p>
+<p>分类：</p>
+<ol>
+<li><p>前置通知</p>
+</li>
+<li><p>返回通知：代理目标的方法成功结束后执行</p>
+</li>
+<li><p>异常通知：代理目标的方法异常结束执行</p>
+</li>
+<li><p>后置通知：最终结束执行</p>
+</li>
+<li><p>环绕通知：方法之前之后都执行</p>
+</li>
+</ol>
+</li>
+<li><p>切面：</p>
+<p>封装前置通知、后置通知…的类</p>
+</li>
+<li><p>连接点：</p>
+<p>在各个方法中一致的、能够添加增强的位置</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-10-09-39-25-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>切入点：</p>
+<p>得到某个连接点，就是切入点</p>
+</li>
+</ul>
+<h3 id="动态代理分类"><a href="#动态代理分类" class="headerlink" title="动态代理分类"></a>动态代理分类</h3><ul>
+<li><p>当代理目标有接口时——生成的代理类是和它实现了同样接口的好兄弟类</p>
+</li>
+<li><p>当没有接口时——生成的代理类是继承了此类的好大儿</p>
+<p><strong>为什么不能纯粹的另外一个类——通过调用代理目标类的方法前后切入实现增强？</strong></p>
+<p><code>因为生成动态代理类需要一个模板，来确定代理类的结构和行为——比如在JDK实现中，method就间接映射到模板的方法......</code></p>
+</li>
+</ul>
+<ol>
+<li><p>JDK动态代理</p>
+<p>当目标类有接口时用JDK和cglib</p>
+</li>
+<li><p>CGLib动态代理</p>
+<p>目标类没有接口时只能用vglib</p>
+</li>
+</ol>
+<hr>
+<h5 id="AspectJ"><a href="#AspectJ" class="headerlink" title="AspectJ"></a>AspectJ</h5><p>AOP框架</p>
+<p>spring借用其中的注解进行便利开发</p>
+<p>据说AspectJ本质上是静态代理，将代理逻辑“织入”被代理的目标类编译得到的字节码文件——导致效果是动态代理。</p>
+<h5 id="动态代理基本步骤："><a href="#动态代理基本步骤：" class="headerlink" title="动态代理基本步骤："></a>动态代理基本步骤：</h5><ul>
+<li><p>引入aop和aspect相关依赖</p>
+</li>
+<li><p>配置xml文件或配置类实现组件扫描（依赖IoC容器）和aop的aspectJ的自动代理（识别加了@Aspect注解，为其自动生成代理类）</p>
+</li>
+<li><p>创建目标资源</p>
+<ul>
+<li><p>接口</p>
+</li>
+<li><p>实现类</p>
+</li>
+</ul>
+</li>
+<li><p>创建切面类</p>
+<ul>
+<li><p>明确切入点</p>
+</li>
+<li><p>明确通知类型</p>
+<p><strong>通知类型：</strong> 在切入方法上添加，明确切入点</p>
+<ul>
+<li><p>前置：@Before()</p>
+</li>
+<li><p>返回：@AfterReturning()  在return语句后执行</p>
+</li>
+<li><p>异常：@AfterThrowing()</p>
+</li>
+<li><p>后置：@After()   类似try-catch中的finally</p>
+</li>
+<li><p>环绕：@Around() 通过使用try-catch-finally，编写以上各个位置的切入</p>
+</li>
+</ul>
+<p>通过设置参数value&#x3D;“”，编写<strong>切入点表达式</strong></p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-07-10-10-32-19-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="673">
+
+<p>其作用就是：明确在哪一个&#x2F;哪些方法附加切入（有点像sql）</p>
+</li>
+<li><p>每个切面类的方法都可以有一个参数——JoinPoint类型，用于获取关于切入点的属性。</p>
+<p><code>------</code></p>
+</li>
+</ul>
+</li>
+<li><p>返回通知AfterReturning——能够得到方法的返回值</p>
+<p>在注解@AfterReturning中添加参数：returning &#x3D; ”sthName“</p>
+<p>之后便可在方法参数中使用Object类型的sthName</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-10-11-17-41-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>异常通知AfterThrowing——能够得到异常类型</p>
+<p>形式和上面类似：有参数 throwing &#x3D; ”sthName“</p>
+</li>
+<li><p>环绕通知Around</p>
+<p>在try-catch-finally中适当位置可切入属于上面的方法</p>
+<ul>
+<li><p>在try中一开始写的是@Before</p>
+</li>
+<li><p>需要模拟一个方法执行</p>
+<p>用更强的ProceedingJoinPoint类型的joinpoint调用proceed方法，获取一个Obj类型的返回值result</p>
+</li>
+<li><p>返回之后可调用@AfterReturning</p>
+</li>
+<li><p>catch中可写异常处理@AfterThrowing</p>
+</li>
+<li><p>finally中写@After</p>
+</li>
+</ul>
+<p><code>------</code></p>
+<hr>
+<p>btw：切面类和代理类不一致：代理类是外包目标类实现拦截和增强，切面类是封装横切关注点的另外的类。切面类使用代理类来实现切面的功能，代理类调用切面类的方法来增强或拦截。</p>
+</li>
+<li><p><strong>重用切入点表达式：</strong></p>
+<p>由于对于同一个方法或同一类方法可能需要写多个切入方法，同时就需要重复写多次切入点表达式，所以可以提取出来，进行复用和在核心代码中简单引用</p>
+<p>定义方法，给方法添加注释@Pointcut(value &#x3D; “表达式”)，然后调用方法即可</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-10-11-40-58-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果定义的方法在不同切面类中：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-10-11-41-44-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>为什么不是抽象成属性直接引用呢？感觉也可以吧</p>
+</li>
+<li><p><strong>切面优先级：</strong></p>
+<p>相同的目标方法上有多个切面时，切面通过优先级控制执行顺序</p>
+<p>外层的优先级较高，先执行</p>
+<p>使用@Order（）注解,  参数越小，越先执行</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-10-11-45-15-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<h5 id="基于配置文件的AOP切入"><a href="#基于配置文件的AOP切入" class="headerlink" title="基于配置文件的AOP切入"></a>基于配置文件的AOP切入</h5><p>紧紧用配置文件完成所有事——</p>
+<ul>
+<li><p>找到切面类：</p>
+</li>
+<li><p>配置切入点：</p>
+</li>
+<li><p>配置五种切入方法：</p>
+</li>
+</ul>
+<h5 id="全注解开发"><a href="#全注解开发" class="headerlink" title="全注解开发"></a>全注解开发</h5><p>需要将bean.xml配置文件转化成配置类，用注解完成相应配置</p>
+<ul>
+<li><p>开启全文扫描</p>
+</li>
+<li><p>开启AspectJ自动代理</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-10-16-53-06-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>据说EnableAspectJAutoProxy有个参数proxyTargetClass，是boolean类型</p>
+<p>true——Spring使用基于类的代理（CGlib）</p>
+<p>false——Spring使用基于接口的代理（JDK原生）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="BTW-配置文件常见前缀配置"><a href="#BTW-配置文件常见前缀配置" class="headerlink" title="BTW:配置文件常见前缀配置"></a>BTW:配置文件常见前缀配置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:p</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/p&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/context&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xmlns:aop</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/aop&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans</span></span><br><span class="hljs-string"><span class="hljs-tag">        https://www.springframework.org/schema/beans/spring-beans.xsd</span></span><br><span class="hljs-string"><span class="hljs-tag">        http://www.springframework.org/schema/context</span></span><br><span class="hljs-string"><span class="hljs-tag">        https://www.springframework.org/schema/context/spring-context.xsd</span></span><br><span class="hljs-string"><span class="hljs-tag">        http://www.springframework.org/schema/aop</span></span><br><span class="hljs-string"><span class="hljs-tag">        https://www.springframework.org/schema/aop/spring-aop.xsd&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="JUnit单元测试"><a href="#JUnit单元测试" class="headerlink" title="JUnit单元测试"></a>JUnit单元测试</h3><ul>
+<li><p>Spring整合JUnit，可以省略每次创建容器的过程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//@SpringJUnitConfig(locations = &quot;classpath:bean.xml&quot;)</span><br><span class="hljs-meta">@SpringJUnitConfig(classes = bean.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test1</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    Car car;<br><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">say</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(car.say());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>通过注释明确加载哪个bean.xml配置文件，or某个配置类</p>
+<p>JUnit还有巨多关于测试的功能</p>
+<h3 id="BTW：bean-xml注解总结："><a href="#BTW：bean-xml注解总结：" class="headerlink" title="BTW：bean.xml注解总结："></a>BTW：bean.xml注解总结：</h3><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-11-19-46-42-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-11-19-47-34-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-11-19-47-55-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-11-19-48-15-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-11-19-48-30-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>另外：</p>
+<p>&lt;context&gt;标签用于<strong>配置</strong>程序上下文信息（上下文可以理解为IoC容器）</p>
+<ul>
+<li><p>&lt;context:component-scan&gt;:开启组件扫描</p>
+</li>
+<li><p>&lt;context:annotation-config&gt;:开启注解驱动功能</p>
+</li>
+<li><p>&lt;context:poperty-placeholder&gt;:用于加载属性文件中的属性值</p>
+</li>
+</ul>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><ul>
+<li>Spring框架对JDBC进行封装，封装结果是jdbcTemplate</li>
+</ul>
+<h3 id="JDBCTemplate"><a href="#JDBCTemplate" class="headerlink" title="JDBCTemplate"></a>JDBCTemplate</h3><ul>
+<li><p>引入的依赖：</p>
+<ol>
+<li><p>Spring-jdbc</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-11-19-34-08-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>mysql</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-11-19-34-25-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>德鲁伊连接池druid</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-11-19-35-01-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>连接池：</p>
+<p>解决普通JDBC获取连接，关闭连接的耗时繁琐操作——<strong>池化</strong>——将建立连接和关闭连接对用户屏蔽掉，转而对其面向<strong>调用</strong>连接和<strong>释放</strong>连接。</p>
+<p>上层操作简单看：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.czxy;<br>​<br><span class="hljs-keyword">import</span> com.alibaba.druid.pool.DruidDataSource;<br><span class="hljs-keyword">import</span> com.alibaba.druid.pool.DruidPooledConnection;<br><span class="hljs-keyword">import</span> org.junit.Test;<br>​<br><span class="hljs-keyword">import</span> java.sql.SQLException;<br>​<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestDruid</span> &#123;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testDemo</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-comment">//1 获得连接池</span><br>        <span class="hljs-comment">//1.1 核心类</span><br>        <span class="hljs-type">DruidDataSource</span> <span class="hljs-variable">dataSource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DruidDataSource</span>();<br>        <span class="hljs-comment">//1.2 基本4项</span><br>        <span class="hljs-comment">//  1) 驱动</span><br>        dataSource.setDriverClassName(<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);<br>        <span class="hljs-comment">//  2) 连接</span><br>        dataSource.setUrl(<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/ssm_db1&quot;</span>);<br>        <span class="hljs-comment">//  3) 用户</span><br>        dataSource.setUsername(<span class="hljs-string">&quot;root&quot;</span>);<br>        <span class="hljs-comment">//  4) 密码</span><br>        dataSource.setPassword(<span class="hljs-string">&quot;1234&quot;</span>);<br>        <span class="hljs-comment">//1.3 特殊项【可选】</span><br>        <span class="hljs-comment">// 1) 初始化大小</span><br>        dataSource.setInitialSize(<span class="hljs-number">5</span>);<br>        <span class="hljs-comment">// 2) 最大值活动数</span><br>        dataSource.setMaxActive(<span class="hljs-number">10</span>);<br>        <span class="hljs-comment">// 3) 最小空闲数</span><br>        dataSource.setMinIdle(<span class="hljs-number">2</span>);<br>​<br>        <span class="hljs-comment">//2 从连接池中获得连接</span><br>        <span class="hljs-comment">//对比两次获取到的连接是否一致</span><br>        <span class="hljs-type">DruidPooledConnection</span> <span class="hljs-variable">conn</span> <span class="hljs-operator">=</span> dataSource.getConnection();<br>        System.out.println(conn);<br>         <span class="hljs-comment">//用完了，返还到连接池中</span><br>        conn.close();<br>​<br>        <span class="hljs-type">DruidPooledConnection</span> <span class="hljs-variable">conn2</span> <span class="hljs-operator">=</span> dataSource.getConnection();<br>        System.out.println(conn2);<br>        conn2.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>经典操作：</p>
+<p><code>创建配置文件jdbc.properties,里面配置连接数据库的必要信息——用户，密码，数据库url，驱动</code></p>
+<p><code>在spring的配置文件（bean.xml）中引入此文件引入,引入后就可通过K-V形式访问到数据（properties是k=v，yml格式是k：v）</code></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-09-43-27-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>配置JDBCTemplate——将其作为一个bean对象</p>
+<p><strong>说明本身就是一个类</strong></p>
+<p>JDBCTemplate有一个属性——<strong>dataSource</strong>——用于绑定连接池</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-09-44-55-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>sql语法复习：</p>
+<p>占位符？——表示写sql时并不确定，需要在真正传入DB时传入参数的位置</p>
+<p>mybatis的#{}，${}转化成？然后用参数注入也是模拟此过程。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-09-55-31-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>JDBCTemplate让程序员面向类的API，于是API设计的很人性化（通过可变参数完成注入）</p>
+</li>
+<li><p>mybatis并没有对象，而是通过配置和注解match到程序和目标sql，此时传参的操作就显得刻意了一点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">void</span> <span class="hljs-title function_">updateSalary</span><span class="hljs-params">(Integer id, Integer salary, LocalDate fromDate,LocalDate toDate)</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">update</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;updateSalary&quot;</span>&gt;</span><br>    update salaries<br>    set salary=#&#123;salary&#125;<br>    where emp_no = #&#123;id&#125;<br>      and from_date = #&#123;fromDate&#125;<br>    and to_date = #&#123;toDate&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">update</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询的写法：</p>
+<p>写法一：手写中间参数的实现类（用resultSet和rowNum获取想要的结果）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-10-08-16-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>思想：查询的参数中有resultSet结果集，此类型内置了一个表，封装了一些API来访问这张结果表：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-10-12-56-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>写法二：</p>
+<p>使用中间参数的实现类</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-10-13-59-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<h3 id="事务："><a href="#事务：" class="headerlink" title="事务："></a>事务：</h3><p>事务指一个操作序列，这些操作要么全部执行，要么全不执行。</p>
+<ul>
+<li><p>ACID</p>
+<ul>
+<li><p>原子性（Atomicity）：不可细分，绑定整体</p>
+</li>
+<li><p>一致性（Consistency）：事务中的数据正确，在财会中满足会计恒等式，在sql中满足主键不重复等等</p>
+</li>
+<li><p>隔离性（Isolation）：多个事务之间——在提交前相互隔离，一个事务不会访问到其他事务的中间状态。也要应对并发修改。</p>
+</li>
+<li><p>持久性（Durability）：提交的事务必须保存下来，既是系统崩溃，重启后也要有保留。</p>
+</li>
+</ul>
+</li>
+<li><p>编程式事务和声明式事务：</p>
+<p>编程式要求手动开启事务，提交事务，异常回滚…</p>
+<p>声明式仅仅通过配置即可实现——声明式是编程式的封装，将共同部分屏蔽掉。</p>
+</li>
+</ul>
+<ol>
+<li><p>开启事务</p>
+<ol>
+<li><p>添加事务配置</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-10-45-22-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-10-47-01-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>在Service层添加注解：@Transactional</p>
+<ul>
+<li><p>加到方法上单独控制方法</p>
+</li>
+<li><p>加到类上控制所有方法</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>@Transactional的参数</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-07-16-11-07-16-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Spring学习笔记</div>
+      <div>http://example.com/2025/04/20/Spring/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

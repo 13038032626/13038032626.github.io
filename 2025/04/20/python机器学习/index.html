@@ -1,0 +1,1716 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="python机器学习 图灵测试 一个人和一台机器，二者在隔离的情况下，机器通过一些装置向被测试者随意提问 考察人能否识别出对面是人还是机器 如果有超过30%的人不能确定对方身份，则这台机器通过测试 —— 具有人工智能  达特茅斯会议  1956 人工智能元年  人工智能 –&gt; 机器学习 –&gt; 深度学习 机器学习是人工智能的一个实现途径 深度学习是机器学习中，由神经网络方法发展而来  人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习学习笔记">
+<meta property="og:url" content="http://example.com/2025/04/20/python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="python机器学习 图灵测试 一个人和一台机器，二者在隔离的情况下，机器通过一些装置向被测试者随意提问 考察人能否识别出对面是人还是机器 如果有超过30%的人不能确定对方身份，则这台机器通过测试 —— 具有人工智能  达特茅斯会议  1956 人工智能元年  人工智能 –&gt; 机器学习 –&gt; 深度学习 机器学习是人工智能的一个实现途径 深度学习是机器学习中，由神经网络方法发展而来  人">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/xuanwo.jpg">
+<meta property="article:published_time" content="2025-04-20T06:02:38.193Z">
+<meta property="article:modified_time" content="2025-04-20T06:06:57.289Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/xuanwo.jpg">
+  
+  
+  
+  <title>机器学习学习笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>songlin&#39;s Room</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/reading/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>reading</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/java/" target="_self">
+                <i class="iconfont icon-code"></i>
+                <span>java</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/movie/" target="_self">
+                <i class="iconfont icon-image"></i>
+                <span>movie</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/wofo-far.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="机器学习学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">机器学习学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="python机器学习"><a href="#python机器学习" class="headerlink" title="python机器学习"></a>python机器学习</h1><ol>
+<li><p>图灵测试</p>
+<p>一个人和一台机器，二者在隔离的情况下，机器通过一些装置向被测试者随意提问</p>
+<p>考察人能否识别出对面是人还是机器</p>
+<p>如果有超过30%的人不能确定对方身份，则这台机器通过测试 —— 具有<strong>人工智能</strong></p>
+</li>
+<li><p>达特茅斯会议</p>
+<p> 1956 人工智能元年</p>
+</li>
+<li><p>人工智能 –&gt; 机器学习 –&gt; 深度学习</p>
+<p>机器学习是人工智能的一个实现途径</p>
+<p>深度学习是机器学习中，由神经网络方法发展而来</p>
+</li>
+<li><p>人工智能主要分支介绍</p>
+<p>通讯 – 计算机视觉</p>
+<p>感知 – 自然语言处理</p>
+<p>行动 – 机器人</p>
+<ul>
+<li><p>计算机视觉（CV）：</p>
+<p>指机器感知环境的能力</p>
+<p>经典任务有：图像形成、图像处理、图像提取、图像的三维推理…人脸识别和物体检测比较成熟</p>
+</li>
+<li><p>自然语言处理（NLP）：</p>
+<p>覆盖 文本挖掘&#x2F;分类、机器翻译、语音识别…</p>
+</li>
+<li><p>机器人（Robotics）：</p>
+<p>研究机器人设计、制造、应用。关注它们的计算机系统、传感反馈和信息处理</p>
+</li>
+</ul>
+</li>
+<li><p>人工智能必备三要素</p>
+<ul>
+<li>数据</li>
+<li>算法</li>
+<li>算力</li>
+</ul>
+</li>
+<li><p>CPU与GPU简单对比</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226163216184.png" srcset="/img/loading.gif" lazyload alt="image-20231226163216184"></p>
+<p>CPU用于处理IO密集+计算密集，GPU纯粹为了计算</p>
+<ul>
+<li><p>内部缓存空间：CPU &gt; GPU</p>
+</li>
+<li><p>线程数：GPU &gt; CPU</p>
+</li>
+<li><p>CPU需要面对各种不同的数据类型、操作各种逻辑判断、分支跳转、中断…这导致CPU内部结构异常复杂；而GPU面对的是类型高度统一的、相互没有依赖的大规模数据，计算过程也很纯粹</p>
+</li>
+<li><p>GPU采用数量众多的计算单元和超长的流水线，只有简单的控制逻辑，并省略了cache，而CPU不仅被cache占了大量空间，还有复杂的控制逻辑和许多优化电路，为之省去了部分计算能力</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226164407095.png" srcset="/img/loading.gif" lazyload alt="image-20231226164407095"></p>
+</li>
+</ul>
+</li>
+<li><p>什么类型的程序适合在GPU上运行？</p>
+<ol>
+<li>计算密集 - 指大部分运行时间花在了寄存器的运算上</li>
+<li>易于并行的程序 - GPU内部是一种SIMD（Single Instruction Multiple Data）架构，内部有成百上千个核，每个核在同一时间能做独立的事情</li>
+</ol>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226164355331.png" srcset="/img/loading.gif" lazyload alt="image-20231226164355331"></p>
+</li>
+<li><p>特征工程：</p>
+<p>使用专业技巧处理数据，使得特征能够被机器识别 &#x2F; 发挥更好的作用</p>
+</li>
+<li><p>机器学习 – 算法分类</p>
+<p>基本分类：</p>
+<ul>
+<li>监督学习</li>
+<li>无监督学习</li>
+<li>半监督学习</li>
+<li>强化学习</li>
+</ul>
+</li>
+<li><p>监督学习</p>
+<p>定义：</p>
+<p>输入数据是由输入特征值和目标值所组成</p>
+<ul>
+<li>连续的、函数的输出 —— 回归</li>
+<li>离散的输出 —— 分类</li>
+</ul>
+<p>回归问题</p>
+<p>分类问题</p>
+</li>
+<li><p>无监督学习</p>
+<p> 定义：</p>
+<p> 输入数据是由输入特征值组成，没有被标记，也没用确定的结果</p>
+<p> 需要根据样本间的相似性对样本进行分类&#x2F;聚类Clustering，试图使得类内的差距最小化、类间的差距最大化</p>
+</li>
+<li><p>半监督学习</p>
+<p> 训练集同时包括有标记样本和未标记样本</p>
+<p> 目的：减少工作量，其中一部分数据不用人为标记</p>
+</li>
+<li><p>强化学习</p>
+<p> 动态过程 —— 前一步数据的输出是下一步数据的输入</p>
+<blockquote>
+<p>智能体（agent）在与环境的交互中学习如何做出决策以达到最大化某种累积奖励的目标。</p>
+</blockquote>
+<p> 四要素：</p>
+<ul>
+<li>Agent：进行决策</li>
+<li>Action：具体的决策</li>
+<li>Environment：Agent与其进行交互的外部系统，环境对Agent的行为做出响应，并提供奖励或惩罚</li>
+<li>Reward：数值反馈，目的是最大化积累奖励来学习优化策略</li>
+</ul>
+</li>
+<li><p>没有免费午餐定理</p>
+<blockquote>
+<p>指：机器学习中，对于同一种问题的不同算法都有好有劣，有的算法在解决这种问题的某个场景时十分精妙，但代价就是在解决另一场景的问题会十分糟糕</p>
+<blockquote>
+<p>即：对于所有可能问题的集合，所有算法的平均性能都类似</p>
+</blockquote>
+<p>内含：针对具体的学习问题选取合适的算法：根据算法设计的<strong>归纳偏好</strong> &#x2F; 假设</p>
+</blockquote>
+</li>
+<li><p>奥卡姆剃刀原则</p>
+<blockquote>
+<p>贪心咯</p>
+<p>是一种科学和哲学原则：</p>
+<p>指：在解释现象是，应该采用最简单的理论或解释</p>
+</blockquote>
+</li>
+<li><p>极大似然法</p>
+<blockquote>
+<p>思路：基于观测到的样本数据，试图找到最能观测到数据出现的概率最大的参数值</p>
+<blockquote>
+<p>极大似然法根据结果反推条件，很贴近人类思维：异常已经发生了，想想到底之前发生了什么最有可能导致这个异常呢？</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>模型评估与选择</p>
+<ul>
+<li><p>模型？</p>
+<blockquote>
+<p>机器学习所做的事就是：</p>
+<ol>
+<li><p>研究一种从已有数据中产生模型的算法 —— 学习算法</p>
+</li>
+<li><p>从已有数据 &#x2F; 训练样本中，找到适用于所有潜在样本的 <mark>普遍规律</mark></p>
+</li>
+</ol>
+<blockquote>
+<p>学习算法</p>
+</blockquote>
+<p>这个<strong>学习算法</strong>接受已有的数据，形成一个模型[工厂]，当有新数据产生时，模型给出相应的计算结果</p>
+<blockquote>
+<p>普遍规律</p>
+</blockquote>
+<p>所谓过拟合，就是把样本自身特征误以为是所有潜在样本的普遍规律</p>
+<p>所谓欠拟合，就是没有关注到样本内的普遍性质 &#x2F; 准普遍规律</p>
+</blockquote>
+</li>
+<li><p>样本 &amp; 样本空间</p>
+<blockquote>
+<p>机器学习中，把一个样本当做一个向量，整个样本空间当做一个高维空间</p>
+<p>将原本数之间的关系问题在空间内尝试解决</p>
+</blockquote>
+</li>
+<li><p>场景1</p>
+<p>如何将1000个样本合理分成训练集和测试集？</p>
+<ul>
+<li>如果预先直到样本的分布（比如300正，700负 或者 200老人，500青年，300小孩…）应该理性地选择等比例分出测试集</li>
+<li>那怎么在200个老人中选出200*30%的测试样本呢？随即咯</li>
+<li>随机就意味着结果有偶然性，降低偶然事件概率的策略：多次重复随机</li>
+</ul>
+<p>于是给出的策略是：进行一百次随即划分，每个都来实验，将预测结果平均，作为最后的结果</p>
+<blockquote>
+<p>K折交叉验证的优化思路也类似</p>
+</blockquote>
+<p>解决方案2：</p>
+<blockquote>
+<p>自助法：</p>
+<p>基本思路是：从m个样本中有放回地抽取m次，其中有大约36%的样本没有被抽到，其他64%的样本中有的样本存在多次重复，使用这个抽取出来的样本，既能留下36%测试集，也是随机抽的，还能有m个训练集</p>
+<blockquote>
+<p>感觉不靠谱</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>场景2：</p>
+<p>如何调参？</p>
+<blockquote>
+<ol>
+<li><p>暴力遍历</p>
+</li>
+<li><p>限定范围，确认步长的遍历</p>
+</li>
+<li><p>随即搜索，满意即可</p>
+</li>
+<li><p>在多个变量的场景下可能使用网格搜索</p>
+</li>
+<li><p>贝叶斯优化：</p>
+<p>整体感觉是通过上次的结果反馈给下次调优</p>
+<blockquote>
+<p>具体是：</p>
+<p>先预设了一个先验模型</p>
+<p>通过此模型决定下次怎么优化</p>
+<p>优化结果反馈给模型进行迭代</p>
+</blockquote>
+</li>
+<li><p>绘制学习曲线，观测变化决定下一步</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ol>
+<li><p>K近邻算法KNN</p>
+<blockquote>
+<p>通过你的邻居来判断你的类别是什么</p>
+<p>是根据所有已知类别的实例类型，来判断位置实例</p>
+</blockquote>
+<p>方法：</p>
+<ul>
+<li>分类任务：投票法</li>
+<li>回归任务：平均法 &#x2F; 加权平均</li>
+</ul>
+<p>思路：</p>
+<p><code>k表示需要多少近邻来判断自身身份，当k = 1，在点周围找出最近的一个点，根据此点的数据决定自身属性...</code></p>
+<p>距离度量：</p>
+<ol>
+<li>欧氏距离</li>
+<li>余弦值距离</li>
+<li>相关度correlation</li>
+<li>曼哈顿距离</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li><p>算法的复杂度较高</p>
+<p>在每个未知点计算最近邻居时都需要遍历求取和所有已知点的距离</p>
+</li>
+<li><p>当其样本分布不平衡时，比如其中一类样本过大，新的未知实例容易被归类为这个主导样本</p>
+</li>
+</ol>
+<h4 id="维数灾难问题："><a href="#维数灾难问题：" class="headerlink" title="维数灾难问题："></a>维数灾难问题：</h4><p><code>问题描述：在高维空间中，许多事物的行为迥然不同。例如：在一个10000维的单位超立方体中随机选取一个点，这个点离边界的距离小于0。001的概率是99.999999% —— 高维超立方体中大多数点都非常接近边界</code></p>
+<p><code>问题描述：当维数不断增大，内接球的体积会趋于0，而超立方体的体积还是1 —— 大部分空间都是边缘</code></p>
+<p>导致在模型训练中：大部分数据都位于定义的特征空间立方体的拐角处</p>
+<p><code>问题描述：为了避免一个点附近没有参照物；当数据维度很高时，KNN算法对于伊普西隆的选取也不能太低；假如一维样本空间边长 = 1，伊普西隆 = 0.01，则要求至少1000个样本分布在空间内  ；  假如是20维样本空间边长 = 1，伊普西隆 = 0.01，则要求至少1000的20次方个样本</code></p>
+<p><code>问题描述：随着维度增高，两点间平均距离会增大（由于点分布越来越靠近边缘，导致距离越来越大）就导致伊普西隆的选取不能是定死的 / 样本点和实例之间的距离越来越大；但逆天的是：当数据是100w维时，平均距离约等于408.25</code></p>
+<h4 id="降维方法："><a href="#降维方法：" class="headerlink" title="降维方法："></a>降维方法：</h4><ol>
+<li><p>直接降维：直接删除某些属性 例如LASSO</p>
+</li>
+<li><p>线性降维：例如PCA</p>
+</li>
+<li><p>非线性降维：</p>
+<p>KPCA</p>
+<p>流形降维</p>
+<p>IsoMap</p>
+<p>LLE</p>
+</li>
+<li><p>分类</p>
+<ul>
+<li><p>投影 Projection</p>
+<p>直接把三位点分布投影到二维平面</p>
+</li>
+<li><p>流形学习 manifold Learning</p>
+<p>按某种流的方式扫描+展开空间内的点分布</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>线性回归</p>
+<ul>
+<li><p>代价函数（Cost Function）：</p>
+<blockquote>
+<p>自变量是模型中要估计的参数，因变量是要最小化的代价</p>
+</blockquote>
+<p>当只有一个参数要估计时，常常是：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226202026309.png" srcset="/img/loading.gif" lazyload alt="image-20231226202026309"></p>
+<p>当有两个参数要估计时：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226202047985.png" srcset="/img/loading.gif" lazyload alt="image-20231226202047985"></p>
+</li>
+<li><p>梯度下降法</p>
+<blockquote>
+<p>用于优化代价函数的一个优化算法</p>
+</blockquote>
+<p>思路：</p>
+<ul>
+<li>给定一个初始位置，在每个位置判断梯度最小的方向为下降方向；即代价函数减少最快的方向</li>
+</ul>
+<p>考虑的问题：</p>
+<ul>
+<li>学习率：确定方向后，步长如何选择</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li>可能会陷入局部最小值</li>
+</ul>
+<p>过程：</p>
+<p>每一步通过偏导确认在各个坐标轴方向的程度，再在这个方向上推进α</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226203800018.png" srcset="/img/loading.gif" lazyload alt="image-20231226203800018"></p>
+</li>
+<li><p>标准方程法：</p>
+<p>直接将代价函数对sita列向量求导</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226230724137.png" srcset="/img/loading.gif" lazyload alt="image-20231226230724137"></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226230847284.png" srcset="/img/loading.gif" lazyload alt="image-20231226230847284"></p>
+<h4 id="对比："><a href="#对比：" class="headerlink" title="对比："></a>对比：</h4><ul>
+<li><p>梯度下降法：</p>
+<p>缺点：</p>
+<p>需要选择合适的学习率</p>
+<p>需要迭代多个周期</p>
+<p>只能得到最优解的近似值</p>
+<p>优点：</p>
+<p>当特征值非常多时也能行</p>
+</li>
+<li><p>标准方程法：</p>
+<p>优点：</p>
+<p>不需要学习率</p>
+<p>不需要迭代</p>
+<p>可以得到全局最优解</p>
+<p>缺点：</p>
+<p>需要计算（X的转置*X）的逆</p>
+<p>时间复杂度较高</p>
+</li>
+</ul>
+</li>
+<li><p>特征缩放：</p>
+<blockquote>
+<p>当多个特征间取值范围的数量级差别很大，导致梯度下降法无法选择中间合适的学习率</p>
+</blockquote>
+<p>就是标准化</p>
+</li>
+<li><p>交叉验证法：</p>
+<p>某些时刻由于样本数目不多，分成训练集和测试集比较寒酸</p>
+<p>交叉验证：试图用样本中能训练的都训练，同时还要能分出测试集</p>
+<p><code>将样本分成十份，一共十波训练+测试，每一波用不同的测试集，十波得到的结果（测试集测试得到的误差）取平均数作为最后结果</code></p>
+</li>
+<li><p>过拟合：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226232537255.png" srcset="/img/loading.gif" lazyload alt="image-20231226232537255"></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226232819053.png" srcset="/img/loading.gif" lazyload alt="image-20231226232819053"></p>
+<p>欠拟合：拟合程度不足</p>
+<p>过拟合：</p>
+<ul>
+<li>当模型在训练集表现很好，测试集很拉 – 可能过拟合</li>
+<li>模型过分地适应了训练数据的噪声和细节，而失去了对新数据的泛化能力</li>
+<li>过拟合通常发生在模型具有过多的参数或复杂度过高的情况下。</li>
+</ul>
+<p>避免过拟合：</p>
+<ol>
+<li>减少样本特征</li>
+<li>增加数据量</li>
+<li>正则化</li>
+</ol>
+</li>
+<li><p>正则化</p>
+<p>在模型的损失函数中添加额外项来惩罚模型复杂度</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226233507573.png" srcset="/img/loading.gif" lazyload alt="image-20231226233507573"></p>
+</li>
+<li><p>岭回归 Ridge Regression</p>
+<p>原本多元回归方案中：</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226234123617.png" srcset="/img/loading.gif" lazyload alt="image-20231226234123617" style="zoom:75%;" />
+
+<p>但当数据的特征比样本数量还多时，（X转置*X）不满秩 –&gt; 不可逆</p>
+<p>所以提出岭回归：但需要解释为什么可以加这个对角矩阵</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226234259467.png" srcset="/img/loading.gif" lazyload alt="image-20231226234259467" style="zoom:67%;" /> 
+
+<p>岭回归其实来自正则化（双方都是为了避免过多解释变量）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231226234439385.png" srcset="/img/loading.gif" lazyload alt="image-20231226234439385"></p>
+<ul>
+<li>但是岭回归改变了代价函数，导致是有偏估计</li>
+<li>岭系数λ怎么选择：<ul>
+<li>较大的λ会导致模型参数较少，比较简单，但也就导致拟合优度较低</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>LASSO回归算法：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228102636834.png" srcset="/img/loading.gif" lazyload alt="image-20231228102636834"></p>
+<p>λ的限制作用：</p>
+<ul>
+<li><p>整个代价函数要最小化，当λ较大就限制了θ较小，λ较小即允许θ变大</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228103123526.png" srcset="/img/loading.gif" lazyload alt="image-20231228103123526"></p>
+<p>不同惩罚函数，λ允许θ变化范围</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多元线性回归</p>
+<p>思路类似一元线性回归</p>
+<p>构造线性函数，构造代价函数，梯度下降求解极小值对应的目标参数</p>
+</li>
+<li><p>逻辑回归 &#x2F; 回归用于分类</p>
+<blockquote>
+<p>用来处理分类问题：是否为垃圾邮件，判断某人信用…</p>
+</blockquote>
+<p>逻辑回归预测函数：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231227145447155.png" srcset="/img/loading.gif" lazyload alt="image-20231227145447155"></p>
+<p>其中θ转X表示多个X的线性组合 –&gt; 加权求和，决定了如何评价X</p>
+<blockquote>
+<p>对数几率函数：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231230202215608.png" srcset="/img/loading.gif" lazyload alt="image-20231230202215608"></p>
+<p>此函数有点东西</p>
+<p>ln(y&#x2F;1-y) &#x3D; θX  &#x3D;&#x3D;等价于&#x3D;&#x3D; y &#x3D; g(θX) </p>
+<p>其中y在 0到1，表示X参与计算后为正的概率，1-y表示为负的概率</p>
+<blockquote>
+<p>由ln(y&#x2F;1-y) &#x3D; θX 积回去得到g(x)，恰巧长这个样子——在0到1</p>
+</blockquote>
+<p>此函数估计的y：可以直接得到预测是某一类的概率；提供概率而不是直接的判定结果往往携带更多信息</p>
+</blockquote>
+<p>决策边界：</p>
+<p>在此边界上的点都恰好使得g(x) &#x3D;&#x3D; 0.5 即θX &#x3D;&#x3D; 0</p>
+<p>简单的评价函数：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231227150132642.png" srcset="/img/loading.gif" lazyload alt="image-20231227150132642"></p>
+<p>复杂的评价函数：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231227150235335.png" srcset="/img/loading.gif" lazyload alt="image-20231227150235335"></p>
+<p>新代价函数：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228104300647.png" srcset="/img/loading.gif" lazyload alt="image-20231228104300647"></p>
+<p>&#x3D;&#x3D;&gt; </p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228105101669.png" srcset="/img/loading.gif" lazyload alt="image-20231228105101669"></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228104840345.png" srcset="/img/loading.gif" lazyload alt="image-20231228104840345"></p>
+<p>原本最小回归的代价函数，可能并非凸函数，导致不适合梯度下降</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228105940565.png" srcset="/img/loading.gif" lazyload alt="image-20231228105940565"></p>
+<p>本身无论θX怎样，h(x)都是凸函数，外加log后也能保证是凸函数 – 凸优化问题</p>
+<p>原本外层没包很多层…</p>
+</blockquote>
+<p>   新代价函数：</p>
+<ul>
+<li><p>天生适应逻辑回归函数 —— 考察回归结果和0 &#x2F; 1的差距</p>
+</li>
+<li><p>相当于原本由(h(x) - x)^2描述，变成由log(h(x))描述</p>
+</li>
+</ul>
+<h4 id="分类结果评估："><a href="#分类结果评估：" class="headerlink" title="分类结果评估："></a>分类结果评估：</h4><blockquote>
+<p>正确率、召回率、F值</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228110754260.png" srcset="/img/loading.gif" lazyload alt="image-20231228110754260"></p>
+</blockquote>
+<p>   正确率 Precision：一次操作中，命中目标群体的概率</p>
+<p>   召回率 Recall：一次操作中，命中目标群体的范围</p>
+<p>   F值：二者均衡</p>
+<ul>
+<li><p>通常：提高正确率会降低召回率；提高召回率会降低正确率</p>
+<blockquote>
+<p>暂不明</p>
+</blockquote>
+</li>
+<li><p>极端情况：当只搜索出一个结果但是正确的，P为1.R巨低；当需要把所有目标都检索出来，R很高，但对P需求更高</p>
+</li>
+</ul>
+<hr>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ol>
+<li><p>线性判别</p>
+<blockquote>
+<p>思路：</p>
+<p>对于在高维中离散的点，怎么能合理的在低位观察并区分？</p>
+<blockquote>
+<p>保留尽可能多的信息（方差最大），将点投影到低维；在低维进行观测</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>多分类问题：</p>
+<p>要将离散的点分成多个类，直接的想法就是怎么转化成多个二分类问题</p>
+<ol>
+<li><p>一对一</p>
+<blockquote>
+<p>一共有n个类，每次尝试将样本分类成这两个类，一共会分n(n-1)&#x2F;2次；</p>
+<p>一个点会被分n(n-1)&#x2F;2次，会到达n(n-1)&#x2F;2个模型中，其中出现次数最多的一个模型就是它的归属</p>
+<blockquote>
+<p>有点暴力</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>一对多</p>
+<blockquote>
+<p>一共有n个类，每次尝试将其中一个类和其余所有类分成两类，一共会分n次；</p>
+<p>一个点会被分n次，其中分到哪个单独的类中就属于哪个，一个样本点属于多个，要么根据置信度，要么设置偏好；一个样本点一个都不属于，可以另外处理：标记unKnown</p>
+<blockquote>
+<p>人类正常逻辑，但也有点暴力</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>多对多</p>
+<p><mark>我选择国王试酒算法</mark></p>
+</li>
+</ol>
+</li>
+<li><h3 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h3><blockquote>
+<p>深度学习</p>
+</blockquote>
+<blockquote>
+<p>如何理解深度学习？</p>
+<p>整个学习过程就是为了准确预测输入值对应的输出，即拟合一条直线</p>
+<p>每个神经元接收输入【以变量形式】，经过加权叠加后形成新的变量 &#x2F; 曲线（可能还需要一次sigmoid标准化一下），传递给下一个神经元</p>
+<p>所谓深度学习，意思就是任何一个传入的变量都可以再递归探索其深度构建</p>
+</blockquote>
+<ul>
+<li><p>单层感知器：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228125032929.png" srcset="/img/loading.gif" lazyload alt="image-20231228125032929"></p>
+<p>感知器学习规则：</p>
+<ul>
+<li><p>感知器接受输入X，输出y；y为sign函数</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228125137157.png" srcset="/img/loading.gif" lazyload alt="image-20231228125137157" style="zoom:50%;" />
+</li>
+<li><p>模型本身用来评判某个样本的属性是否满足要求，在训练过程中是通过有标记的样本进行训练</p>
+<p>已知X，已知Y，如何确定W使得感知器能够较好的将不同类型的X分类 ——&gt; 就是估计加权比例</p>
+</li>
+<li><p>模型提出一种算法：</p>
+<p>根据当前的预测值y’和真实值Y的差距，迭代更新W；直到预测值等于真实值</p>
+<p><code>更新W的速度目前人为设置，添加了参数 -- 学习率</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h5 id="BP神经网络"><a href="#BP神经网络" class="headerlink" title="BP神经网络"></a>BP神经网络</h5><blockquote>
+<p>误差反向传播过程</p>
+</blockquote>
+<p>以上简单神经网络通过判断预测值和真实值是否一致来实现W的调优</p>
+<p>当神经网络模型由多层构成，只有最后一层才有y的真实值</p>
+<blockquote>
+<p>于是要么设法正向调整输入靠近输出，要么根据输出回馈输入</p>
+</blockquote>
+<p>BP反向传播即：根据最后一层的ΔWk（误差），一层一层反向计算ΔWk-1 … ΔW1 完成对输入层的调整</p>
+<p>最后一层：</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228142907653.png" srcset="/img/loading.gif" lazyload alt="image-20231228142907653" style="zoom:67%;" />
+
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228142919677.png" srcset="/img/loading.gif" lazyload alt="image-20231228142919677" style="zoom: 67%;" />
+
+<p>根据预测值和真实值的差别算出学习信号，准备向上传递</p>
+<p>前几层：</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228143051839.png" srcset="/img/loading.gif" lazyload alt="image-20231228143051839" style="zoom:67%;" />
+
+<p>根据上层的学习信号和本层的某些信息归纳得出</p>
+<p>在每层误差ΔW调整时，都乘了当前层激活函数的导数，当激活函数是传统sigmoid时，导数很容易很小，导致前面多层ΔW太小无法实现调整 </p>
+<blockquote>
+<p>即：对层的高低有限制，只有五层以内可以实现有效调整</p>
+</blockquote>
+<p><code>具体流程：输出层的某个结果的误差对上层某个影响因素求偏导（通过链式），表示输出层和隐藏层一个影响关系的误差的梯度方向，隐藏层按此方向更新步长为学习率的误差；</code></p>
+<ul>
+<li><p>激活函数</p>
+<ol>
+<li><p>Sigmoid函数</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228142358464.png" srcset="/img/loading.gif" lazyload alt="image-20231228142358464"></p>
+</li>
+<li><p>双曲正切Tanh函数和SoftSign</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228142439467.png" srcset="/img/loading.gif" lazyload alt="image-20231228142439467"></p>
+</li>
+<li><p>ReLU函数</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228142636263.png" srcset="/img/loading.gif" lazyload alt="image-20231228142636263"></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><h4 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h4><blockquote>
+<p>比较适合分析离散数据、对于连续数据需要先转变成离散数据</p>
+<p>模拟人类思维：分治【将高层的问题分到底层】|  递归【高层只关注以高层属性怎么分类，剩下的子问题交给低层】</p>
+</blockquote>
+<ul>
+<li><p>算法发展：</p>
+<p>ID3 –&gt; C4.5 –&gt; CART</p>
+</li>
+<li><p>决策树的构建需要考虑的问题：哪个属性先考虑（在树的上层）；是否有些属性不用在考虑</p>
+<p>通过信息熵解释针对某个属性的分类有效程度 – 最大化信息增益</p>
+</li>
+<li><h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4><p>信息量的大小 &#x3D;&#x3D; 其能消除的不确定性的大小</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228161832640.png" srcset="/img/loading.gif" lazyload alt="image-20231228161832640"></p>
+<blockquote>
+<p>公式的理性理解：为了使信息熵最小，应该让概率紧凑分不到一个事件里[log一个大数并不会太大]，而不是多个事件[直接相加比log内相加大很多]</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228161847852.png" srcset="/img/loading.gif" lazyload alt="image-20231228161847852"></p>
+</li>
+<li><p><strong>ID3过程：</strong></p>
+<p>在多个具有标记的样本的数据集中（14个），如果只知道有9个1，5个0，则当前的信息熵为：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228162448353.png" srcset="/img/loading.gif" lazyload alt="image-20231228162448353"></p>
+<p>尝试用样本属性信息降低信息熵</p>
+<ul>
+<li><p>用age初步分类：</p>
+<p>尝试用年龄分布为youth、middle_aged、senior区分样本集 —— 确定年龄，计算信息熵；最理想的情况是：所有youth全是1，所有其他年龄都是0，即在年龄确认时信息熵为0；</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228163309059.png" srcset="/img/loading.gif" lazyload alt="image-20231228163309059"></p>
+</li>
+<li><p>计算信息增益：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228163331400.png" srcset="/img/loading.gif" lazyload alt="image-20231228163331400"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p><strong>C4.5算法：</strong></p>
+<p>在ID3中，计算信息增益的方法更倾向于首先选择因子数较多的变量 [通过log后求和的弊端]</p>
+<p>C4.5的改进方法 —— 同时除以增益率 【类似标准化】</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228164020460.png" srcset="/img/loading.gif" lazyload alt="image-20231228164020460"></p>
+</li>
+<li><p><strong>CART算法</strong></p>
+<blockquote>
+<p>CART算法 递归地构建二叉树，使用基尼系数最小化来选择具体特征</p>
+</blockquote>
+<ul>
+<li><p>基尼系数：</p>
+<p>1减去所有可能性的概率的平方 &#x3D; 交叉项求和</p>
+<p> &#x3D;&#x3D; 用于刻画可能性的分散情况</p>
+<ol>
+<li>整个样本集D</li>
+</ol>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228164913241.png" srcset="/img/loading.gif" lazyload alt="image-20231228164913241" style="zoom:67%;" />
+
+<ol start="2">
+<li><p>由A分类后的D：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228165738655.png" srcset="/img/loading.gif" lazyload alt="image-20231228165738655"></p>
+</li>
+<li><p>分类前后信息增益</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228165758154.png" srcset="/img/loading.gif" lazyload alt="image-20231228165758154" style="zoom:80%;" /></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>剪枝处理：</p>
+<blockquote>
+<p>当决策树层数太高&#x2F;最高 即把所有属性遍历访问完[就相当于递归了所有属性]，整棵树就只适合训练集的样本</p>
+<p>剪枝处理就是将没必要 &#x2F; 不显著的 &#x2F;太刻意的分支去掉 – 因为决策树的递归遍历是有优先级的</p>
+</blockquote>
+</li>
+</ul>
+<ol start="8">
+<li><h3 id="贝叶斯算法"><a href="#贝叶斯算法" class="headerlink" title="贝叶斯算法"></a>贝叶斯算法</h3><ul>
+<li><p>争论：</p>
+<p>古典统计学派 and 贝叶斯学派</p>
+<ul>
+<li>古典统计学派认为概率来自统计，需要通过统计来得到概率；在统计之前不应该存在可用的概率信息</li>
+<li>贝叶斯学派 引入先验信息；认为有些情况下，概率信息来自统计操作之外</li>
+</ul>
+<p>矛盾在于是否承认先验概率</p>
+</li>
+<li><p>贝叶斯定理： </p>
+<p><em><strong>如何交换条件概率中的条件和结果</strong></em></p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228172109089.png" srcset="/img/loading.gif" lazyload alt="image-20231228172109089" style="zoom:67%;" />
+
+<p>其中：</p>
+<ul>
+<li><p>P(H)表示H发生的先验概率</p>
+<p>一封邮件是垃圾邮件的概率</p>
+</li>
+<li><p>P(X)表示X发生的先验概率</p>
+<p>一封邮件中有“办证”的概率</p>
+</li>
+<li><p>P(X|H)表示在H发生的情况下，X发生的概率；</p>
+<blockquote>
+<p>是先验概率 — 需要预先知道</p>
+</blockquote>
+<p>一封垃圾邮件中有“办证”的概率【事先对垃圾邮件便利统计过】</p>
+</li>
+<li><p>P(H|X)表示：当某个样本满足X条件，有多大概率将样本判定成H —— 是要计算得到的后验概率</p>
+<p>有“办证”的邮件是垃圾邮件的概率</p>
+</li>
+</ul>
+<p>作用：计算某个属性确定后，有多少概率将其判定为1 &#x2F; 0</p>
+<hr>
+<p>但是在应用场景下，往往不光根据一个H来判断X，而可能有多个H，按照上述思路，当X内含不同：例如X指“办证”、“办证+理财”、“办证+理财+金铲铲”都需要重新统计P(X)，以及P(X|H)；</p>
+<ul>
+<li><p>一种直观的思路是：当X指的内容相互独立，P(X)变成变成可插拔的P(X1)P(X2)…；P(X|H)变成P(X1|H)P(X2|H)…</p>
+<p><strong>贝叶斯分类器：</strong></p>
+<blockquote>
+<p>若<strong>样本x</strong>有n个特征，用(<img src="https://private.codecogs.com/gif.latex?x_%7B1%7D,x_%7B2%7D,...,x_%7Bn%7D" srcset="/img/loading.gif" lazyload alt="x_{1},x_{2},...,x_{n}">)表示，</p>
+<p>将其分到类<img src="https://private.codecogs.com/gif.latex?y_k" srcset="/img/loading.gif" lazyload alt="y_k">的可能性为： </p>
+<p><img src="https://private.codecogs.com/gif.latex?P(y_%7Bk%7D%7Cx_%7B1%7D,x_%7B2%7D,...,x_%7Bn%7D)%20=%20P(y_%7Bk%7D)%5Cprod_%7Bi=1%7D%5E%7Bn%7DP(x_%7Bi%7D%7Cy_%7Bk%7D)" srcset="/img/loading.gif" lazyload alt="P(y_{k}|x_{1},x_{2},...,x_{n}) &#x3D; P(y_{k})\prod_{i&#x3D;1}^{n}P(x_{i}|y_{k})"></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>朴素贝叶斯：</p>
+<blockquote>
+<p>假设：特征X1、X2、X3…之间都是相互独立的</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228173727913.png" srcset="/img/loading.gif" lazyload alt="image-20231228173727913"></p>
+<p>由于事件相互独立，可以将原本X1、X2…理论上合并成一个事件，在计算时分成多个小事件</p>
+<p>具体模型：</p>
+<ul>
+<li><p>多项式模型</p>
+<p>解释P(X|H)时，当X的子事件有重复时，保留重复</p>
+<p>用于文本分类 —— 保留单词出现的次数，便于更准确的分类</p>
+<blockquote>
+<p>例如：当通过判断内含“代开发票，增值税发票，正规发票“的是不是垃圾邮件时，首先分词为（代开、发票、增值税、发票、正规、发票）；</p>
+<p>计算P(X|H)：表示一封垃圾邮件，必须有以上六个词才纳入统计</p>
+<blockquote>
+<p>则先验概率p(c) &#x3D; 类c下单词总数 &#x2F; 整个训练样本的单词总数</p>
+<p>类条件概率 p(tk|c) &#x3D; (类c下单词tk在各个文档出现的数量之和+1) &#x2F; (类c下单词总数 + |V|)</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>伯努利模型</p>
+<p>每个特征是布尔类型，表示某个特征在文本中有无出现</p>
+<blockquote>
+<p>例如：计算P(X|H)：表示一封垃圾邮件，只要有（代开、发票、增值税、正规）即可；</p>
+<blockquote>
+<p>先验概率p(c)&#x3D;类c下文档总数&#x2F;整个训练样本的文档总数</p>
+<p>类条件概率p(tk|c)&#x3D;类c下包含单词tk的文档总数&#x2F;类c下的文档总数+2</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>混合模型</p>
+<p>在计算句子概率时，不考虑重复词的次数，但在同居词语的概率时，考虑重复词的次数</p>
+</li>
+<li><p>高斯模型</p>
+<p>当特征是连续变量的时候，如果用多项式模型就会导致X的子事件很多，此时采用高斯模型</p>
+<p>高斯模型假设某个特征的分布满足高斯分布（μ和σ需要计算得出），于是可以单独计算某一点的概率，也可以计算区间的概率积分</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228201316787.png" srcset="/img/loading.gif" lazyload alt="image-20231228201316787" style="zoom:67%;" /></li>
+</ul>
+</li>
+</ul>
+<ol start="9">
+<li><h3 id="聚类算法"><a href="#聚类算法" class="headerlink" title="聚类算法"></a>聚类算法</h3><ol>
+<li><p>K-Means</p>
+<p>表示要将输入的样本划分成K个聚类</p>
+<p>要求：同一类中的对象相似度高、不同类中的对象相似度低</p>
+<ul>
+<li><p>算法思想：</p>
+<p>以空间中k个点为中心进行聚类：对最靠近它们的对象归类，通过迭代的方法，逐次更新各个聚类的中心位置，直到得到最好的聚类结果</p>
+<p><code>迭代步骤：初始位置时将所有点分配到距离最近的中心，在每个聚类中计算所有点的重心作为新的中心，再将所有点分配到最近的中心...知道聚类结果不再发生变化</code></p>
+<p>感觉每一步都在尝试靠近点更密集的位置</p>
+</li>
+<li><p>问题：</p>
+<ol>
+<li><p>对K个初始质心的选择比较敏感，容易陷入局部最小值</p>
+<p>即：整个过程的动态性全部依赖于：有点可以再聚类之间穿梭，穿梭后才能改变重心，改变重心才能改中心，才能再去吸引新的点进来</p>
+<p>循环停止的标准不是一个可量化的指标，就可呢导致停在意想不到的位置</p>
+<blockquote>
+<p>有点死锁的感觉，自己把自己的锁占用了 - 才需要可重入锁 </p>
+</blockquote>
+</li>
+<li><p>K值的选取比较麻烦</p>
+</li>
+<li><p>模型的局限性：非球状数据分布难以刻画</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231228204119330.png" srcset="/img/loading.gif" lazyload alt="image-20231228204119330"></p>
+</li>
+<li><p>数据比较大的时候，收敛会比较慢</p>
+<p>解决方案：</p>
+<p>mini-banch-K-means： 先用小样本测测聚类</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>DBSCAN算法</p>
+<blockquote>
+<p>基于密度的算法：将足够高密度的区域划分为簇，可以发现任何形状的聚类</p>
+</blockquote>
+<p>基本概念：</p>
+<ol>
+<li><p>伊普西隆-邻域：</p>
+<p>给定对象半径伊普西隆内的区域</p>
+</li>
+<li><p>核心对象：</p>
+<p>如果给定伊普西隆邻域内样本点数大于等于Minpoints，则称该对象为核心对象</p>
+</li>
+<li><p>直接密度可达：</p>
+<p>给定一个对象集合D，如果P在q的邻域内，且Q是一个和相对性，则说对象p从q出发是直接密度可达的</p>
+</li>
+<li><p>密度可达：</p>
+<p>对于集合D，若存在一个对象链p1，p2,…pn&#x3D;p，其中pi是从pi+1关于伊普西隆和Minpoints的直接密度可达，则称p是从q关于伊普西隆和minpoints的密度可达</p>
+</li>
+<li><p>密度相连：</p>
+<p>集合D存在点o，使得点p，q是从o关于伊普西隆和minpoints密度可达的，则点p，q是关于伊普西隆和minpoints密度相连的</p>
+</li>
+</ol>
+<p>步骤：</p>
+<ol>
+<li>指定合适的伊普西隆和minpoints</li>
+<li>计算所有的样本点，如果点p的伊普西隆邻域内有超过minpoints个点，则创建一个以p为核心点的新簇</li>
+<li>反复寻找这些和谐的的直接密度可达（或密度可达）的点，将其加入到相应的簇；对于核心点间发生密度相连，则合并两个簇</li>
+<li>当没有新的点可以被添加到任何簇，算法结束</li>
+</ol>
+<p>感觉：</p>
+<blockquote>
+<p>DBSCAN尊重每个相邻足够近的点，即使不是球状，也能通过中间相邻将一个簇连接起来</p>
+<p>目标是区分这些簇：最近的两点间也有距离</p>
+</blockquote>
+</li>
+<li><h3 id="PCA-主成分分析"><a href="#PCA-主成分分析" class="headerlink" title="PCA 主成分分析"></a>PCA 主成分分析</h3><blockquote>
+<p>思想：将高维的样本点投影到低维，投影的策略是：尽可能使得方差最大【投影操作牺牲的信息量越少】</p>
+</blockquote>
+<p>第一个主成分找到方差最大的方向，第二个主成分寻找方差次大，并且与第一个主成分正交的方向【正交是为了降低相关性】</p>
+<p>根据两个方向确认一个平面，即可投影</p>
+<hr>
+<h4 id="KPCA"><a href="#KPCA" class="headerlink" title="KPCA"></a>KPCA</h4><blockquote>
+<p>问题描述：</p>
+<p>假如在一个平面中两类样本点比较难以区分</p>
+<p>但如果将这些点投影到三维空间：尝试根据Z轴的数值区分这些点</p>
+<p>则有可能在三维空间被一个平面完美分离</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229200138200.png" srcset="/img/loading.gif" lazyload alt="image-20231229200138200"></p>
+</blockquote>
+<p>核心概念：</p>
+<ol>
+<li><p>核函数：</p>
+<p>核函数用于将原始数据映射到一个高维空间中；</p>
+<p>常见核函数包括：线性核、多项式核、高斯核等，不同核函数对数据进行不同类别的变换，实现不同降维效果</p>
+</li>
+<li><p>核函数参数：</p>
+<p>一般通过交叉验证等方法来确认最佳参数</p>
+</li>
+</ol>
+</li>
+<li><h3 id="SVM支持向量机"><a href="#SVM支持向量机" class="headerlink" title="SVM支持向量机"></a>SVM支持向量机</h3><blockquote>
+<p>SVM寻找区分两类的超平面（hyper plane），使得边际（margin）最大</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229081546605.png" srcset="/img/loading.gif" lazyload alt="image-20231229081546605"></p>
+<p>&#x3D;&#x3D;&gt;如何量化中间的margin</p>
+<blockquote>
+<p>先将两条虚线标准化成右侧为1，可以统一用||W||刻画</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229082740217.png" srcset="/img/loading.gif" lazyload alt="image-20231229082740217"></p>
+<p>求解步骤：</p>
+<ol>
+<li><p>转化成凸优化问题：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229085509872.png" srcset="/img/loading.gif" lazyload alt="image-20231229085509872"></p>
+</li>
+<li><p>拉格朗日乘子法：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-section"># 细说拉格朗日常数法：</span><br><br><span class="hljs-bullet">-</span> 基本思想<br><span class="hljs-code">    将约束条件引入目标函数，通过引入拉格朗日乘子来构建新的函数，通过对这个新函数求导，找到使其梯度为0的点，从而得到原问题的最优解</span><br><span class="hljs-code"></span><br><span class="hljs-bullet">-</span> 可行性证明<br><span class="hljs-code">    &gt; 二维为例</span><br><span class="hljs-code">      目标函数：f(x,y) = x+y;</span><br><span class="hljs-code">      s.t.：x2+y2 - 1 = 0;</span><br><span class="hljs-code">    目标函数和等式约束都可以用x，y的梯度来刻画其值的变化</span><br><span class="hljs-code">    求解的目的就是：在s.t.梯度垂直方向移动过程中，一直沿着     目标函数梯度负方向移到尽头</span><br><span class="hljs-code">    `注意搞明白活动的点具有活动的s.t.的梯度方向，全局拥有唯      一的目标函数梯度方向`</span><br><span class="hljs-code">    ---</span><br><span class="hljs-code">    于是：感性证明就是：</span><br><span class="hljs-code">    只有当目标函数的梯度和s.t.的梯度共线时才能找到极值</span><br><span class="hljs-code">    于是构建函数</span><br><span class="hljs-code">    - L(x,λ) = f(x) + λg(x)</span><br><span class="hljs-code">    求解方程：</span><br><span class="hljs-code">    - L(x,λ)对x的偏导 --&gt; 梯度相同</span><br><span class="hljs-code">    - L(x,λ)对λ的偏导 --&gt; 约束条件成立</span><br><span class="hljs-code"></span><br><span class="hljs-bullet">-</span> 感觉就是：整个函数是为了构建两个偏导方程组的<br>  关键问题是：在等式约束下如何求解原问题极值？在无条件约束时   是偏导 == 0，有约束时是偏导 == 约束条件的偏导【此时只有   f(x)偏导 == 0并不够，必须用约束条件限制，而怎么限制？就是约束条件始终 == 0，即要求x......】<br></code></pre></td></tr></table></figure>
+
+<p>转化成无约束问题</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229085539335.png" srcset="/img/loading.gif" lazyload alt="image-20231229085539335"></p>
+</li>
+<li><p>转化成对偶问题：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229085701904.png" srcset="/img/loading.gif" lazyload alt="image-20231229085701904"></p>
+<p>其中：max min 表示：w和b的取值使得原式最小，a的值使得原式最大</p>
+</li>
+<li><p>min问题通过求偏导解出w &amp; b</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229085916801.png" srcset="/img/loading.gif" lazyload alt="image-20231229085916801"></p>
+</li>
+<li><p>max问题要求解α值</p>
+<p>使用SMP算法</p>
+</li>
+</ol>
+<p><strong>假如样本线性不可分？</strong></p>
+<p>即在两类的内部都有其他类的一些点（误差点），此时怎么划分出两个超平面边际？</p>
+<ol>
+<li><p>尝试让每个边界变得松弛——移动到包括误差点</p>
+</li>
+<li><p>代价函数中添加惩罚函数，惩罚边界的移动距离</p>
+<p>寻找刚好包括自身类所有点的超平面</p>
+</li>
+</ol>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229091734973.png" srcset="/img/loading.gif" lazyload alt="image-20231229091734973" style="zoom:80%;" />
+</li>
+<li><h3 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h3><blockquote>
+<p>通过多个学习器完成学习任务，为了获得比单一学习器更优越的泛化性能</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229102016483.png" srcset="/img/loading.gif" lazyload alt="image-20231229102016483"></p>
+<p>每个学习器结构：</p>
+<ul>
+<li>个体学习器：学习器中只是用一种算法</li>
+<li>组件学习器：学习器中使用异质的算法</li>
+</ul>
+<p>集成学习集成多个学习器的原则：</p>
+<blockquote>
+<p>好而不同、少数服从多数</p>
+</blockquote>
+<p>​    场景1：好而不同、由多数的成功分类掩盖少数失败分类</p>
+<p>​    <img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229102424813.png" srcset="/img/loading.gif" lazyload alt="image-20231229102424813"></p>
+<p>​    场景2：好但相同、无法取长补短</p>
+<p>​    <img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229102446932.png" srcset="/img/loading.gif" lazyload alt="image-20231229102446932"></p>
+<p>​    场景3：差且不同、每个学习器自身分类太差，反而影响了别的学习器</p>
+<p>​    <img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229102659007.png" srcset="/img/loading.gif" lazyload alt="image-20231229102659007"></p>
+<p><code>什么是好模型？只要自身的分类/预测准确率大于50%，且和现有的学习机不重合；就可以给系统提高一点正确率</code></p>
+<p>解释：</p>
+<p>假设原本有500个准确率为60%的学习机，现在考虑能否添加一个新的学习率为51%的学习机</p>
+<p>原本模型准确率：</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20231229105245581.png" srcset="/img/loading.gif" lazyload alt="image-20231229105245581" style="zoom:80%;" />
+
+<p>新模型准确率：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex">0.51*(251个可能性求和)+0.49*(250个可能性求和)<br></code></pre></td></tr></table></figure>
+
+<p>251表示：新模型对了，后来只至少250个模型也是对的(500-250+1)</p>
+<p>250表示：新模型错了，后台需要至少251个模型是对的</p>
+<p>于是：明显比原本大</p>
+<p>分类：</p>
+<ul>
+<li><p>个体学习器之间存在强依赖关系 –&gt; 必须串行生成的序列化方法</p>
+<p>Boosting</p>
+</li>
+<li><p>个体学习器之间不存在强依赖关系 –&gt; 可以同时的并行化方法</p>
+<p>Bagging</p>
+<p>随机森林</p>
+</li>
+</ul>
+</li>
+<li><h4 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h4><ul>
+<li><p>AdaBoosting</p>
+<blockquote>
+<p>思路:多个模型中，每个模型都在尝试增强整体效果</p>
+<p>具体而言：</p>
+<blockquote>
+<p>先从初始训练集训练出一个基学习器，再根据基学习器的表现对训练样本进行调整，使得某些分类异常的样本权重更高 &#x2F; 后续受到更多关注，然后基于调整后的样本分布来训练下一个学习器 </p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>Gradient_boosting</p>
+<blockquote>
+<p>思路：首先训练一个模型m1，产生错误e1，针对e1训练第二个模型m2，产生错误e2，针对e2训练第三个模型m3…</p>
+<p>最终的预测结果是m1+m2+m3+…</p>
+<blockquote>
+<p>AdaBoosting类似乘法，GradientBoosting类似加法</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><h4 id="Bagging-and-随机森林"><a href="#Bagging-and-随机森林" class="headerlink" title="Bagging and 随机森林"></a>Bagging and 随机森林</h4><blockquote>
+<p>思路：</p>
+<ul>
+<li><p>不同学习器使用不同的训练集：</p>
+<p>从训练集中进行抽样，组成每个子训练集；子训练集用来训练每个基模型；最后对所有及模型的预测结果进行综合产生最后的结果</p>
+</li>
+<li><p>不同的学习器使用不同的算法</p>
+</li>
+<li><p>不同的学习器使用不同的参数</p>
+</li>
+<li><p>不同的学习器使用不同的特征选择和特征工程</p>
+</li>
+</ul>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>都是为了保证个体学习器尽可能相互独立</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h5 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h5><p>通过训练集不同</p>
+<p>分类：</p>
+<ul>
+<li>Bagging：放回取样</li>
+<li>Pasting：不放回取样</li>
+<li>bootstrap_features：在特征空间随机采样（每个学习器使用不同的特征工程）</li>
+</ul>
+<h5 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h5><p>通过训练集和特征选取不同 –&gt; 样本和节点判断的特征都随机选择</p>
+<blockquote>
+<p>简单思想：每个决策树是一个分类器，随机森林维护了多个不同的决策树；那么对于一个输入，N棵树给出N个分类结果；随机森林最终集成所有分类投票结果，输出票数最多的【bagging】</p>
+</blockquote>
+<hr>
+<hr>
+<p>结合策略：</p>
+<ol>
+<li><p>平均分</p>
+<ul>
+<li><p>简单平均分</p>
+</li>
+<li><p>加权平均分</p>
+<p>性能比较：</p>
+<blockquote>
+<p>加权平均的性能未必优于简单平均，因为加权时的权重一般来自训练数据，又很容易导致自身信息过度利用——过拟合</p>
+<p>一般而言：在个体学习器性能相差较大时使用加权平均，性能相近时使用简单平均</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>投票法</p>
+<ul>
+<li><p>绝对多数投票法</p>
+<p>若某标记得票超过半数，则预测为标记，否则拒绝预测</p>
+<blockquote>
+<p>实现统一一般人员比较困难–&gt; 可能会退化成相对多数投票法</p>
+</blockquote>
+</li>
+<li><p>相对多数投票法</p>
+<p>预测为的票最多的标记，如果同时有多个标记为得票最高，则随机从中选一个</p>
+</li>
+<li><p>加权投票法</p>
+</li>
+<li><p>硬投票与软投票</p>
+<p>硬投票：</p>
+<ul>
+<li>每个模型在A，B两个结果中做出选择，最后统计A票多还是B票多</li>
+</ul>
+<p>软投票：</p>
+<ul>
+<li>每个模型给出是A或B的概率，最后将概率相加平均，比较A，B的平均概率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>学习法</p>
+<blockquote>
+<p>通过另一个学习器来进行结合</p>
+<p>把个体学习称为出基学习器，用于结合的学习器称为次级学习器或者元学习器（meta-learner）</p>
+</blockquote>
+<h4 id="Stacking"><a href="#Stacking" class="headerlink" title="Stacking"></a>Stacking</h4><blockquote>
+<p>思想：</p>
+<p>把训练样本集分为两部分</p>
+<p>一部分用来训练许多初级学习器</p>
+<p>通过处理分类器预测的结果 和 另一部分样本一起来训练次级学习器，由此最终得到预测结果</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><h3 id="特征选择与稀疏学习"><a href="#特征选择与稀疏学习" class="headerlink" title="特征选择与稀疏学习"></a>特征选择与稀疏学习</h3><blockquote>
+<p>特征选择：如果选择最重要的特征，以提高模型的性能 - 目的是降维，减少复杂度，提高性能</p>
+<p>稀疏学习：指在模型的参数中有很多是零，对此模型怎么搞</p>
+</blockquote>
+<ul>
+<li><p>子集搜索与评价：</p>
+<ul>
+<li><p>概念：</p>
+<ol>
+<li><p>特征 feature：</p>
+<p>西瓜的色泽、跟蒂、纹理…</p>
+</li>
+<li><p>相关特征：relevant feature：</p>
+<p>对当前学习任务有用的属性</p>
+</li>
+<li><p>无关特征：irrelevant feature：</p>
+<p>对当前任务无关的属性</p>
+</li>
+<li><p>冗余特征：redundant feature：</p>
+<p>指两个特征之间可以相互计算得到</p>
+</li>
+<li><p>特征选择：feature selection：</p>
+<p>从给定的特征及和中选择特征子集的过程【数据预处理 &#x2F; 特征工程】</p>
+</li>
+</ol>
+</li>
+<li><p>本章假设</p>
+<ul>
+<li>数据集不涉及冗余特征</li>
+<li>初始特征集包含所有重要信息</li>
+</ul>
+</li>
+<li><p>特征选择的思路：</p>
+<blockquote>
+<p>假设没有任何领域的先验假设</p>
+</blockquote>
+<p>思路一：</p>
+<ul>
+<li><p>遍历所有可能子集 - 高层for</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;i &lt; n;i++;)&#123;<span class="hljs-comment">//取i个</span><br>    <span class="hljs-keyword">for</span>()&#123;   <span class="hljs-comment">//内部i层for，用i个指针实现组合遍历</span><br>        <span class="hljs-keyword">for</span>()&#123;<br>            <span class="hljs-keyword">for</span>()&#123;<br>                ...<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>思路二：</p>
+<ul>
+<li>迭代：<ol>
+<li>从候选子集选择一个</li>
+<li>跑一遍后评价</li>
+<li>根据评价产生下一个子集</li>
+<li>直到无法找到更好的候选子集</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>子集搜索：</p>
+<blockquote>
+<p>最初怎么确定包含所有信息的初始子集？整体思路是贪心：贪心策略是：遇到一个决策一个</p>
+</blockquote>
+<ol>
+<li><p>前向搜索：</p>
+<p>从候选子集中依次选择有用的</p>
+</li>
+<li><p>后向搜索：</p>
+<p>从候选子集中依次淘汰没用的</p>
+</li>
+<li><p>双向搜索：</p>
+<p>贪心策略强化：选有用的同时删掉没用的 &#x2F; 冗余的</p>
+</li>
+</ol>
+<p>问题：</p>
+<ul>
+<li>贪心策略未必有效：有可能导致忽略最优选择</li>
+</ul>
+</li>
+<li><p>子集评价：</p>
+<blockquote>
+<p>问题描述：如何评价选择某个特征 &#x2F; 子集的效果？</p>
+<blockquote>
+<p>通过信息增益</p>
+</blockquote>
+</blockquote>
+<p>每个特征都将原本的样本进行分类，分类好坏就是信息熵的大小，就是这个特征和实际结果相关性强不强；</p>
+<p>信息增益越大，意味着特征子集包含的有助于分类的信息越多</p>
+</li>
+<li><p>特征选择：</p>
+<p>于是：特征选择就是搜索机制+评价机制</p>
+<p>例如：前向搜索 + 信息熵 &#x3D; 决策树……</p>
+</li>
+<li><p>特征选择方法：</p>
+<ol>
+<li>过滤式 Filter</li>
+<li>包裹式 Wrapper</li>
+<li>嵌入式 Embedded</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><blockquote>
+<p>思想：由于或许大量带有标签的数据是比较困难的，但获取大量未标签的数据是比较轻松的，于是能否利用带有标签的部分数据进行监督学习，主要利用现成的分类结果；之后对次模型使用无监督学习训练未标签数据</p>
+</blockquote>
+<p>针对 带标签样本远少于不带标签样本</p>
+<p>对未标签样本的一些假设：</p>
+<ol>
+<li><p>平滑性假设：</p>
+<p>假设相似的 &#x2F; 邻近的样本具有相似的标签</p>
+</li>
+<li><p>流形假设：</p>
+<p>假设高维数据可能在一个低维的流形上分布，在流形上相邻的点可能有相似的标签</p>
+</li>
+<li><p>聚类假设：</p>
+<p>假设未标记数据可能属于一些潜在的聚类结构</p>
+</li>
+</ol>
+<p>分类 【根据对未标记样本】：</p>
+<ul>
+<li><p>主动学习</p>
+<p>将未标记样本查询标记后，更改为标记数据</p>
+</li>
+<li><p>半监督学习</p>
+<ul>
+<li><p>纯半监督学习</p>
+<p>标记的和未标记的样本全都用来训练模型，测试的样本另外找</p>
+</li>
+<li><p>直推学习</p>
+<p>用标记的样本来训练模型，未标记的同样参与训练，同时作为测试样本</p>
+</li>
+</ul>
+</li>
+<li><p>半监督学习算法：</p>
+<ol>
+<li><h4 id="自训练："><a href="#自训练：" class="headerlink" title="自训练："></a>自训练：</h4><blockquote>
+<p>简单的增量算法：</p>
+<p>最初用带标记的数据构建分类器，然后预测未标记数据，通过判断结果的可信程度决定是否将此样本加入到训练集中，优化训练模型</p>
+<blockquote>
+<p>增强训练</p>
+</blockquote>
+<blockquote>
+<p>包裹式算法：算法本身性能影响特征选择或者训练样本</p>
+</blockquote>
+</blockquote>
+<h3 id="生成式模型："><a href="#生成式模型：" class="headerlink" title="生成式模型："></a>生成式模型：</h3><blockquote>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>机器学习学习笔记</div>
+      <div>http://example.com/2025/04/20/python机器学习/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

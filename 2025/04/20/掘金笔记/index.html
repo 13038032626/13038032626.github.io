@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Arthas Java监控诊断产品  场景的弊端  客户线上问题，应该如何复现，让客户再点一下吗？ 异常被吃掉，手足无措，看是哪个家伙写的，竟然是自己！ 排查别人线上的 bug，不仅代码还没看懂，还没一行日志，捏了一把汗！ 预发 debug，稍微时间长点，群里就怨声载道！ 加日志重新部署，半个小时就没了，问题还没有找到，头顶的灯却早已照亮了整层楼…… 线上机器不能 debug，也不能开 debu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="掘金 &amp; bilibili学习笔记">
+<meta property="og:url" content="http://example.com/2025/04/20/%E6%8E%98%E9%87%91%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Arthas Java监控诊断产品  场景的弊端  客户线上问题，应该如何复现，让客户再点一下吗？ 异常被吃掉，手足无措，看是哪个家伙写的，竟然是自己！ 排查别人线上的 bug，不仅代码还没看懂，还没一行日志，捏了一把汗！ 预发 debug，稍微时间长点，群里就怨声载道！ 加日志重新部署，半个小时就没了，问题还没有找到，头顶的灯却早已照亮了整层楼…… 线上机器不能 debug，也不能开 debu">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/xuanwo.jpg">
+<meta property="article:published_time" content="2025-04-20T06:03:37.329Z">
+<meta property="article:modified_time" content="2025-04-20T06:08:53.530Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/xuanwo.jpg">
+  
+  
+  
+  <title>掘金 &amp; bilibili学习笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>songlin&#39;s Room</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/reading/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>reading</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/java/" target="_self">
+                <i class="iconfont icon-code"></i>
+                <span>java</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/movie/" target="_self">
+                <i class="iconfont icon-image"></i>
+                <span>movie</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/wofo-far.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="掘金 &amp; bilibili学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">掘金 &amp; bilibili学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <ol>
+<li><h1 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h1><blockquote>
+<p>Java监控诊断产品</p>
+</blockquote>
+<p>场景的弊端</p>
+<blockquote>
+<p>客户线上问题，应该如何复现，让客户再点一下吗？</p>
+<p>异常被吃掉，手足无措，看是哪个家伙写的，竟然是自己！</p>
+<p>排查别人线上的 bug，不仅代码还没看懂，还没一行日志，捏了一把汗！</p>
+<p>预发 debug，稍微时间长点，群里就怨声载道！</p>
+<p>加日志重新部署，半个小时就没了，问题还没有找到，头顶的灯却早已照亮了整层楼……</p>
+<p>线上机器不能 debug，也不能开 debug 端口，重新部署会不会破坏现场呢?</p>
+<p>怀疑入参有问题，怀疑合并代码有问题，怀疑没有部署成功，全是问号……</p>
+<p>一个问题排查一天，被 Diss 排查问题慢……</p>
+</blockquote>
+<p>使用的案例：</p>
+<ol>
+<li><p>排查CPU起飞的问题</p>
+<ol>
+<li><p>使用thread查看所有线程信息，同时会列出每个线程的CPU使用率</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/12/1716d1924e177a14~tplv-t2oaga2asx-zoom-in-crop-mark:1512:0:0:0.awebp" srcset="/img/loading.gif" lazyload alt="img"></p>
+</li>
+<li><p>使用命令thread 12 查看12号线程信息，可以看到该线程中使用CPU较高的方法和行数</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/12/1716d19b4599f795~tplv-t2oaga2asx-zoom-in-crop-mark:1512:0:0:0.awebp" srcset="/img/loading.gif" lazyload alt="img"></p>
+</li>
+</ol>
+</li>
+<li><p>dashboard 查看系统实时数据面板</p>
+</li>
+<li><p>watch com.Arthas addHashSet ‘{params[0],returnObj}’ 查看入参和出参…</p>
+</li>
+</ol>
+</li>
+<li><h1 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h1><blockquote>
+<p>分布式系统中的并发问题</p>
+</blockquote>
+<ul>
+<li><p>竟态条件</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a42e2b43992148e8a4a5b8cc4ce355fa~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=2554&h=862&s=365188&e=png&b=fefbfb" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>指多个进程 &#x2F; 线程在执行顺序上产生了不确定性，从而导致程序的行为不可预测</p>
+<p>分布式系统中，多个节点同时访问共享资源，需要一个合理的同步机制</p>
+</li>
+<li><p>数据不一致</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6ade93521134caeae33e25557680c58~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=2916&h=828&s=341313&e=png&b=ffffff" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>分布式系统中由于数据的拆分和复制，数据的一致性会受到影响</p>
+<blockquote>
+<p> CAP 定理指出，在分布式系统中，一致性（Consistency）、可用性（Availability）、分区容错性（Partition tolerance）这三个属性不可能完全同时满足。因此，在设计分布式系统时，需要在一致性、可用性和分区容错性之间做出权衡，这可能导致数据不一致的情况发生。</p>
+</blockquote>
+</li>
+<li><p>死锁</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c68904707b8b4649ade782d396042d30~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=1370&h=1626&s=716615&e=png&b=ffffff" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>分布式系统中，多个节点可能同时竞争资源，类似多个进程竞争同一主机的资源；需要一个良好的协调机制</p>
+</li>
+</ul>
+<blockquote>
+<p>基于数据库的分布式锁</p>
+<blockquote>
+<p>本质是在分布式集群外，抽出一台服务器负责管理锁，在此将管理的模式匹配到数据库中</p>
+</blockquote>
+</blockquote>
+<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实现相对简单，不需要引入额外的组件。</td>
+<td>性能相对较差，数据库的IO开销较大。</td>
+</tr>
+<tr>
+<td>可以使用数据库的事务机制确保数据的一致性。</td>
+<td>容易产生死锁，需要谨慎设计。</td>
+</tr>
+<tr>
+<td></td>
+<td>不适用于高并发场景，可能成为系统的瓶颈。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>基于缓存的分布式锁</p>
+<blockquote>
+<p>也是抽出一台服务器负责管理锁，在此将管理模式匹配到Redis</p>
+</blockquote>
+</blockquote>
+<p>命令：</p>
+<ul>
+<li><p>SETNX（set if not exists） &#x2F; 确定是没办法同时设置expire time，需要在下一个命令中设置 expire</p>
+</li>
+<li><p>set key value ex 10 nx &#x2F; 更原子性</p>
+</li>
+</ul>
+<h4 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h4><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>性能较高，缓存系统通常在内存中操作，IO开销较小。</td>
+<td>可能存在缓存失效和节点崩溃等问题，需要额外处理。</td>
+</tr>
+<tr>
+<td>可以使用缓存的原子操作确保获取锁的安全性。</td>
+<td>需要依赖外部缓存系统，引入了系统的复杂性。</td>
+</tr>
+<tr>
+<td>适用于高并发场景，不易成为系统的瓶颈。</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>其他注意点：</p>
+<ol>
+<li><p>可重入 —— &gt; value中还要存一个count</p>
+</li>
+<li><p>锁粒度的选择 —— &gt; </p>
+</li>
+<li><p>超时时间的选择</p>
+</li>
+<li><p>解决redis单点问题 —— &gt; RedLock</p>
+<blockquote>
+<p> 思想：在多个Redis实例上创建相同的锁，使用SETNX获取锁。只有当大部分获取到锁才认为成功</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><h1 id="java新版本有价值的更新"><a href="#java新版本有价值的更新" class="headerlink" title="java新版本有价值的更新"></a>java新版本有价值的更新</h1><ol>
+<li><p>Local Variable Type Inference（局部变量类型推断） | JDK 10</p>
+<blockquote>
+<p>编码时不指定类型的情况下，编译时由值的类型推断出来</p>
+</blockquote>
+</li>
+<li><p>switch语法糖增强 | JDK14</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-keyword">switch</span>(flag) &#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>,<span class="hljs-number">4</span> -&gt; System.out.println(<span class="hljs-string">&quot;hello&quot;</span>);<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span> -&gt; System.out.println(<span class="hljs-string">&quot;world&quot;</span>);<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">3</span> -&gt; System.out.println(<span class="hljs-string">&quot;hello world&quot;</span>);<br>    <span class="hljs-keyword">default</span> -&gt; System.out.println(<span class="hljs-string">&quot;haha&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>有点像lambda &#x2F; js中箭头表达式 ；整体而言更像面向函数编程的思想</p>
+</blockquote>
+</li>
+<li><p>Text blocks 文本块 | JDK 15</p>
+<blockquote>
+<p>传统文本换行需要 &#x2F;n，新版本只需关注文本块中的内容</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20240506111919888.png" srcset="/img/loading.gif" lazyload alt="image-20240506111919888"></p>
+</li>
+<li><p>record关键字</p>
+<blockquote>
+<p>替换Lombok</p>
+<p>但是很多类需要builder模式，二者并不兼容</p>
+</blockquote>
+</li>
+<li><p>Sealed class 封闭类 | java 17</p>
+<blockquote>
+<p>允许将一个类 或 接口 的集成 &#x2F; 实现 限制在一组有限的子类中</p>
+<p>例如：某个UserService接口只允许 UserServiceImpl实现，就需要用sealed将这个类表述为封闭类，同时使用permits关键字来定制可继承和实现的类有哪些</p>
+<p>实现 &#x2F; 继承的类需要声明为final或者non-sealed</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">sealed</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserService</span> <span class="hljs-keyword">permits</span> UserServiceImpl, UserServiceFinalImpl&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>NullPointerException更多异常信息，能够更准确的定位</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06b26d4878424867bb37999204357a0d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+</li>
+</ol>
+</li>
+<li><h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>架构</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2db0016998d447f1bf0c657454180238~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=1986&h=1182&s=483033&e=png&b=f4f4f4" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>特点：</p>
+<ol>
+<li><p>事件驱动 &amp; 异步非阻塞</p>
+<blockquote>
+<p>事件驱动：</p>
+<ul>
+<li><p>传统IO模型中，痛点在于用户线程往往需要等待缓冲区数据准备（无论是等文件系统还是网卡），导致一个线程只能处理一个请求</p>
+</li>
+<li><p>事件驱动意味着<strong>主动权倒置</strong>：当缓冲区的数据准备好后再占用用户线程</p>
+<blockquote>
+<p>具体实现方式：</p>
+<ol>
+<li><p>异步IO —— AIO</p>
+<ul>
+<li>当某个IO事件完毕后给用户线程发送一个事件通知</li>
+</ul>
+</li>
+<li><p>IO多路复用</p>
+<ul>
+<li><p>一个线程检查多个连接的数据是否准备完毕，某个请求的数据完毕后，再通知用户线程执行后续代码【本质实现了异步IO，但并不是由文件系统 &#x2F; 网卡发起通知，而是委托轮询的线程】</p>
+<blockquote>
+<p>无需异步，无需轮询，无需长连接，而是压榨一个线程</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p><code>事件驱动机制就是指当有读/写/连接事件就绪时 再去做读/写/接受连接这些事情，而不是一直在那里傻傻的等，也正应了他的名词： 【事件驱动！】，基于事件驱动思想设计的多路复用I/O（如select/poll，epoll），相对于传统I/O模型，达到了异步非阻塞的效果！</code></p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>Nginx使用IO多路复用</p>
+</blockquote>
+</li>
+<li><p>类似的Reactor模型</p>
+</li>
+<li><p>Proxy Cache（服务器缓存）</p>
+<blockquote>
+<p>Nginx作为反向代理的第一关，可能会将服务器的响应数据存储在本地磁盘</p>
+<p>在缓存数据时，还运用零拷贝 &amp; mmap技术使得copy性能大幅提升</p>
+</blockquote>
+</li>
+</ol>
+<p>模块：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9abd5af68a4f4581b34e14af6810e3a7~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=1306&h=928&s=154272&e=png&b=f8f6f2" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>“高内聚 低耦合代表”</p>
+</blockquote>
+<p>常见应用场景：</p>
+<ul>
+<li><p>反向代理</p>
+</li>
+<li><p>负载均衡</p>
+</li>
+<li><p>缓存</p>
+</li>
+<li><p>限流</p>
+<blockquote>
+<p>两种限流方式：</p>
+<ul>
+<li><p>按并发连接数量限流</p>
+<p>每个IP最大支持12个连接</p>
+</li>
+<li><p>按请求速率限流（QPS）</p>
+<p>可能限制每秒同一ip最多一秒访问5次</p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p>黑&#x2F;白名单</p>
+</li>
+<li><p>静态资源服务</p>
+</li>
+<li><p>动静分离</p>
+</li>
+<li><p>防盗链</p>
+</li>
+<li><p>跨域</p>
+</li>
+<li><p>高可用</p>
+</li>
+<li><p>…….</p>
+</li>
+</ul>
+<p>核心功能参数调整全都内聚在nginx.conf中</p>
+<blockquote>
+<p>文件解读：</p>
+<ul>
+<li><p>nginx.conf由一个一个指令块组成，用{}界定指令块</p>
+</li>
+<li><p>分为：全局块，events块，http块，location块，upstream块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">全局模块<br>event模块<br>http模块<br>    upstream模块<br><br>    server模块<br>        location块<br>        location块<br>        ....<br>    server模块<br>        location块<br>        location块<br>        ...<br>    .... <br></code></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<p>压缩：</p>
+<blockquote>
+<p>目前大多数网站都在使用gzip传输HTML、CSS、JS等资源文件</p>
+</blockquote>
+</li>
+<li><h3 id="比特币"><a href="#比特币" class="headerlink" title="比特币"></a>比特币</h3><blockquote>
+<ol>
+<li><p>2008年11月1日，中本聪《白皮书》– 比特币，一种点对点的电子现金系统</p>
+</li>
+<li><p>去中心化的电子记账系统</p>
+<blockquote>
+<p>传统记账系统由银行中心负责记账，区块链则将账本分布式的、公开的存储在多个节点上</p>
+</blockquote>
+</li>
+<li><p>为什么要记账？记账有奖励</p>
+<blockquote>
+<p>比特币</p>
+<ul>
+<li><p>中本聪在08年提出一种机制</p>
+<p>每十分钟将账目打包成一个区块，第一个四年每个打包的奖励是4个比特币，之后每四年奖励减半 | 其中，比特币的发行是由机制负责的，并没有中心机构</p>
+<blockquote>
+<p>如此一来，比特币总量大约2100万个，时间越往后奖励越少，表示比特币越珍贵</p>
+</blockquote>
+</li>
+<li><p>奖励谁？ &#x2F; 以谁为准？</p>
+<blockquote>
+<p>工作量证明POW —— 挖矿</p>
+<p>原理：</p>
+<ol>
+<li><p>每个记账用户在准备将本地账本封装成区块前，手里有一个大字符串，内容是：前块的头部 + 本地账单 + 时间戳 + 个人信息 + 随机数</p>
+</li>
+<li><p>随机数由记账用户盲猜，目的是使得整个字符串的二次哈希结果满足要求</p>
+<ul>
+<li><p>要求：区块链机制会要求最后的哈希结果只有前n位是0才算是正确答案，而n的取值（difficulty）由机制决定，当前挖矿的算力越高，n越大（计算越难），算力越低，n越小（计算越简单）；目的是为了保证可以十分钟左右打包一个区块</p>
+</li>
+<li><p>举例而言：</p>
+<p>假如共有10000台矿机，每台的算力是14T&#x2F;s（等于1.4 × 10e13次&#x2F;s），十分钟内能够计算8 × 10e19次，约等于2e66；所以为了在十分钟内大概有一次计算能够命中，n可取66，即要求二次哈希的前66位必须为0</p>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>Web3</p>
+<blockquote>
+<ol>
+<li><p>Web1：【只读】</p>
+<p>Web内容是静态的，信息由机构聚合，例如YAHOO，搜狐，新浪</p>
+</li>
+<li><p>Web2：【可读、可写】</p>
+<p>Web2的内容由用户动态生成，数据存储在中心化的服务器中</p>
+</li>
+<li><p>Web3：【可拥有】</p>
+<p>使用区块链技术、智能合约、去中心化、不可篡改…</p>
+</li>
+</ol>
+</blockquote>
+<p>学科要点：</p>
+<ol>
+<li><p>密码学：密码学是区块链底层安全机制的保障</p>
+</li>
+<li><p>比特币： </p>
+</li>
+<li><p>以太坊：去中心化的全球计算机（区块链技术不仅用来记账，还能用于应用）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2024-05-25-21-15-41-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>智能合约：以太坊上运行的程序</p>
+<p>开发者可以在以太坊上使用Solidity语言创建运行于EVM上的应用程序（智能合约）</p>
+<p>特点：</p>
+<ul>
+<li><p>去中心化</p>
+</li>
+<li><p>代码即法律 | 无需第三方</p>
+</li>
+<li><p>无需准入</p>
+</li>
+<li><p>可组合</p>
+</li>
+</ul>
+</li>
+<li><p>智能合约安全</p>
+</li>
+<li><p>Web3应用——加密钱包</p>
+<blockquote>
+<p>在区块链上，通过加密钱包管理资产，由于没有中心化机构保障资产安全，只通过个人私钥 &#x2F; 助记词保障资产归属</p>
+<blockquote>
+<p>谁拥有私钥，谁就拥有资产</p>
+</blockquote>
+<p>而公钥就是链上的地址 &#x2F; 用户名</p>
+</blockquote>
+<p>Web3应用——DEFI</p>
+<blockquote>
+<p>去中心化金融：建立在区块链、智能合约平台上的金融类产品工具</p>
+<p>和传统金融相比，智能合约代替中心化银行</p>
+</blockquote>
+<p>Web3应用——NFT</p>
+<p>Web3应用——DAO</p>
+<blockquote>
+<p>去中心化自治组织：通过智能合约报纸运转的组织，与公司制相对</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p>密码学基础</p>
+<ol>
+<li><p>科尔霍夫原则</p>
+<blockquote>
+<p>对于一个密码学系统，应当仅有密钥是保密的，其余算法和一切参数都应该是公开的</p>
+<p>保密并不意味着数学上不可破解，而只需要现实中不可破解即可</p>
+</blockquote>
+</li>
+<li><p>古典加密算法（属于堆成加密）【凯撒密码、维吉尼亚密码】</p>
+</li>
+<li><p>现代对称加密算法</p>
+<p>缺点：双方必须事先共享密钥</p>
+</li>
+<li><p>非对称加密算法</p>
+</li>
+</ol>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>掘金 &amp; bilibili学习笔记</div>
+      <div>http://example.com/2025/04/20/掘金笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

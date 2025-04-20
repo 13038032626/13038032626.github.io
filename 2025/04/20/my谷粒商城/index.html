@@ -1,0 +1,2604 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="软件开发流程 需求分析——写出需求规格说明书（仅仅说明需求）  设计——产品文档，UI界面设计，概要设计，详细设计，数据库设计  开发！——写项目代码+单元测试  测试——测开人员编写测试用例，写测试报告  上线运维——运维人员配置软件运行环境   项目组角色分工  软件环境 本地环境：自己电脑上的运行环境  开发环境：开发人员在开发阶段使用的环境，一般外部用户无法访问  测试环境：专门给测试人员">
+<meta property="og:type" content="article">
+<meta property="og:title" content="guli-mail学习笔记">
+<meta property="og:url" content="http://example.com/2025/04/20/my%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="软件开发流程 需求分析——写出需求规格说明书（仅仅说明需求）  设计——产品文档，UI界面设计，概要设计，详细设计，数据库设计  开发！——写项目代码+单元测试  测试——测开人员编写测试用例，写测试报告  上线运维——运维人员配置软件运行环境   项目组角色分工  软件环境 本地环境：自己电脑上的运行环境  开发环境：开发人员在开发阶段使用的环境，一般外部用户无法访问  测试环境：专门给测试人员">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/xuanwo.jpg">
+<meta property="article:published_time" content="2025-04-20T06:02:31.323Z">
+<meta property="article:modified_time" content="2025-04-20T06:06:41.618Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/xuanwo.jpg">
+  
+  
+  
+  <title>guli-mail学习笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>songlin&#39;s Room</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/reading/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>reading</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/java/" target="_self">
+                <i class="iconfont icon-code"></i>
+                <span>java</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/movie/" target="_self">
+                <i class="iconfont icon-image"></i>
+                <span>movie</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/wofo-far.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="guli-mail学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">guli-mail学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="软件开发流程"><a href="#软件开发流程" class="headerlink" title="软件开发流程"></a>软件开发流程</h2><ol>
+<li><p>需求分析——写出需求规格说明书（仅仅说明需求）</p>
+</li>
+<li><p>设计——产品文档，UI界面设计，概要设计，详细设计，数据库设计</p>
+</li>
+<li><p>开发！——写项目代码+单元测试</p>
+</li>
+<li><p>测试——测开人员编写测试用例，写测试报告</p>
+</li>
+<li><p>上线运维——运维人员配置软件运行环境</p>
+</li>
+</ol>
+<h2 id="项目组角色分工"><a href="#项目组角色分工" class="headerlink" title="项目组角色分工"></a>项目组角色分工</h2><img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-01-15-12-12-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="426">
+
+<h2 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h2><ol>
+<li><p>本地环境：自己电脑上的运行环境</p>
+</li>
+<li><p>开发环境：开发人员在开发阶段使用的环境，一般外部用户无法访问</p>
+</li>
+<li><p>测试环境：专门给测试人员使用的环境，用于项目测试（另一个服务器上运行其JDK，tomcat，MySQL…）</p>
+</li>
+<li><p>生产环境：即线上环境，提供对外服务的环境</p>
+</li>
+</ol>
+<h2 id="瑞吉外卖"><a href="#瑞吉外卖" class="headerlink" title="瑞吉外卖"></a>瑞吉外卖</h2><ul>
+<li><p>系统管理后台</p>
+<ul>
+<li>功能：分离管理，菜品管理，套餐管理，菜品口味管理，员工登录，员工退出，员工管理，订单管理</li>
+</ul>
+</li>
+<li><p>移动端</p>
+<ul>
+<li>功能：手机号登录，微信登录，地址管理，历史订单，菜品规格，购物车，下单，菜品浏览</li>
+</ul>
+</li>
+<li><p>角色分类</p>
+<ul>
+<li><p>后台系统管理员：用于后台全部操作权限</p>
+</li>
+<li><p>后台系统普通员工：登录后对菜品，套餐，订单进行管理</p>
+</li>
+<li><p>C端用户。</p>
+</li>
+</ul>
+</li>
+<li><p>技术选型：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-01-15-33-30-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>说明：</p>
+<ol>
+<li><p>Nginx：</p>
+<p>Nginx是一个用于提供静态资源(HTML,CSS,JS,图像…)的HTTP服务器。</p>
+<p>功能之一是代理前端请求，发送到后端。目的是提供负载均衡，缓存，SSL等功能。</p>
+<ul>
+<li>负载均衡的实现：Nginx在多个后台服务器之间分发请求。</li>
+</ul>
+<p>功能之一是高并发处理（特色）</p>
+</li>
+<li><p>Spring Session：</p>
+<p>Spring Session是Spring Framework的一个<strong>子项目</strong>。用于简化在<strong>分布式系统</strong>中管理用户会话的功能。</p>
+<p>Spring Session的提供了一种抽象的方式来管理用户会话——将会话数据存储在外部存储介质中（如数据库，Redis，Hazelcast等），为了使不同服务器上的应用实例能共享和访问同一用户的会话信息。</p>
+</li>
+<li><p>Swagger：</p>
+<p>Swagger是一个用于描述，设计，构建，管理，测试和文档化RESTful Web服务的工具集。是用来对前后端分离时中间API进行管理的。</p>
+</li>
+<li><p>Redis：</p>
+<p>Remote Dictionary Server 高性能键值存储数据库。</p>
+<p>Redis以键值对的形式存储数据，并支持<strong>多种数据结构</strong>，如字符串，哈希，列表，集合，有序集合…</p>
+<p>Redis主要用途：缓存、会话存储、消息队列、排行榜，实时数据分析，分布式锁，地理位置信息</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="谷粒商城"><a href="#谷粒商城" class="headerlink" title="谷粒商城"></a>谷粒商城</h2><ul>
+<li><p>技术选型</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-01-16-08-12-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="450">
+
+<ol>
+<li><p>基础篇</p>
+<ul>
+<li><p>后端基础环境</p>
+<p>Spring Boot + Spring Cloud + Docker</p>
+</li>
+<li><p>前端</p>
+<p>三件套+V3+Element-Plus</p>
+</li>
+<li><p>通过<strong>逆向工程</strong>方式构建项目</p>
+</li>
+</ul>
+</li>
+<li><p>架构篇</p>
+<ul>
+<li><p>Elasticsearch  弹性搜索</p>
+</li>
+<li><p>网关</p>
+</li>
+<li><p>远程调用</p>
+</li>
+<li><p>链路追踪</p>
+</li>
+<li><p>缓存</p>
+</li>
+<li><p>Session同步方案</p>
+</li>
+<li><p>全文检索</p>
+</li>
+<li><p>异步编排</p>
+</li>
+<li><p>线程池</p>
+</li>
+<li><p>压力测试与性能优化</p>
+</li>
+<li><p>调优</p>
+</li>
+<li><p>Redis</p>
+</li>
+<li><p>CI&#x2F;CD</p>
+</li>
+</ul>
+</li>
+<li><p>集群篇</p>
+<ul>
+<li><p>k8s集群</p>
+</li>
+<li><p>Devops</p>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>细说各个技术栈</p>
+<ol>
+<li><p>配置linux虚拟环境</p>
+<ol>
+<li><p>virtualBox是虚拟机</p>
+<p>允许在一台计算机上创建和运行虚拟机</p>
+<p><strong>虚拟机</strong>：模拟完整的计算环境，包括操作系统，应用程序等</p>
+</li>
+<li><p>vagrant是自动配置操作系统的代理软件</p>
+<p>是一个用于<strong>构建和维护虚拟化开发环境</strong>的工具</p>
+<p>用它可以加载某个操作系统的镜像，相当于直接配置好操作系统</p>
+<p><strong>镜像</strong>：Image：指一个预先配置好的操作系统或软件环境的副本。镜像包含了操作系统，应用程序，设置，配置，数据等，是一个虚拟机的完整快照。</p>
+</li>
+<li><p>CentOS是基于Linux的操作系统</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li><p><strong>Docker</strong> written by golang</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-02-15-23-31-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="223">
+
+<p>Docker用于将应用程序和其依赖打包成一个独立的、轻量级的<strong>容器</strong>，以便在任何环境中运行。</p>
+<p>如果打包有等级：Maven&lt;Tomcat&lt;Docker</p>
+<p>Maven只打包和管理依赖jar包</p>
+<p>Tomcat打包和管理到各种应用程序Servlet和JSP，但却是专门为Java Web程序设计的——即只能运行javaWeb应用。而且Tomcat的运行依赖本地JVM</p>
+<p>Docker容器目的就是实现应用程序的<strong>可移植性</strong>，<strong>环境隔离性</strong>。</p>
+<p>解决的问题——代码<strong>水土不服</strong>——由于开发&#x2F;测试&#x2F;生产环境不同导致代码运行结果不同。</p>
+<ul>
+<li><p>水土不服——软件跨环境迁移的问题</p>
+</li>
+<li><p>解决方法——打包水土——将程序和环境绑定，用一个容器进行管理——<strong>Docker</strong></p>
+</li>
+</ul>
+<p>另外：Docker容器化也是对内部程序的二次封装，统一原本每个应用程序不同的命令：例如mysql.serve start统一成docker run；mysqld统一成 docker exec…</p>
+</li>
+</ol>
+<h4 id="容器化与云原生："><a href="#容器化与云原生：" class="headerlink" title="容器化与云原生："></a>容器化与云原生：</h4><blockquote>
+<p>伏笔</p>
+</blockquote>
+<h4 id="虚拟化与容器化："><a href="#虚拟化与容器化：" class="headerlink" title="虚拟化与容器化："></a>虚拟化与容器化：</h4><blockquote>
+<p>为什么需要虚拟化 &#x2F; 容器化？</p>
+<ul>
+<li><p>当企业的三个应用程序功耗不大，可以考虑运行在单台物理机上时；如果当三个应用程序的底层依赖的版本有冲突（依赖没有隔离）例如：一个是java 8，一个是Java 17，就会导致物理机底层依赖比较难以管理 ； 更严重的情况是：比Java、MySQL等更加底层的依赖配置起冲突，例如</p>
+<blockquote>
+<p>如果是更底层的运行库&#x2F;库版本冲突，例如某个应用需要glibc，另一个应用需要uclibc，这就无解了</p>
+</blockquote>
+</li>
+<li><p>所以虚拟化技术并不是单纯的开一个新的操作系统，而是说开一个原本操作系统无法提供的环境</p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<ol start="3">
+<li><p>Spring Cloud</p>
+<p>Spring Cloud是一个用于<strong>构建分布式系统</strong>和<strong>微服务架构</strong>的框架。</p>
+<p>提供了一组工具和组件，用于<strong>简化</strong>分布式系统开发的复杂性和<strong>解决</strong>微服务架构中一些常见问题。</p>
+<p>Spring Cloud下有许多子项目，每个子项目都专注于不同的分布式系统和微服务开发问题。LIsted below</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-01-16-35-31-image.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+</li>
+<li><p>ElasticSearch：</p>
+<p>分布式搜索和分析引擎，能够快速地搜索大量数据，并支持实时查询和分析。用于实现全文搜索，日志分析，数据可视化等功能。</p>
+<hr>
+</li>
+<li><p>Sentinel：</p>
+<p>是一个分布式系统的流量控制和熔断器<strong>库</strong>。旨在提供一种简单，文档，可到的流量控制手段，以保护微服务架构中的应用程序免受流量过载、雪崩效应和故障的影响。</p>
+<hr>
+</li>
+<li><p>Nacos：</p>
+<p>是一个开源系统，支持动态服务发现，配置管理和命名空间管理，服务员数据等功能。总体而言是用于<strong>构建和管理</strong> <strong>微服务架构</strong> 和 <strong>分布式系统</strong> 的平台。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-01-17-14-43-image.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+</li>
+<li><p>zipkin：</p>
+<p>是一个分布式系统的追踪系统。用于收集、存储、查看分布式系统中各个服务之间的调用链路和性能数据。</p>
+<p><code>在微服务架构中，一个业务请求往往会经过多个不同的服务进行处理。每个服务可能又依赖其他的服务，形成一个复杂的调用链路。当系统中出现问题或性能瓶颈时，追踪调用链路和性能数据对于定位问题和优化性能非常重要。</code></p>
+</li>
+</ol>
+<hr>
+<ul>
+<li><p>概念：</p>
+<ol>
+<li><p>微服务：</p>
+<p>是一种架构风格：拒绝从前的大型单体应用，因为在大型应用中一个小项目不可用会影响全局，一个解耦的思想就是在一堆提供相同服务的项目服务中选择能用的即可——这就要求大型项目分离成微服务。微服务架构风格将大型单体应用根据其业务边界进行服务微化拆分，各个服务独立部署运行。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-01-17-41-45-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>分层所面临的问题就是<strong>需要传递</strong>——推荐http。</p>
+<hr>
+</li>
+<li><p>集群 &amp; 分布式 &amp; 节点：</p>
+<p>集群：<strong>物理形态</strong>——只要是一堆机器，就可以叫集群，无论他们是不是干同一件事。</p>
+<p>集群往往是解决一台机器容易宕机、数据备份等问题。</p>
+<p>分布式：<strong>工作方式</strong>——将不同的业务分布在不同的地方，其中每个业务根据需要配集群。</p>
+<p>节点：分布式中每个业务的服务器</p>
+<hr>
+</li>
+<li><p>远程调用  RPC</p>
+<p>在分布式系统中，各个服务可能处于不同主机，但服务之间需要相互调用&#x2F;传递信息。称之为远程调用。</p>
+<p>Spring Cloud 使用HTTP + JSON的方式完成远程调用。</p>
+<p>项目中 不同微服务之间通过OpenFeign，主微服务向目的微服务发送http请求，完成远程的方法调用</p>
+<hr>
+</li>
+<li><p>负载均衡</p>
+<p>根据不同的负载均衡算法，将对一个服务的调用平衡到集群的各个服务器上。为了使每一个服务器都不要太忙或者太闲。</p>
+<p>常见算法：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-01-17-59-56-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-01-18-00-43-image.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+</li>
+<li><p>服务注册&#x2F;发现 &amp; 注册中心</p>
+<p>一个服务内的集群是多台服务器，管理这些服务器哪台上线了，哪台下线了的一个应用就是注册&#x2F;发现中心。对B服务的访问需要经过对B的注册&#x2F;发现中心，找到被发现可用的一个服务器。</p>
+<hr>
+</li>
+<li><p>配置中心</p>
+<p>一个服务内的集群是多台服务器，统一管理这些服务器的配置——配置中心。</p>
+<hr>
+</li>
+<li><p>服务熔断 &amp; 服务降级</p>
+<p>由于微服务之间是用http协议相互调度的，这就不可避免在传输中出现错误。</p>
+<p>如果服务A对B的调度没有及时响应，而对A的调度一直在进行，导致A的服务器很容易压力过大导致宕机</p>
+<ul>
+<li><p>服务熔断：</p>
+<p>如果被调度的服务经常失败（达到某一阈值），开启断路保护机制——后来的请求不再去调度这个服务，而是由本地直接返回默认的数据。</p>
+<p><small>如果只针对超时的请求，该怎么区分是因为传输中不可抗力导致还是被调度端异常导致——最终还是需要识别出多次调度失败的服务</small></p>
+</li>
+<li><p>服务降级：</p>
+<p>在运维期间，当系统处于高峰期时资源紧张。可以让非核心业务<strong>降级运行</strong>——即某些不处理&#x2F;简单处理（抛异常，前端缓存，返回Null，调用Mock数据（模拟数据），调用Fallback处理逻辑（备用方案））</p>
+</li>
+</ul>
+<hr>
+</li>
+<li><p>API网关：API Gateway</p>
+<p>（过滤器&#x2F;拦截器&#x2F;守卫）</p>
+<p>目的是抽象出微服务中都需要的某些功能，某些<strong>需要在客户端请求到达服务前进行</strong>的功能——过滤&#x2F;认证，重定向，负载均衡…</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><ul>
+<li>Docker架构</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-02-15-31-35-image.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>镜像（Image）：相当于一个root文件系统（从Docker创建的内部的系统就源于此文件）</p>
+<p>每个image包含一个应用程序所需的所有代码、库、依赖项和配置。将其打包成一个可运行的、只读的模板。</p>
+</li>
+<li><p>容器（Container）：容器就是镜像的实例化对象。<strong>镜像是静态的定义，容器是镜像运行时的实体</strong>。容器可以被创建、启动、停止、删除、暂停…</p>
+</li>
+<li><p>仓库（Respository）：代码控制中心，用来保存镜像（Docker hub外国中心仓库，private registry私服）</p>
+</li>
+</ol>
+<h3 id="Docker-命令"><a href="#Docker-命令" class="headerlink" title="Docker 命令"></a>Docker 命令</h3><ol>
+<li><p>关于Docker daemon守护线程的</p>
+<ol>
+<li><p>启动dockers服务</p>
+<p>systemctl start docker</p>
+</li>
+<li><p>停止docker服务</p>
+<p>systemctl stop docker</p>
+</li>
+<li><p>重启docker服务</p>
+<p>sysytemctl restart docker</p>
+</li>
+<li><p>查看docker服务状态</p>
+<p>systemctl status docker</p>
+</li>
+<li><p>设置开机自启docker</p>
+<p>systemctl enable docker</p>
+</li>
+</ol>
+</li>
+<li><p>关于Docker镜像的（image文件&#x2F;各个软件）</p>
+<ol>
+<li><p>查看本地所有镜像</p>
+<p>docker images</p>
+<p>docker images -q  #查看所有镜像的id</p>
+</li>
+<li><p>搜索镜像</p>
+<p>docker search 镜像名称</p>
+</li>
+<li><p>拉取镜像：从仓库下来镜像到本地，镜像名称格式：name:版本</p>
+<p>docker pull 镜像名称</p>
+</li>
+<li><p>删除镜像：删除本地镜像</p>
+<p>docker rmi 镜像id  #删除指定本地镜像（remove image）</p>
+<p>docker rmi `docker images -q`  #删除所有本地镜像 （将查看id结果作为参数）</p>
+</li>
+</ol>
+</li>
+<li><p>关于Docker容器的</p>
+<ol>
+<li><p>查看容器</p>
+<p>docker ps  #查看正在运行的容器</p>
+<p>docker ps -a  #查看所有容器</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-02-16-32-40-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>创建并启动容器</p>
+<p>docker run 参数 创建并启动容器</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-02-16-32-58-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>参数说明：</p>
+<ul>
+<li><p>-i  保存容器运行。</p>
+</li>
+<li><p>-t  为容器重新分配一个伪输入终端。</p>
+</li>
+<li><p>-d  以守护（后台）模式运行容器。创建一个容器在后台运行</p>
+<ul>
+<li><p>再进入：docker exec -it name &#x2F;bin&#x2F;bash</p>
+</li>
+<li><p>&#x2F;bin&#x2F;bash相当于进入容器的初始化操作（必要的）</p>
+</li>
+</ul>
+</li>
+<li><p>通常：-it：创建交互式容器  -id：创建守护式容器</p>
+<p>用-it就直接进入到容器，用id则还在上一层。</p>
+</li>
+<li><p>–name：为创建的容器命名</p>
+</li>
+</ul>
+</li>
+<li><p>进入容器</p>
+<p>docker exec 参数  #退出容器，容器不会关闭</p>
+</li>
+<li><p>停止容器</p>
+<p>docker stop 容器名称（id）（stop后状态是exited）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-02-16-46-24-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>启动容器</p>
+<p>docker start 容器名称（id）</p>
+</li>
+<li><p>删除容器</p>
+<p>docker rm 容器名称（id）</p>
+</li>
+<li><p>查看容器信息</p>
+<p>docker inspect 容器名称（id）</p>
+</li>
+<li><p>容器自启动（随着虚拟机启动）</p>
+<p>docker自启动已经配置过了，就是随着虚拟机自启动</p>
+<p>一般过程是：虚拟机启动&#x2F;docker启动，用户连接vagrant，用户切换到root</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-21-55-38-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h3><img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-02-16-58-40-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="411">
+
+<ul>
+<li><p>解决的问题：</p>
+<ol>
+<li><p>Docker 中的Container容器删除后，在容器中的内容也会随之销毁（需要备份）</p>
+</li>
+<li><p>Docker 中的Container容器和外部机器无法直接交换文件（没配虚拟ip时）（需要Docker容器中介）</p>
+</li>
+<li><p>Docker 容器中的Container容器怎么进行数据交互（或许需要中介）</p>
+</li>
+</ol>
+</li>
+<li><p>数据卷</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-02-17-01-57-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="397">
+
+<ul>
+<li><p>数据卷是宿主机的一个目录或文件</p>
+</li>
+<li><p>当容器目录和数据卷目录绑定后，对方的修改会立刻同步</p>
+</li>
+<li><p>一个数据卷可以被多个容器同时<strong>挂载</strong>，一个容器也可以挂载多个数据卷</p>
+<p>挂载：往往是说容器内的文件挂载到外部文件，从而通过外部读写内部。</p>
+<p>挂载的常见对象：配置、日志、数据文件</p>
+</li>
+</ul>
+</li>
+<li><p>配置数据卷：（文件映射）</p>
+<p>语法：</p>
+<p>在创建容器时，使用 -v 参数 设置数据卷</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-02-17-13-44-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>其中，前面是在外层目录中建立的目录</p>
+<p>后面是在Container容器中建立的目录</p>
+<p>Attention：</p>
+<ol>
+<li><p>目录必须是绝对路径</p>
+</li>
+<li><p>如果目录不存在，会自动创建</p>
+</li>
+<li><p>一个容器可以挂载多个数据卷</p>
+</li>
+<li><p>基本Linux语法（文件）：</p>
+<ol>
+<li><p>touch itheima.txt &#x3D;&#x3D;&gt; 创建文件</p>
+</li>
+<li><p>echo i love mazda &gt; itheima.txt &#x3D;&#x3D;&gt; 向此文件中写入数据</p>
+</li>
+<li><p>cat itheima.txt &#x3D;&#x3D;&gt; 读取此文件</p>
+</li>
+</ol>
+</li>
+<li><p>基本Linux文件层次：</p>
+<p><strong>[root@localhost &#x2F;] 斜杠&#x2F;表示根目录</strong>：根目录是整个文件系统的起点，所有目录和文件的根节点。根目录下一级是许多重要的大目录：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-02-19-17-18-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>而在home下就拥有每个用户的一个独立的子目录，用于存储用户个人文件和配置信息。</p>
+<p>root似乎没有在home下的文件夹</p>
+<p><strong>[root@localhost ~]波纹~表示用户主目录</strong></p>
+</li>
+</ol>
+</li>
+<li><p>数据卷容器</p>
+<p>主要思想：创建一个容器，这个容器和一个数据卷进行了挂载。然后又创建了许多容器，和这个数据卷容器进行了绑定，实际效果就是后面的每个容器和数据卷进行了绑定。</p>
+<p>有点像定义了一个接口。</p>
+<img title="" src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-02-19-29-28-image.png" srcset="/img/loading.gif" lazyload alt="" width="404">
+
+<p>步骤：</p>
+<ol>
+<li><p>docker run -it –name&#x3D;c3 -v &#x2F;volumn centos:7 &#x2F;bin&#x2F;bash</p>
+<p>创建启动c3数据卷容器，使用-v参数，&#x2F;volumn表示在c3中所挂载到数据卷的文件</p>
+<p>在数据卷中自动创建了一个文件用于挂载，似乎并不关心在数据卷中的文件，所以名字很随意。</p>
+</li>
+<li><p>创建启动c1，c2容器，使用–volumes-from 参数，设置数据卷</p>
+<p>docker run -it –name&#x3D;c1 –volumnes-from c3 centos:7 &#x2F;bin&#x2F;bash</p>
+<p>docker run -it –name&#x3D;c2 –volumnes-from c3 centos:7 &#x2F;bin&#x2F;bash</p>
+</li>
+</ol>
+<p>之后c1,c2中都有volumn文件，看起来是c3主导了。</p>
+</li>
+<li><p>注意的Bug</p>
+<ul>
+<li><p>用vi进入txt写入文件后，先进行ctrl+c结束写入，再:wq保存退出</p>
+</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h3 id="Docker-应用部署"><a href="#Docker-应用部署" class="headerlink" title="Docker 应用部署"></a>Docker 应用部署</h3><ul>
+<li><p>宿主机和虚拟机</p>
+<p>二者概念相辅相成</p>
+<p>二者都是在虚拟化技术环境下的概念</p>
+<p><strong>宿主机</strong>是承载虚拟机的计算机，<strong>虚拟机</strong>是在宿主机上模拟的独立操作系统环境。</p>
+<p>宿主机要运行虚拟机，就要为其管理和分配物理资源（处理器，内存，存储…）</p>
+<p>虚拟机在宿主机上的虚拟环境运行自己的操作系统和应用程序——感觉像是独立的计算机一样。</p>
+</li>
+<li><p>部署面临第一个问题——外界无法直接访问到虚拟机内的某一容器</p>
+<p>但外界可以通过访问宿主机，宿主机再访问容器</p>
+</li>
+<li><p>不过由宿主机到容器的过程没有特殊逻辑，需要实现配置——<strong>端口映射</strong></p>
+</li>
+</ul>
+<h5 id="端口映射："><a href="#端口映射：" class="headerlink" title="端口映射："></a>端口映射：</h5><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-02-20-00-26-image.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>docker run -d -p 3306:3306 -v $PWD&#x2F;conf:&#x2F;etc&#x2F;mysql&#x2F;conf.d -v $PWD&#x2F;data:&#x2F;var&#x2F;lib&#x2F;mysql -e MYSQL_ROOT_PASSWORD&#x3D;123456 –name mysql mysql:5.7</p>
+</blockquote>
+<h2 id="bug简述："><a href="#bug简述：" class="headerlink" title="bug简述："></a>bug简述：</h2><ol>
+<li><p>Docker logs -f Container_id 可以查看具体某个容器的日志，某些不显示报错的报错会在日志中报出。</p>
+</li>
+<li><p>关于没有空间</p>
+<ol>
+<li><p>du -sh *</p>
+<p>查看当前目录下各个子目录&#x2F;文件夹大小</p>
+<p>disk usage -summarize human-readable</p>
+</li>
+<li><p>df -h</p>
+<p>显示文件系统的词频空间使用情况。是整个分区的概念，磁盘分区无法进入，它是存储在文件系统的一个设备节点，用于挂载到文件系统树的特定路径上。</p>
+</li>
+<li><p>据说：某个包（vagrant）的存储过大，是因为vagrant挂载了vagrantFile所在文件夹（win下）的所有文件，只要把vagrantFile换到新建文件夹即可</p>
+<p>但我还是直接找到不能再往下走的大文件，将其删除</p>
+</li>
+</ol>
+</li>
+<li><p>关于&#x2F;var&#x2F;lib&#x2F;下没有mysql文件</p>
+<p>本应没有</p>
+<p>重装镜像，装5.7</p>
+</li>
+</ol>
+<h2 id="谷粒商城架构图"><a href="#谷粒商城架构图" class="headerlink" title="谷粒商城架构图"></a>谷粒商城架构图</h2><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-01-19-43-14-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>大致流程说明：</p>
+<ol>
+<li><p>左侧外网：用户访问到Nginx服务器，服务器访问内网的网关，网关进行路由&#x2F;认证&#x2F;限流等操作后调用业务集群中的各种微服务功能（正中间）。</p>
+</li>
+<li><p>核心微服务的功能实现需要Redis做缓存，MySQL做持久化数据库，RabbitMQ做消息队列，ElasticSearch做全文检索。将需要存储的文件云存储到阿里云OSS（中下方）。</p>
+</li>
+<li><p>对于核心微服务的管理，通过Nacos注册中心&#x2F;配置中心管理。微服务的调用链如果有某处出问题，调用Spring Cloud的业务追踪模块，外加许多其他功能完成错误提示（上方）。</p>
+</li>
+<li><p>开发人员将代码托管到Github，OP运维人员用自动化工具Jenkins从Github拉取代码后，打包成Docker镜像，再用K8s集成服务，以Docker容器来进行（最下方）。</p>
+</li>
+</ol>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="开发环境搭建"><a href="#开发环境搭建" class="headerlink" title="开发环境搭建"></a>开发环境搭建</h2><ul>
+<li><p>要求：</p>
+<ol>
+<li><p>注意Java版本</p>
+</li>
+<li><p>注意maven版</p>
+</li>
+<li><p>git</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><p>git是一个分布式<strong>版本控制</strong>系统，内容管理系统，工作管理系统</p>
+<p>用于<strong>跟踪</strong>代码和文件的<strong>变化</strong>，协助<strong>多人</strong>协作开发，并管理项目的不同<strong>版本</strong></p>
+<p>具体作用：</p>
+<ol>
+<li><p>跨区域多人协同开发</p>
+</li>
+<li><p>追踪和记载文件的历史记录</p>
+</li>
+<li><p>组织和保护源代码和文档</p>
+</li>
+<li><p>统计工作量</p>
+</li>
+<li><p>并行开发，提高效率</p>
+</li>
+<li><p>追踪记录整个软件开发过程</p>
+</li>
+<li><p>降低人为错误</p>
+</li>
+</ol>
+<p>常见的版本控制软件&#x2F;系统</p>
+<ul>
+<li><p>Git</p>
+</li>
+<li><p>SVN（subversion）</p>
+</li>
+<li><p>CVS（Concurrent Version System）</p>
+</li>
+<li><p>Visual Studio Online</p>
+</li>
+</ul>
+<p>git将项目代码存储在仓库 repository ，并记录每个文件的历史修改记录</p>
+<p>Git具有<strong>分布式特性</strong>——开发者可以在不同分支上同时工作，然后将分支合并到主要代码库。</p>
+<p>分支：从主分支（master&#x2F;main）分离出来的代码路径，可以并行开发不同功能</p>
+<p>提交：Commit 记录仓库的一个特定状态</p>
+<p>合并：Merge 将一个分支的更改合并到另一分支中</p>
+<p>拉取：Pull 从远程仓库获取更新。</p>
+<p>推送：Push 将本地的更改推送到远程仓库，使其他人看得到修改</p>
+<ul>
+<li>Git客户端负责代码提交、合并…以上功能，Github可以当做Git的可视化+web通信工具。</li>
+</ul>
+<p>版本控制分类</p>
+<ol>
+<li><p>本地版本控制：</p>
+<p>个人在本地计算机记录文件&#x2F;软件的多个版本</p>
+</li>
+<li><p>集中版本控制： 代表：SVN</p>
+<p>企业在中央服务器中存有一版，开发者基于中央服务器的某一历史版本进行开发，开发结果合并回中央服务器中。</p>
+<p>缺点：没有实现热部署——开发虽是并行的，但并不协同。</p>
+</li>
+<li><p>分布式版本控制： 代表：Git</p>
+<p>所有开发人员拥有中央服务器的同一版本所有代码，基于此开发后再提交会中央服务器进行更新</p>
+<p>相较于集中版本控制，分布式中将所有代码进行备份。且备份的代码在所有开发人员中同步更新（热部署）。</p>
+</li>
+</ol>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>工具：</p>
+<ul>
+<li><p>Git Bash：Unix和Linux风格的命令行</p>
+</li>
+<li><p>Git CMD：windows风格的命令行</p>
+<p>windows的命令行和Linux的命令行语法上略有不同——like cls &#x2F; clear</p>
+</li>
+<li><p>Git GUI：图形界面的Git</p>
+</li>
+</ul>
+<p>常用命令：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-09-10-48-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>Git理论：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-09-47-53-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>Git三个工作区域+远程仓库</p>
+<ol>
+<li><p>工作区：working 平时存放代码</p>
+</li>
+<li><p>暂存区：index 用于临时存放改动</p>
+</li>
+<li><p>资源区&#x2F;仓库区&#x2F;本地仓库：head 安全存放数据，里面有所有版本的数据</p>
+<p>又有说法表示head指向最后一次提交的结果</p>
+</li>
+<li><p>远程仓库：托管代码的服务器</p>
+</li>
+</ol>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-20-34-42-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>分支：</p>
+<p>用来将<strong>特性开发</strong>绝缘开的。</p>
+<p>创建仓库时，master是默认分支。在其他分支上进行开发，完成后需要合并到主分支上</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-20-40-58-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>创建一个叫feature_x的分支并切换过去</p>
+<blockquote>
+<p>git checkout -b feature_x</p>
+</blockquote>
+<p>切换回主分支</p>
+<blockquote>
+<p>git checkout master</p>
+</blockquote>
+<p>删除新建的分支</p>
+<blockquote>
+<p>git branch -d feature_x</p>
+</blockquote>
+<p>建立的分支需要被推送到远端仓库，不如该分支就不为他人所见</p>
+<blockquote>
+<p>推：git push origin <branch></p>
+</blockquote>
+<p>Git常用操作：</p>
+<ol>
+<li><p>初始化：</p>
+<ol>
+<li><p>创建项目：</p>
+<p>Git bash中：git init</p>
+<p>空项目结构：</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-04-10-02-25-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="367">
+</li>
+<li><p>克隆&#x2F;复制项目：</p>
+<p>Git bash中：git clone url</p>
+<p>如果是在远端服务器上的仓库：</p>
+<blockquote>
+<p>git clone username@host:&#x2F;path&#x2F;to&#x2F;repository</p>
+</blockquote>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-10-04-31-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>项目结构</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-10-08-13-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>提交操作</p>
+<img title="" src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-04-20-35-15-image.png" srcset="/img/loading.gif" lazyload alt="" width="636">
+
+<blockquote>
+<p>git add &lt;filename&gt;</p>
+<p>git add *</p>
+<p>将代码添加到暂存区</p>
+</blockquote>
+<blockquote>
+<p>git commit -m “提交代码的描述信息”</p>
+<p>将代码提交到HEAD</p>
+</blockquote>
+<blockquote>
+<p>git push origin master </p>
+<p>将在head的改动提交到远端仓库</p>
+<p>master可以替换成要推送的任何分支</p>
+</blockquote>
+</li>
+<li><p>更新与合并</p>
+<p>更新本地仓库，同步最新改动</p>
+<blockquote>
+<p>git pull</p>
+</blockquote>
+<p>在当下的工作目录中获取并合并远端的改动;或要合并其他分支到当前分支</p>
+<blockquote>
+<p>git merge <branch></p>
+</blockquote>
+<blockquote>
+<p>在这两种情况下，git 都会尝试去自动合并改动。遗憾的是，这可能并非每次都成功，并可能出现<em>冲突（conflicts）</em>。 这时候就需要你修改这些文件来手动合并这些<em>冲突（conflicts）</em>。</p>
+</blockquote>
+<p>执行命令标记合并成功</p>
+<blockquote>
+<p>git add <filename></p>
+</blockquote>
+<p>合并改动之前，可以使用如下命令预览差异</p>
+<blockquote>
+<p>git diff <source_branch> <target_branch></p>
+</blockquote>
+</li>
+<li><p>为版本添加标签</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-20-49-39-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li></li>
+<li><p>IDEA中集成</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-10-11-45-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+</li>
+<li><p>Git文件操作</p>
+<ul>
+<li><p>文件的四种状态：</p>
+<ol>
+<li>Untracked：未跟踪，表示文件还处于个人编写状态，虽在文件夹中，但没有加入Git库，不参与版本控制。</li>
+</ol>
+<p>通过git add 将状态变为Staged</p>
+<ol start="2">
+<li><p>Unmodify：文件已经入库，未修改。表示版本库中的文件内容和文件夹里完全一致。这种类型的文件有两种去处——被修改则变为Modified，如果使用git rm移出版本库，则成为untracked文件</p>
+</li>
+<li><p>Modified：文件已修改，但还没有其他操作。这种文件也有两个去处——通过git add 进入暂存区staged，或通过git checkout 丢弃（git checkout表示从库中取出文件，覆盖此文件）</p>
+</li>
+<li><p>Staged：暂存状态，执行git commit后将修改同步到库中，这是库中的文件和本地文件变为一致，文件变为unmodify；执行git reset head filename 取消暂存，文件状态为Modified</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>gitignore</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-04-10-39-36-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>免密登录：</p>
+<p>从本地仓库提交到gitee远程仓库时，避免每次输入密码。</p>
+<p>根据本地的git的信息生成公钥私钥——唯一识别当前git（git内保存有global的账户和密码）——就可以免密登录到gitee本人远程仓库。</p>
+<p>使用SSH协议：用于在不安全的网络上安全地进行远程访问，文件传输和命令执行。</p>
+<p>SSH中使用公钥私钥模式：</p>
+<blockquote>
+<p><strong>公钥和私钥文件：</strong> SSH使用公钥加密来确保通信的安全性。在用户使用SSH连接到远程服务器时，他们需要<strong>一对密钥</strong>：一个私钥保留在用户计算机上，另一个<strong>公钥嵌入在远程服务器的授权文件中</strong>。公钥和私钥通常存储在用户的主目录下的<code>.ssh</code>文件夹中，分别是<code>id_rsa</code>（私钥）和<code>id_rsa.pub</code>（公钥）。</p>
+</blockquote>
+<p>大致：我的本地保存私钥，公钥发到gitee。身份认证时我发送加密后的信息，到达gitee用私钥解密。</p>
+</li>
+<li><p>开源许可证：各种协议限制此项目对外的开源程度</p>
+<p>是否可以随意转载&#x2F;是否能够商业使用…</p>
+</li>
+</ol>
+<h4 id="IDEA集成Git"><a href="#IDEA集成Git" class="headerlink" title="IDEA集成Git"></a>IDEA集成Git</h4><ul>
+<li><p>idea新建项目绑定Git</p>
+<ol>
+<li><p>创建时确定URL</p>
+</li>
+<li><p>新项目中复制来.git文件，即可将新项目和git账户绑定</p>
+<p>因为.git是在git init时产生，并没有保留项目的任何信息，只是指向个人身份的gitee</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="谷粒项目构建"><a href="#谷粒项目构建" class="headerlink" title="谷粒项目构建"></a>谷粒项目构建</h2><blockquote>
+<p> 后台管理系统</p>
+</blockquote>
+<ol>
+<li><p>前端用开源项目——人人开源</p>
+</li>
+<li><p>后端</p>
+<ul>
+<li><p>powerDesign 设计数据库</p>
+</li>
+<li><p>基础crud代码由开源项目生成（从数据库逆向）</p>
+</li>
+</ul>
+</li>
+<li><p>系统项目结构：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-05-19-07-17-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>基础crud代码结构</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-05-19-07-58-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>项目亮点：</p>
+<ol>
+<li><p>代码生成面临缺失依赖问题：</p>
+<p>由于五个子模块都缺失类似的依赖，所以能抽离出依赖部分最好——于是用一个子模块包含需要的依赖，再导入此子模块作为依赖。</p>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>分布式-微服务</p>
+</blockquote>
+<p><big>老版本选择Spring Cloud</big></p>
+<ul>
+<li><p>注册中心：管理各个微服务</p>
+<p>Spring Cloud Netflix 中的 Eureka</p>
+</li>
+<li><p>配置中心：管理各个微服务的配置信息</p>
+<p>Spring Cloud Config</p>
+</li>
+<li><p>网关：拦截！过滤！</p>
+<p>Spring Cloud Netflix 中的 Zuul</p>
+</li>
+<li><p>短路保护：</p>
+<p>Spring Cloud Netflix 中的 Hystrix</p>
+</li>
+</ul>
+<h4 id="Spring-Cloud-Alibaba"><a href="#Spring-Cloud-Alibaba" class="headerlink" title="Spring Cloud Alibaba"></a>Spring Cloud Alibaba</h4><p>提供微服务开发的一站式解决方案，包含更强的分布式应用的必要组件</p>
+<p>更强：封装到只需要添加一些注解和少量配置。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-05-19-26-55-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><big>新版本选择Spring Cloud Alibaba</big></p>
+<ul>
+<li><p>注册中心&#x2F;配置中心</p>
+<p>Nacos</p>
+</li>
+<li><p>服务容器（限流、降级、熔断）</p>
+<p>Sentinal</p>
+</li>
+<li><p>分布式事务解决方案</p>
+<p>Seata</p>
+</li>
+</ul>
+<p><small>任用Spring Cloud</small></p>
+<ul>
+<li><p>负载均衡</p>
+<p>Ribbon</p>
+</li>
+<li><p>声明式HTTP客户端（调用远程服务）</p>
+<p>OpenFeign</p>
+</li>
+<li><p>API网关（webflux编程模式）</p>
+<p>Gateway（比Zuul更强）</p>
+</li>
+<li><p>调用链监控</p>
+<p>Sleuth</p>
+</li>
+</ul>
+<hr>
+<h3 id="by-the-way：记录bug"><a href="#by-the-way：记录bug" class="headerlink" title="by the way：记录bug"></a>by the way：记录bug</h3><p>git拉取代码的时候报错：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-05-20-03-43-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-05-20-04-00-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>解决方法：</p>
+<ol>
+<li><p>解开代理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs git">git config --global --unset http.proxy<br>git config --global --unset https.proxy<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>清理DNS缓存</p>
+<p>cmd下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ipconfig/flushdns<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><ol>
+<li><h1 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h1><p><small>用于管理注册中心和配置中心</small></p>
+<ul>
+<li><h3 id="管理中心"><a href="#管理中心" class="headerlink" title="管理中心"></a>管理中心</h3></li>
+</ul>
+<p>步骤：</p>
+<ol>
+<li><p>启动Nacos服务器——可以运行在本地&#x2F;Linux</p>
+</li>
+<li><p>Java代码中：</p>
+<ol>
+<li><p>将Nacos依赖导入微服务的pom文件——将此微服务放入注册中心，并能检测&#x2F;发现其他微服务。（统一放入common）</p>
+</li>
+<li><p>给此微服务写配置信息（目标nacos服务器的位置）</p>
+</li>
+<li><p>必要的注解（前两步都是配置资源可用，这一步是将微服务绑进注册中心）</p>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>bug记录：<strong>卡最长时间的bug</strong></p>
+<p>原委：nacos服务器启动正常，java的微服务配置没有报错，但jdk，spring-boot，spring-cloud-alibaba都是用的高版本，此时nacos无法发现微服务</p>
+<p>答案：果然是版本匹配的问题</p>
+</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E">版本说明 · alibaba&#x2F;spring-cloud-alibaba Wiki (github.com)</a></p>
+</blockquote>
+<ul>
+<li><p>原先老哥怀疑是JDK版本过高，却没有怀疑Spring-boot，Spring-cloud，Spring-cloud-alibaba虽都是高版本但能否匹配。（jdk过高可能影响微服务，也可能影响nacos&#x2F;底层用java执行，依赖jdk）</p>
+</li>
+<li><p>最后的答案是：从github官网上<strong>找到了版本匹配说明</strong>（真难找——在wiki中）</p>
+</li>
+</ul>
+<ol start="2">
+<li><p>关于版本的第二个问题</p>
+<p>原委：想把开源项目renren-fast也加入nacos，但开源项目的版本较落后且不易更改</p>
+<p>答案：按照低版本重新引入相关依赖，而非按照common统一引入</p>
+<hr>
+</li>
+</ol>
+<h3 id="配置中心"><a href="#配置中心" class="headerlink" title="配置中心"></a>配置中心</h3><p>   目的：</p>
+<ul>
+<li><p>当下的问题是：每次更改某些配置，需要改Java微服务的配置文件，并重启微服务。重启就会导致项目阻塞甚至报错，于是想要有类似热部署的功能。</p>
+</li>
+<li><p>nacos配置中心就可以将nacos中的数据实时更新到微服务的运行内存中。并没有绑定某个文件（热部署），而是<strong>覆盖</strong></p>
+<p>步骤：</p>
+</li>
+</ul>
+<ol>
+<li><p>引入依赖 nacos-config</p>
+</li>
+<li><p>原本配置文件中，添加nacos-config配置中心的ip+端口地址</p>
+</li>
+<li><p>原本配置文件中，给项目绑定配置中心的具体某一配置文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">cloud:</span><br>  <span class="hljs-attr">nacos:</span><br>    <span class="hljs-attr">discovery:</span><br>      <span class="hljs-attr">server-addr:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:8848</span><br>    <span class="hljs-attr">config:</span><br>      <span class="hljs-attr">server-addr:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:8848</span><br><span class="hljs-attr">config:</span><br>  <span class="hljs-attr">import:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">nacos:example.properties?refresh=true</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>项目中可以动态获取配置</p>
+<p> @value(“${配置项名}”)</p>
+<p> @ConfigurationProperation()</p>
+</li>
+<li><p>在Controller中添加注解 @RefreshScope 表示每次访问时自动更新配置（将配置中心的配置刷新到项目中）</p>
+</li>
+<li><p>据说：如果配置中心和当前应用的配置文件都配置了相同的项，优先用配置文件的。</p>
+<ul>
+<li><h3 id="配置中心细节"><a href="#配置中心细节" class="headerlink" title="配置中心细节"></a>配置中心细节</h3></li>
+</ul>
+<ol>
+<li><strong>命名空间</strong></li>
+</ol>
+<p>应用场景：</p>
+<ol>
+<li><p>环境隔离：对于开发、测试、上线需要不同的配置。而不可能为这些配置中同类的信息取不同的名，于是就将其大分类</p>
+</li>
+<li><p>环境隔离：对于不同微服务，分开不同配置也合理</p>
+</li>
+</ol>
+<p>没有命名空间时，默认都在public保留空间中</p>
+<p>步骤：</p>
+<ol>
+<li><p>配置文件明确命名空间（类似uuid，由nacos创建的空间确定）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-08-17-31-01-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p><strong>配置集</strong>：</p>
+</li>
+</ol>
+<p>配置集合</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-08-17-37-46-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>服务器预加载时是根据确定配置集ID加载配置的。</p>
+<p>配置集ID：DataID</p>
+<ul>
+<li>nacos服务器可以乱起，后端配置文件可以乱起，但后端需要找得到nacos的文件</li>
+</ul>
+<ol start="3">
+<li><strong>配置分组</strong></li>
+</ol>
+<p>配置分组&gt;命名空间&gt;配置集 &#x3D;&#x3D;&#x3D;&gt; 配置分组就是将一系列配置组合成一组，可以同时存在多组</p>
+<p>默认：DEFAULT_GROUP</p>
+<p>应用场景：</p>
+<p>淘宝618，双11，平时，可能需要不同的配置，且是更改全局的大配置。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-08-18-40-50-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<p>此项目的配置的配置：每个微服务创建自己的命名空间，使用配置分组区分环境：dev开发环境，test测试环境，prod生产环境</p>
+<p>写法：</p>
+<p><small>由于Spring Boot版本不同，还没查到高版本3.0的写法，于是下面是自己测出来的</small></p>
+<ul>
+<li><p>一个微服务必须在外面写清楚某些东西（不能导入）</p>
+<ul>
+<li><p>name</p>
+</li>
+<li><p>nacos服务器的ip地址</p>
+</li>
+<li><p>配置的group</p>
+</li>
+<li><p>配置的命名空间</p>
+</li>
+</ul>
+</li>
+<li><p>在此范围内，其实限制了许多，只能导入同一group同一命名空间的一些配置集。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-08-19-53-18-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>参数也可以跟到导入的后面，似乎group也可以，但没搞好</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-08-19-47-20-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<ol start="2">
+<li><h1 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h1><p><small>用于微服务之间远程调用的声明式API（封装HTTP）</small></p>
+<p>步骤：</p>
+<ol>
+<li><p>项目引入open-feign，starter.balancer依赖</p>
+</li>
+<li><p>当下微服务下编写接口（声明将用Feign访问目标微服务的Mapper）</p>
+<p>具体API：需要辨明要访问的是哪个微服务，哪个Controller的哪个方法</p>
+<p>具体而言：写明微服务的name，http的requestMapping的全路径</p>
+</li>
+<li><p>开启远程调用功能——将以上配置的资源伴随启动加入到内存中。</p>
+<p>在此，Feign对象&#x2F;接口对象，和原本Spring bean对象一致，但不同在于</p>
+<ol>
+<li><p>Feign对象<img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-08-16-17-33-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>参数更多，底层实现方法略复杂，但对上层而言还仅仅是个bean</p>
+</li>
+<li><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-08-16-19-43-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>和初始化bean对象的模式不同，需要额外指定一个注解+包扫描范围</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><h1 id="Gateway"><a href="#Gateway" class="headerlink" title="Gateway"></a>Gateway</h1><p>作用：网关——作为流量的入口，常用功能包括：路由转发、权限校验、限流控制等。</p>
+<p>            之前用zuul，但被Gateway淘汰。</p>
+<p>三大组成部分：</p>
+<ol>
+<li><p>route 路由：</p>
+<p>决定前往哪里</p>
+<p>参数id和uri</p>
+</li>
+<li><p>predicate 断言：</p>
+<p>决定哪些流量需要走此路由（作用类似urlPattern）</p>
+<p>参数繁多，且是多方位的</p>
+<p>局部举例：</p>
+<ul>
+<li><p>后置断言路由</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-09-15-32-29-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>接收一个参数，datetime类型&#x2F;ZonedDateTime类型，此断言匹配指定日期之后发生的请求。</p>
+</li>
+<li><p>前置断言路由</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-09-15-33-40-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>夹逼——用Between表示两个时间之间</p>
+</li>
+<li><p>Cookie断言路由</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-09-15-34-48-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="319">
+
+<p>接收两个参数，cookie的名称和regexp（Java的正则）</p>
+</li>
+<li><p>header断言路由</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-09-15-35-41-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>判断请求头是否含有某类信息</p>
+</li>
+<li><p>由主机host，method，path，Query查参数，IP地址</p>
+</li>
+</ul>
+</li>
+<li><p>Filter 过滤器：</p>
+<p>决定流量进入退出时的钩子函数</p>
+<p><code>和vue路由守卫、httpServlet的Filter略有不同，那里对路由到哪里并不关心，因为在进入过滤器前就明确了，于是用next或者doFilter传递，但这里由于环境是分布式集群，于是更关心具体路由到哪个服务器</code></p>
+</li>
+</ol>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-08-20-20-31-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-08-20-25-03-image.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><h3 id="Java8新特性"><a href="#Java8新特性" class="headerlink" title="Java8新特性"></a>Java8新特性</h3><p>lambda、stream、</p>
+<h4 id="lambda"><a href="#lambda" class="headerlink" title="lambda"></a>lambda</h4><ul>
+<li><p>缘由：</p>
+<p>简化定义接口的实现类的代码，但只能简化只有一个抽象方法的接口</p>
+</li>
+<li><p>写法：</p>
+<p>class classname &#x3D; () -&gt; {重写方法的具体代码}</p>
+<p>例如：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-08-52-24-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>代码中，lambda<strong>只关心最重要的方法重写的逻辑</strong>，而忽略方法定义、接口多态等已知信息。</p>
+</li>
+</ul>
+<p>由lambda函数引入概念</p>
+<h5 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h5><p>在JS中广泛应用</p>
+<ul>
+<li><p>将数据的变化过程进行抽象</p>
+<ul>
+<li><p>函数可以存储在变量中</p>
+</li>
+<li><p>函数可作为参数</p>
+</li>
+<li><p>函数可作为返回值</p>
+</li>
+</ul>
+</li>
+<li><p>函数是第一等公民（之一）</p>
+<p>传统OOP中，变量，参数，返回值都是对象（基本数据类型也可以视为对象），所以对象是第一等公民，但函数式编程中，函数不属于对象也可以传递。</p>
+</li>
+</ul>
+<p><strong>传递</strong>示例：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-09-25-25-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>方法接收一个Factory类型的参数</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-10-09-25-56-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="273">
+
+<p>Factory可用lambda表达式表示为函数</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-10-09-26-46-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="443">
+
+<p>调用方法如下：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-09-29-01-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>第二种更是一次性、简上又简</p>
+<p><strong>返回值</strong>示例：</p>
+<img title="" src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-10-09-32-02-image.png" srcset="/img/loading.gif" lazyload alt="" width="500">
+
+<p>语法简写</p>
+<ol>
+<li>函数内只有一行时：省略{}和return（不论唯一的一行是否是return）</li>
+</ol>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-09-39-49-image.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-09-44-32-image.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<p>思路：能省就省，能推断就推断</p>
+<p>由于有接口做模板限制，实现类的可变位置其实只有参数名和方法逻辑。</p>
+<h4 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h4><ul>
+<li><p>是使用lambda的前提</p>
+</li>
+<li><p>指有且<strong>只有一个抽象方法的接口</strong>，其他静态方法可以有</p>
+</li>
+<li><p>通常用@FunctionalInterface注解声明</p>
+</li>
+</ul>
+<p>常见函数式接口</p>
+<ol>
+<li><p>Predicate 断言</p>
+<p>唯一方法：test(T t)返回bool值，表示验证 t 是否符合test定义的逻辑</p>
+<hr>
+</li>
+</ol>
+<p>        by the way：</p>
+<p>        接口中的default方法：作用就是让实现类可以调用已经写好的逻辑</p>
+<p>        但问题就是：类可以实现多个接口，就容易导致default方法重名，此时需要重写重名方法。</p>
+<ol start="2">
+<li><p>Function 表示功能</p>
+<p>泛型内两个参数：&lt;返回值类型，参数类型&gt;</p>
+<p>完成符合泛型规范的功能</p>
+</li>
+</ol>
+<h3 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h3><p>当lambda表达式所要完成的业务逻辑已经存在，则直接引用对应的方法</p>
+<p>语法：</p>
+<ol>
+<li>某对象::方法名</li>
+</ol>
+<p>例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> User <span class="hljs-title function_">factoryDemo</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;还是&quot;</span>,<span class="hljs-string">&quot;99&quot;</span>); <br> &#125;<br><br><span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> factoryBean(<span class="hljs-keyword">new</span> <span class="hljs-title class_">lambdaDemo1</span>()::factoryDemo, <span class="hljs-string">&quot;德智&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>具体语法</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-10-37-04-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>静态方法（类方法）、构造方法，直接通过类名调用，普通方法（成员方法）通过对象调用</p>
+<p>可以被引用的方法是有限制的：（要求被引用的方法格式符合lambda中重写方法的格式）</p>
+<ol>
+<li><p>参数数量相同，对应位置类型兼容</p>
+</li>
+<li><p>返回值类型兼容</p>
+<p>在函数式接口中如果是void，具体实现类返回类型任意</p>
+<p>在函数式接口中如果有限制（返回int、User…），具体实现类只能返回相应的</p>
+</li>
+</ol>
+<p>以上兼容是指函数式接口的抽象方法，和被引用的某个方法之间</p>
+<p>例：</p>
+<ol>
+<li>引用静态方法</li>
+</ol>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-10-10-45-47-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="511">
+
+<ol start="2">
+<li>引用构造方法</li>
+</ol>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-10-10-51-29-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="555">
+
+<p>编译器会根据当前位置传入什么参数去自动寻找合适的构造方法</p>
+<ol start="3">
+<li>引用普通方法&#x2F;成员方法</li>
+</ol>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-10-10-56-19-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="563">
+
+<p>由于方法引用只明确方法名，所以对重载的方法进行选择是编译器自动完成的，就也是根据参数和返回值找到合适的方法</p>
+<h3 id="Stream流"><a href="#Stream流" class="headerlink" title="Stream流"></a>Stream流</h3><p>是Collection顶级父类接口中的defualt方法，目的就是简化容器操作，提高多处理器的性能</p>
+<p>关注”做什么“，而非”怎么做“</p>
+<p>感觉就是用流替代for遍历</p>
+<p>使用步骤：</p>
+<ul>
+<li><p>获取流 —— 中间操作 —— 终结操作</p>
+<p>对Stream流的操作分为中间操作和终结操作</p>
+<p><strong>中间操作</strong>：返回的任是流对象</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-15-25-47-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>终结操作</strong>：没有返回值</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-15-25-34-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>短路操作</strong>：也是终结操作，只是一旦条件命中就停止，应用于对流处理时间有限制的场景。</p>
+</li>
+<li><p>真实执行</p>
+<p><strong>lazy延迟执行</strong></p>
+<p>据说在对流的多次聚合时，中间操作并非按顺序执行，而是先缓存到某个队列中，直到碰到终结操作，才开始执行——给了并行的可能——or say 中间操作先后其实无影响。</p>
+<p><strong>底层并行</strong></p>
+<p>用 Fork&#x2F;Join 分治处理</p>
+<p><strong>本质上是回不去的</strong></p>
+<p>加并行操作并非是在流跑完一般后再跑一遍，而是加入并行队列分治跑。</p>
+<p>而一旦对流对象操作到最后（也就是终结操作完后），流对象就不能再进行任何操作了</p>
+</li>
+<li><p>API之中间操作</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-15-35-19-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>API之终结操作</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-15-35-37-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>API之收集操作</p>
+<p>语法：stream.collect(收集器)</p>
+<p>收集器明确将流的每个实体归纳成什么形式</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-15-55-41-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>by the way</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-10-16-08-34-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>参数Function类型就是典型用lambda写函数式接口的。</p>
+</li>
+</ul>
+<hr>
+<hr>
+<h3 id="商品服务"><a href="#商品服务" class="headerlink" title="商品服务"></a>商品服务</h3><ol>
+<li><h4 id="三级分类"><a href="#三级分类" class="headerlink" title="三级分类"></a>三级分类</h4><p>业务目标：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-09-16-31-27-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>数据库中要存储每个分类及其所属关系</p>
+</li>
+<li><p>后端需要做出符合层次关系的数据类型</p>
+</li>
+</ul>
+<hr>
+<p><strong>数据库</strong>：</p>
+<p>存储的每行表示某层的一个分类</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-09-16-34-47-image.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="构建理论："><a href="#构建理论：" class="headerlink" title="构建理论："></a>构建理论：</h5><p>用cat_id和层级确定此行在分类树的具体位置</p>
+<p>用parent_id确定上下层关系——树型结构</p>
+<p><code>如此一来，在确定了最上层的分类后，表中父id是最上层的就根据父安排在第二层，第三层同理，那感觉层级字段非必要，可能是为了查找性能考虑吧</code></p>
+<h5 id="查找代码逻辑："><a href="#查找代码逻辑：" class="headerlink" title="查找代码逻辑："></a>查找代码逻辑：</h5><p>如此一来，如果想要找某个顶级类的所有子类的分组，就是遍历底层用父id匹配出来。</p>
+<p>代码实现思路：</p>
+<ol>
+<li><p>流处理+过滤器+lambda滤出最上层每个实体，对最上层每个实例设置其下层子实体。</p>
+</li>
+<li><p>具体怎么设置：</p>
+<p>流处理+过滤器+lambda滤出第二层、父id是对应实体的下层实体</p>
+<p>同时由于整个分类有三层，还要考虑用递归再来一遍</p>
+</li>
+<li><p>得到的流中是设置了子类的顶级大类们，再用sorted+lambda按照某顺序排序</p>
+</li>
+<li><p>最后将流转化成列表</p>
+</li>
+</ol>
+<p><small>流处理：完成过滤（Filter）+集合内实体分别操作（map）+排序（sorted）</small></p>
+</li>
+</ol>
+<hr>
+<h3 id="解决前端发8080需要分配到后台各个端口的微服务的问题"><a href="#解决前端发8080需要分配到后台各个端口的微服务的问题" class="headerlink" title="解决前端发8080需要分配到后台各个端口的微服务的问题"></a>解决前端发8080需要分配到后台各个端口的微服务的问题</h3><ul>
+<li><p>由于前后端分离开发，且暂时不考虑完美的API文档。前端的所有xhr请求都默认发送给后台8080端口，但后台的设计是：8080只负责基础框架和crud，其他业务相关的代码按照微服务的方式分配到各个子模块——且各个微服务占有不同端口，统一注册到Nacos注册中心进行管理。</p>
+</li>
+<li><p>解决方法是：后台需要一个分流器将不同需求分流到不同微服务</p>
+<ul>
+<li><p>Gateway可以拦下所有请求</p>
+</li>
+<li><p>Gateway配合Nacos可以将请求送到Nacos注册中心的某个微服务上</p>
+</li>
+<li><p>前端需要将默认发送方式从8080改为到网关</p>
+</li>
+</ul>
+</li>
+<li><p>网关（Gateway）</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-08-58-49-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>uri</strong>：Uniform Resource Identifier 统一资源标识符</p>
+<p>用来表示互联网上资源的字符串序列</p>
+<p>uri包括两种形式：URL  URN</p>
+<p><strong>URL</strong>：统一资源定位符：</p>
+<p>表示一个资源的完整地址，协议包含：http，https，ftp，</p>
+<blockquote>
+<p>例如，<a target="_blank" rel="noopener" href="http://www.example.com/index.html">Example Domain</a> 是一个URL。</p>
+</blockquote>
+<p><strong>URN</strong> : 统一资源名称：</p>
+<p>重点在于为资源分配一个唯一的名称，而不关心资源的具体位置。</p>
+<blockquote>
+<p>例如，urn:isbn:0451450523 是一个URN，它标识了一个书籍的国际标准书号（ISBN）。</p>
+</blockquote>
+<hr>
+<p><strong>网关的负载均衡</strong></p>
+<p>网关通过将请求转发到注册中心的同种微服务的不同个体上，实现负载均衡</p>
+<p>大致流程：</p>
+<ul>
+<li><p>网关在后台配置了路由到的微服务</p>
+<blockquote>
+<p>lb:&#x2F;&#x2F;serviceName</p>
+</blockquote>
+</li>
+<li><p>当网关受到请求，首先得到注册中心关于此服务的所有实例信息。</p>
+</li>
+<li><p>根据指定的负载均衡算法（如轮询、随机、权重等），从这些实例中选择一个作为目标。</p>
+</li>
+<li><p>请求转发：</p>
+<p><big>Gateway 将接收到的请求转发到所选的目标实例，这个实例可能是多个同名服务实例中的一个。这个转发过程<strong>是透明的</strong>，客户端无需关心具体的目标实例.</big></p>
+<p>透明：暂不明是通过Feign还是原生http还是其他内部通信协议…</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="记录关于浏览器缓存Ajax的get方法结果"><a href="#记录关于浏览器缓存Ajax的get方法结果" class="headerlink" title="记录关于浏览器缓存Ajax的get方法结果"></a>记录关于浏览器缓存Ajax的get方法结果</h4><ul>
+<li><p>当多次用get+相同的url访问资源</p>
+</li>
+<li><p>服务器返回的响应信息中包含<code>Cache-Control</code>、<code>Expires</code>、<code>Last-Modified</code>等信息，表示能否进行缓存</p>
+</li>
+</ul>
+<p>破解浏览器缓存：</p>
+<ol>
+<li><p>在URL中添加唯一参数</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-17-00-57-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>默认的一个参数 t 获取当前时间戳</p>
+</li>
+<li><p>将 t 和传入参数拼接，一并传入</p>
+</li>
+</ul>
+</li>
+<li><p>设置缓存头部信息</p>
+<p>服务器可以在响应头部设置 <code>Cache-Control: no-cache</code> 和 <code>Expires: 0</code> 等头部信息，告诉浏览器不要缓存响应。</p>
+</li>
+<li><p>用POST据说不会被缓存。</p>
+<p><code>因为它们被认为是非幂等的，即可能对服务器状态产生影响，因此浏览器通常不会缓存 POST 请求的响应。</code></p>
+</li>
+</ol>
+<h4 id="关于拖拽"><a href="#关于拖拽" class="headerlink" title="关于拖拽"></a>关于拖拽</h4><p><small>简记业务逻辑</small></p>
+<ul>
+<li><p>业务逻辑都是基于Element封装好的API：</p>
+<ol>
+<li><p>拖动的视觉动画</p>
+</li>
+<li><p>钩子们&#x2F;由MVVM监听的事件</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-19-50-17-image.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>allow-drop是在每次按住鼠标拖动时进行判断，这种封装很上层，但问题也就在于太上层了——如果我要在松开鼠标的时候判断，就做不到</p>
+</blockquote>
+</li>
+<li><p>向上提供的API</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-12-08-41-31-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="440"></li>
+</ol>
+</li>
+</ul>
+<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><ul>
+<li><p><strong>拖拽时需要判断能否拖拽</strong></p>
+<p>项目的思路是总层数不能超过三层</p>
+<p>获取正在拖动的标签的最大层数，以及目的地的父节点的层数，相加后是否超过三层</p>
+<p>而如何获取最大层数？</p>
+<p>Element提供的钩子给的参数是当前的节点，于是想要挨个遍历每个子节点，只好<strong>dfs深度遍历</strong>了。</p>
+</li>
+<li><p><strong>拖拽后对后端的影响（对表的影响）</strong></p>
+<ol>
+<li><p>影响 parentId 父节点</p>
+</li>
+<li><p>影响 catLevel 当前节点层级</p>
+</li>
+<li><p>影响 sort 节点们的排序</p>
+</li>
+</ol>
+</li>
+<li><p><strong>拖拽获取信息的具体实现（全靠API提供）</strong></p>
+<p><big>核心在于真正理解Element提供的参数</big></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-20-15-31-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>三个参数分别是：</p>
+<ol>
+<li><p>正在拖动的节点</p>
+</li>
+<li><p>拖动后较近的节点（目标节点）</p>
+</li>
+<li><p>拖动节点和目标节点的关系</p>
+</li>
+</ol>
+<p><strong>钩子方法：指前端执行到某个阶段自动调用的方法，所以所有参数都是系统传入</strong></p>
+<p><img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-11-20-19-28-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="198">         ————&gt;           <img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-11-20-19-43-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="206"></p>
+<p>然后就取决于如何解构Element传递的参数</p>
+</li>
+</ul>
+<h4 id="额外业务："><a href="#额外业务：" class="headerlink" title="额外业务："></a>额外业务：</h4><ul>
+<li><p><strong>关于拖动排序</strong></p>
+<p>对于拖入inner，直接将节点合并到子节点，重排。前端没有必要的顺序，也不必调整库</p>
+<p>对于拖入after，before，后端需要保存拖动后的顺序 —— 在表中只好将拖动后同级节点全部发送给后端，后端将新排好的数据存入表中。</p>
+</li>
+<li><p><strong>关于拖动多次后一并提交到后端</strong></p>
+<p>场景分析：每次拖动都会请求后台，后台再请求数据库，对性能消耗略高</p>
+<p>业务分析：</p>
+<ul>
+<li><p>由于拖拽对后台&#x2F;表的影响无非是更新一张产品表内多行数据，前端缓存中如果有重复修改也可按照最新数据更改。</p>
+</li>
+<li><p>问题在于：缓存的部分没有及时更新到库，导致对接下来的判断没有产生影响。</p>
+<p><code>是缓存的通病————被缓存的数据无法生效</code></p>
+<p>答案：前端存储更多的数据 —— 对于每个参与变化的节点，实时更新其层级。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><small>简记后端</small></p>
+<p>前端传递的数据是：由于拖动会改变多了Category行，所以前端决定返回所有移动的行以及目的地。</p>
+<p>后端用Category[]接收，SpringMVC即可自动投影成一系列Category对象。</p>
+<p>之后分别update or 调用封装好的 updateBatch 全部更改即可</p>
+<h3 id="關於文件上傳OSS雲服務器"><a href="#關於文件上傳OSS雲服務器" class="headerlink" title="關於文件上傳OSS雲服務器"></a>關於文件上傳OSS雲服務器</h3><p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-12-09-33-47-image.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>傳統單服務器項目，文件跟隨請求到達服務器，即保存在服務器。</p>
+</li>
+<li><p>但在分佈式項目中，由於瀏覽器每次的請求會被隨機路由到不同的服務器上，導致可能找不到上次傳輸的文件。</p>
+</li>
+<li><p>版本答案是：<strong>提另準備一臺服務器</strong>用來存儲文件。將文件上傳到統一的服務器</p>
+<p>AOP？– 抽象出相同的部分統一操作。？高内聚？</p>
+</li>
+<li><p>專用文件存儲服務器的模式</p>
+<ol>
+<li><p>自建！：</p>
+<blockquote>
+<p>FastDFS（Fast Distributed File System）是一个开源的<strong>分布式文件系统</strong>，旨在提供高性能、高可用性的文件存储解决方案。它是为了解决大规模文件存储和访问的问题而设计的。FastDFS 主要用于存储大量的媒体文件（如图片、音频、视频等）以及其他类型的文件。</p>
+</blockquote>
+<p>思想似乎是有一個管理系統調度&#x2F;記錄分佈式的服務器和文件的對應關係</p>
+<hr>
+<blockquote>
+<p>vsftpd（Very Secure FTP Daemon）是一个开源的<strong>FTP 服务器软件</strong>，旨在提供一个安全、稳定、高性能的<strong>文件传输协议（FTP）服务器</strong>。它是在类 Unix 操作系统上运行的，如 Linux、FreeBSD 等，并且被广泛用于搭建 FTP 服务器，以方便文件的上传、下载和管理。</p>
+</blockquote>
+</li>
+<li><p>雲存儲：</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="分布式文件系统"><a href="#分布式文件系统" class="headerlink" title="分布式文件系统"></a>分布式文件系统</h2><p><small>命运的齿轮从此转动</small></p>
+<blockquote>
+<p>FastDFS是一个开源的分布式文件系统，实现的功能有：文件存储，文件同步，文件访问（上传、下载）</p>
+<p>核心性能：大容量存储和负载均衡问题</p>
+<p>机制：冗余备份，负载均衡，线性扩容…</p>
+</blockquote>
+<h3 id="阿里雲OSS搭建雲存儲"><a href="#阿里雲OSS搭建雲存儲" class="headerlink" title="阿里雲OSS搭建雲存儲"></a>阿里雲OSS搭建雲存儲</h3><h5 id="資源術語："><a href="#資源術語：" class="headerlink" title="資源術語："></a>資源術語：</h5><ol>
+<li><p>存儲空間 Bucket</p>
+<p>劃分出存儲文件的一個基本單元，對此基本單元可以設置相關存儲配置</p>
+</li>
+<li><p>對象&#x2F;文件 Object</p>
+<p>對象是OSS存儲數據的基本單元，對象由<strong>存儲空間内的唯一的key</strong>來標識</p>
+</li>
+<li><p>地域 Region</p>
+<p>表示OSS的數據中心所在物理位置（各個的費用不同）</p>
+</li>
+<li><p>訪問域名 Endpoint</p>
+<p>表示OSS對外服務的訪問域名，OSS以HTTP RESTful的形式對外提供服務。</p>
+<p>據説訪問不同地域所需的域名不同</p>
+</li>
+<li><p>訪問密鑰（yao） AccessKey</p>
+<p>訪問身份驗證中用到的AccessKeyId和AccessKeySecret</p>
+<p>類似Gitee的密鑰</p>
+</li>
+</ol>
+<h5 id="上傳模式"><a href="#上傳模式" class="headerlink" title="上傳模式"></a>上傳模式</h5><ol>
+<li><p>簡單思路</p>
+<p>前端提交multiPart的文件，後端java程序接受，獲取文件流后寫入OSS服務器</p>
+<p>好處：後端是必經之路，可以審核、修改、鑒權…而且後端是唯一有權利上傳的，密鑰只保存在後端即可</p>
+<p>壞處：後端壓力太大</p>
+<p><strong>简述实现</strong>：</p>
+<p>Java后台引入依赖OSS，配置对目标的识别+确认信息：</p>
+<ol>
+<li><p>OSS 服务器的对外访问端口</p>
+</li>
+<li><p>bucket的name</p>
+</li>
+<li><p>密钥id</p>
+</li>
+<li><p>密钥密码</p>
+</li>
+</ol>
+<p>依赖为容器自动注入OssClient对象，调用其流式传输方法即可完成上传。</p>
+</li>
+<li><p>地道思路</p>
+<p><big>服務器簽名后直傳</big></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-12-10-23-08-image.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>用戶向服務器獲取加密後的密鑰，添加在文件某處，直接傳輸給OSS</p>
+</li>
+<li><p><code>感覺和Gitee的區別在於，Gitee是自己上傳自己的，無需證明自己的身份，而OSS系統則需要驗證用戶能否上傳，於是還得後端插一脚</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="关于文件上传OSS"><a href="#关于文件上传OSS" class="headerlink" title="关于文件上传OSS"></a>关于文件上传OSS</h4><ol>
+<li><p>前端收集到文件&#x2F;表单信息后，对文件&#x2F;表单进行<strong>初步校验。</strong></p>
+<p>校验很不简单——构造rules，写validator… </p>
+</li>
+<li><p>前端在之前需要先获取到后台的<strong>认证标签</strong>，用于在向OSS传输文件时标识身份</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-12-19-28-52-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-12-19-29-12-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<h4 id="关于前端校验"><a href="#关于前端校验" class="headerlink" title="关于前端校验"></a>关于前端校验</h4><ol>
+<li><p>前端数据校验的目的有：减少无效的网络请求、提高用户体验（更快返回校验错误）…</p>
+</li>
+<li><p>但由于前端校验容易被绕过，所以后端校验才是最终的屏障</p>
+</li>
+</ol>
+<ul>
+<li><p>可能的校验技术：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230816151006236.png" srcset="/img/loading.gif" lazyload alt="image-20230816151006236"></p>
+</li>
+</ul>
+<h4 id="关于后台校验"><a href="#关于后台校验" class="headerlink" title="关于后台校验"></a>关于后台校验</h4><ol>
+<li><p>确保数据在进入数据库或进行后续处理之前的合法和安全。校验的对象不止需求手册上来自前端的潜在异常输入，也有绕过前端的其他输入。</p>
+</li>
+<li><p><code>Hibernate Validator 是实现了 Java Bean Validation（JSR 303）规范的一个库。因此，它实际上是 JSR 303 的一个具体实现。</code></p>
+</li>
+</ol>
+<ul>
+<li><p>JSR303：Java规范请求（Java Specification Request）定义了java中对Bean的验证规范。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-12-17-25-27-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-12-19-30-52-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>此包下含标识各种规范的注解</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-12-17-26-46-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="214">
+</li>
+<li><p>后台的校验逻辑：</p>
+<p>当通过RequestBody接收到实体对象，会按照实体类中，属性上声明的校验注解来验证。</p>
+<blockquote>
+<p>需要对需要校验的接收对象标注 @Valid 标签</p>
+</blockquote>
+<ul>
+<li><p>后台验证不过的请求：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-12-19-31-55-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>400：服务器不理解请求</p>
+<ul>
+<li><p>bad request 错误的请求——参数错误没法接受–&gt;校验不过</p>
+</li>
+<li><p>invalid hastname 域名不存在</p>
+</li>
+</ul>
+<p>400还未执行到controller就停了</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>统一异常处理：</p>
+<p><small>本质是封装原生异常，封装成更符合业务的异常</small></p>
+</li>
+<li><p>简单异常处理：</p>
+<ul>
+<li><p>用@Valid声明的RequestBody，通过就近声明BindingResult可以获取到JSON投影对象的结果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/Demo&quot;)</span><br>    <span class="hljs-keyword">public</span> R <span class="hljs-title function_">Demo</span><span class="hljs-params">(<span class="hljs-meta">@Valid</span> <span class="hljs-meta">@RequestBody</span> CategoryEntity category, BindingResult result)</span> &#123;<br><br>        <span class="hljs-keyword">if</span> (result.hasErrors()) &#123;<br>            HashMap&lt;String, String&gt; objectObjectHashMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>            List&lt;FieldError&gt; fieldErrors = result.getFieldErrors();<br>            fieldErrors.stream().forEach((item) -&gt; &#123;<br>                <span class="hljs-type">String</span> <span class="hljs-variable">defaultMessage</span> <span class="hljs-operator">=</span> item.getDefaultMessage();<br>                objectObjectHashMap.put(item.getField(), defaultMessage);<br>            &#125;);<br>            System.out.println(<span class="hljs-string">&quot;YES&quot;</span>);<br>            <span class="hljs-keyword">return</span> R.error(<span class="hljs-number">400</span>, <span class="hljs-string">&quot;测试用例1&quot;</span>).put(<span class="hljs-string">&quot;data&quot;</span>,objectObjectHashMap);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> R.ok(<span class="hljs-string">&quot;我们意念合一！&quot;</span>);<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>声明了BindingResult后——@Valid接收错误报异常的情况就被BindingResult屏蔽了</p>
+<p><small>声明了一个形参——重写了全部异常处理</small></p>
+</li>
+</ul>
+</li>
+<li><p>validate 自定义规则</p>
+<p>通过写正则</p>
+</li>
+</ul>
+<h5 id="统一异常处理："><a href="#统一异常处理：" class="headerlink" title="统一异常处理："></a>统一异常处理：</h5><ul>
+<li><p>由于假如对每个Controller的方法都用BindingResult异常处理，有点重复有点麻烦</p>
+</li>
+<li><p>答案是：让程序默认报自定义错——不用BR重写，而是全局地统一重写报错操作</p>
+</li>
+</ul>
+<p>要点：</p>
+<ol>
+<li><p>在外面定义的全局异常类需要几个必备参数（配置）</p>
+<ul>
+<li><p>整个异常类——明确包扫描范围</p>
+<p>@ControllerAdvice就是表示异常处理类</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230816170221767.png" srcset="/img/loading.gif" lazyload alt="image-20230816170221767"></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230816170308419.png" srcset="/img/loading.gif" lazyload alt="image-20230816170308419"></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230816170405581.png" srcset="/img/loading.gif" lazyload alt="image-20230816170405581"></p>
+</li>
+</ul>
+<p>通过给一个java类加注解，就将所有目的范围内的异常全部引流过来——钩子？AOP？过滤器？…在Spring的思想中，这个注解一定<strong>将类声明成bean对象</strong>加载到容器，在底层报异常时调用此bean的方法。</p>
+<p><big>避免面向对象，而是面向切面</big>——<small>仅仅一个注解，便只需要关心业务逻辑</small></p>
+</li>
+</ol>
+<ul>
+<li><p>每个方法——明确针对的异常</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230816171136146.png" srcset="/img/loading.gif" lazyload alt="image-20230816171136146"></p>
+</li>
+</ul>
+<h5 id="用好错误码："><a href="#用好错误码：" class="headerlink" title="用好错误码："></a>用好错误码：</h5><p>思路：用<strong>枚举类型</strong>将不同错误类型对应不同错误码，前端接收各种各样错误码。</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230816172515854.png" srcset="/img/loading.gif" lazyload alt="image-20230816172515854"></p>
+<p>一种枚举类型相当于一个对象，内部都是静态属性（还是面向对象啦）</p>
+<h4 id="分组校验："><a href="#分组校验：" class="headerlink" title="分组校验："></a>分组校验：</h4><ul>
+<li><p>由于一张表的某一字段在不同业务中的校验模式不同（id在新增行时可为null，在删改时不能为null），于是需要将每张Entity表的每个属性的每个校验注解增加分组。最后在Servlet方法接收参数时声明具体分组</p>
+</li>
+<li><p>Attention：</p>
+<p>每个分组的定义方法是：用一个接口声明，用接口的字节码对象做具体识别符。</p>
+</li>
+</ul>
+<h4 id="自定义校验："><a href="#自定义校验：" class="headerlink" title="自定义校验："></a>自定义校验：</h4><p>步骤：</p>
+<ol>
+<li>编写自定义校验注解</li>
+<li>编写自定义校验器</li>
+<li>关联自定义校验器和自定义注解</li>
+</ol>
+<p>思路：</p>
+<ul>
+<li><p>编写注解：和其他校验注解声明同样的元注解，声明同样的插槽&#x2F;参数</p>
+</li>
+<li><p>编写校验器：</p>
+<ul>
+<li><p>校验器是实现校验器接口的一个类，它的核心作用是：拿到校验注解得到的参数，在校验器中完成逻辑判断</p>
+</li>
+<li><p>怎么拿到？—— 泛！</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230816191517333.png" srcset="/img/loading.gif" lazyload alt="image-20230816191517333"></p>
+<p><small>之前对泛型传参的理解，只有泛型能够传递类型（baseMapper由Entity类似确定上层）</small></p>
+<p>此时泛型传入一个注解类型，由此类型即可得到其被传入的参数</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230816192114204.png" srcset="/img/loading.gif" lazyload alt="image-20230816192114204"></p>
+<p>可见：注解不同于类和类对象，其在内存中似乎是一个唯一的类型。</p>
+</li>
+</ul>
+</li>
+<li><p>关联二者：</p>
+<ul>
+<li><p>谁是在主程序中能够被扫描到的？：注解——于是需要在声明注解时绑定校验器</p>
+<p>感觉双绑有点多余…</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="SPU-and-SKU"><a href="#SPU-and-SKU" class="headerlink" title="SPU and SKU"></a>SPU and SKU</h3><ol>
+<li><p>SPU ( Single Product Unit ) : </p>
+<p>单独产品单元：具有相同基本属性和特征的商品集合</p>
+</li>
+<li><p>SKU（Stock Keeping Unit）：</p>
+<p>库存单位：对具体产品进行编码和表示</p>
+</li>
+<li><p>一个SPU可能包含多个SKU：例如：S20是SPU，黑色128g和绿色256g分别是一个SKU。</p>
+</li>
+</ol>
+<h3 id="基本属性（规格参数）and-销售属性"><a href="#基本属性（规格参数）and-销售属性" class="headerlink" title="基本属性（规格参数）and 销售属性"></a>基本属性（规格参数）and 销售属性</h3><ol>
+<li><p>SPU对应的属性就是基本属性</p>
+</li>
+<li><p>区分不同SKU的属性就是销售属性</p>
+</li>
+</ol>
+<ul>
+<li><p>特征：</p>
+<p>基本属性和销售属性都能被各自的<strong>三级分类</strong>组织起来</p>
+<img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230816195600137.png" srcset="/img/loading.gif" lazyload alt="image-20230816195600137" style="zoom: 50%;" /></li>
+</ul>
+<hr>
+<hr>
+<h3 id="数据库的逻辑删除"><a href="#数据库的逻辑删除" class="headerlink" title="数据库的逻辑删除"></a>数据库的逻辑删除</h3><ul>
+<li><p>当对某表进行删除时，没有实质上删除数据库中数据，而是通过将某个字段设置为反，或者其他信息，来表示对上不可见。</p>
+</li>
+<li><p>分析：如此一来：关于这个字段的查询需要凌驾于许多SQL之上，比如select，delete，update，insert都需要判断此字段，需要一个对所有SQL都管理的工具</p>
+</li>
+<li><h3 id="myBatis-Plus"><a href="#myBatis-Plus" class="headerlink" title="myBatis-Plus"></a>myBatis-Plus</h3><p>对于自动注入的SQL</p>
+<p>实际上，mp的模式是：<strong>基于接口的映射</strong></p>
+<p>通过<strong>继承通用的Mapper接口</strong>来实现数据库操作，避免手写大量的CRUD代码</p>
+<p>so my question is —— 表和表不一样，继承下来的方法不可能都不同吧？</p>
+<p>答案：<strong>通过泛型传递数据</strong></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-16-35-10-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>Service层的实现类继承了一个大接口，用泛型传递了这个Service要操作的表。</p>
+<p>于是针对这张表的CRUD代码已经确定</p>
+<p><small>一个问题是：主键是谁在Java的entity对象中体现不来，这在mp的默认规则是：叫id的是主键，或者在entity的主键上加注解@TableId声明主键</small></p>
+</li>
+</ul>
+<p>mp逻辑删除：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-11-16-41-56-image.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="分布式高级篇"><a href="#分布式高级篇" class="headerlink" title="分布式高级篇"></a>分布式高级篇</h2><h3 id="ElasticSearch"><a href="#ElasticSearch" class="headerlink" title="ElasticSearch"></a>ElasticSearch</h3><p>是一个分布式搜索引擎</p>
+<p><code>Elasticsearch可以为所有类型的数据提供实时的搜索和分析，包括结构化文本、非结构化文本、数字数据或地理空间数据。Elasticsearch都能够以快速搜索的方式有效地对其进行存储和建立索引（search其实就是对索引的快速查找）。 ElasticSearch不仅可以进行简单的数据检索，还可以聚合信息来发现数据中的趋势和模式。 随着数据和查询量的增长，Elasticsearch的分布式特性可以使部署的集群随之无缝地扩容。</code></p>
+<p>应用场景：</p>
+<ol>
+<li><p>为应用（APP）或网站添加内容搜索框 | 全文检索</p>
+</li>
+<li><p>存储和分析日志、监测值、和安全事件数据 | ELK系统</p>
+</li>
+<li><p>使用机器学习自动实时为数据行为建模</p>
+</li>
+</ol>
+<p>几个ES相关技术关键词：</p>
+<p>全文检索，倒排索引，封装Lucene jar包，ELK：ElasticSearch+Logstach+Kibana</p>
+<hr>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-18-10-37-25-image.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-18-10-37-57-image.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="项目搭建Nginx服务器"><a href="#项目搭建Nginx服务器" class="headerlink" title="项目搭建Nginx服务器"></a>项目搭建Nginx服务器</h3><p>搭建背景 —— <strong>动静分离</strong> ：</p>
+<p>如果将动态资源和静态资源全都部署在Tomcat服务器上，则对业务的请求和对静态资源的请求全都到达Tomcat服务器，但考虑到<strong>服务器可贵的并发性能</strong>，应该主要交给业务逻辑。于是需要将对静态资源的请求分配到其他服务器。</p>
+<p>动静分离：</p>
+<p>静：图片，JS，CSS等静态资源（以实际文件存在）</p>
+<p>动：服务器需要处理的请求（以代码存在）</p>
+<hr>
+<p>项目的后台管理系统是vue，但将首页等页面放到Tomcat中（各个微服务的resource）</p>
+<p>即：每个微服务不仅有后端逻辑，也内聚了前端的页面</p>
+<p>核心：用 <strong>thymeleaf</strong> 模板引擎</p>
+<blockquote>
+<p>thymeleaf是一款用于渲染XML&#x2F;XHTML&#x2F;<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=HTML5&spm=1001.2101.3001.7020">HTML5</a>内容的模板引擎。类似JSP</p>
+</blockquote>
+<h3 id="Thymeleaf"><a href="#Thymeleaf" class="headerlink" title="Thymeleaf"></a>Thymeleaf</h3><p>作用类似 JSP，是一种写html时插入java对象（属性）的语法</p>
+<p>具体而言：</p>
+<p>在Tomcat服务器的resource资源中写有html文件</p>
+<p>文件中通过${}插槽，将内部的内容替换为Controller中插入的同名内容</p>
+<img src="file:///C:/Users/吴松林/AppData/Roaming/marktext/images/2023-08-18-16-09-48-image.png" srcset="/img/loading.gif" lazyload title="" alt="" width="418">
+
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-18-16-10-03-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>return 表示要进入某个视图 xxx.html</p>
+<p>某处的配置文件设置有默认前缀后缀 于是可以直接写html文件名</p>
+<ul>
+<li><p>静态资源存放在static文件夹下，即可按照路径直接访问</p>
+</li>
+<li><p>页面放在templates下，直接访问</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-18-16-26-21-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>springBoot为thymeleaf进行了自动配置 —— 直接访问端口，自动寻找index.html</p>
+</li>
+</ul>
+<h2 id="搭建域名访问环境"><a href="#搭建域名访问环境" class="headerlink" title="搭建域名访问环境"></a>搭建域名访问环境</h2><ul>
+<li><p>正规流程：</p>
+<ol>
+<li><p>购买域名</p>
+</li>
+<li><p>买一台服务器，可以用虚拟专用服务器&#x2F;云服务器，服务器的操作系统是Linux</p>
+</li>
+<li><p>设置域名解析：将域名指向服务器的IP地址</p>
+</li>
+<li><p>服务器上安装web服务器，如Nginx，Tomcat…</p>
+</li>
+<li><p>配置服务器路由：确保将访问服务器的请求路由到web服务器&#x2F;上传的文件</p>
+</li>
+<li><p>设置安全性：配置防火墙、SSL证书等</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="正向代理和反向代理："><a href="#正向代理和反向代理：" class="headerlink" title="正向代理和反向代理："></a>正向代理和反向代理：</h4><p><code>正向代理反向代理作用在同一位置，区别在于封装（代理）的方向</code></p>
+<p>正向代理：服务器代理客户端，去访问原本客户端访问受限的资源</p>
+<p>反向代理：服务器代理后端集群，作为集群的入口&#x2F;门面让客户端访问</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-18-17-13-02-image.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h2><p><small>对一个系统&#x2F;微服务，在一定的软硬件环境下（linux，4g内存，4核cpu），能够承受的最大负荷量（系统瓶颈）</small></p>
+<p>在压测得出一个系统的瓶颈后，可以通过负载均衡等操作，避免系统压力过大-宕机</p>
+<ul>
+<li><p>压力测试可以发现些单线程场景下不会暴露的<strong>问题</strong></p>
+<ol>
+<li><p><strong>内存泄漏</strong> —— 程序执行中创造了过多对象（占用太多内存）而没有复用</p>
+<p><code>内存泄漏（Memory Leak）是指在计算机程序中，分配的内存空间在不再被程序使用的情况下未能释放，从而导致系统中的可用内存逐渐减少，最终可能导致系统性能下降甚至崩溃。</code></p>
+<p>引发原因：</p>
+<ol>
+<li><p>未释放分配的内存：</p>
+<p>当不再需要某对象&#x2F;某处内存时，没有调用释放内存的函数</p>
+</li>
+<li><p>循环引用：</p>
+<p>对象之间形成了循环引用，即比例引用导致无法被垃圾回收机制正确处理，从而无法释放内存</p>
+</li>
+<li><p>未关闭资源：</p>
+<p>例如文件、网络连接、熟即可连接没有正确关闭，导致资源任然被程序占用，且内存任然被占用</p>
+</li>
+<li><p>缓存未清理：</p>
+<p>由于缓存机制导致大量数据没有被清理而导致占用内存</p>
+</li>
+<li><p>异常退出：</p>
+<p>异常退出导致释放资源和内存的机会被忽略</p>
+</li>
+</ol>
+</li>
+<li><p><strong>并发与同步问题</strong> </p>
+<ul>
+<li>并发：由于多个线程同时执行，导致资源竞争、数据不一致等其他意外行为</li>
+<li>同步：为了解决并发问题，确保多个线程安装顺序执行</li>
+</ul>
+<p>常见的并发和同步问题：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230820170303187.png" srcset="/img/loading.gif" lazyload alt="image-20230820170303187"></p>
+</li>
+</ol>
+</li>
+<li><p>压测指标</p>
+<ol>
+<li><p>TPS |Transaction per second 每秒完成交易&#x2F;事务数</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\Typora\typora-user-images\image-20230820170857888.png" srcset="/img/loading.gif" lazyload alt="image-20230820170857888"></p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="Jmeter"><a href="#Jmeter" class="headerlink" title="Jmeter"></a>Jmeter</h4><p>压测工具，使用逻辑是：</p>
+<p>底层创建<strong>线程池</strong> —— 线程组中每个线程并非对应本机一个端口，而是通过Jmeter创建的线程池完成通信。线程池或许在必要的情况下利用多个线程吧</p>
+<h3 id="压测："><a href="#压测：" class="headerlink" title="压测："></a>压测：</h3><ul>
+<li><p>影响性能的考虑点：</p>
+<ol>
+<li><p>数据库：</p>
+<ol>
+<li><p>连接池管理</p>
+<ul>
+<li><p>合理的连接数限制，过多的连接数在维持中降低了性能，过低的连接数会导致排队。</p>
+</li>
+<li><p>连接超时设置</p>
+<p><code>合理的连接超时时间可以防止应用程序陷入无响应状态。</code></p>
+</li>
+</ul>
+</li>
+<li><p>关于预编译</p>
+<p><code>使用预编译语句（Prepared Statements）来执行数据库查询。预编译语句可以减少每次查询的解析时间，提高执行效率。</code></p>
+</li>
+<li><p>SQL语句层面的优化</p>
+<ul>
+<li><p>合理使用索引：使用索引缩短查询时间，过多使用导致维护成本过高</p>
+</li>
+<li><p>对于大批量的数据操作，考虑使用批量操作减少交互次数</p>
+</li>
+</ul>
+</li>
+<li><p>使用缓存机制</p>
+<p><code>对于频繁读取但不经常变动的数据，可以考虑使用缓存机制，如内存缓存或分布式缓存。</code></p>
+</li>
+</ol>
+</li>
+<li><p>应用程序</p>
+</li>
+<li><p>中间件</p>
+<ol>
+<li><p>Nginx</p>
+</li>
+<li><p>网关</p>
+</li>
+<li><p>Tomcat</p>
+</li>
+</ol>
+</li>
+<li><p>网络，带宽，操作系统</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><big>性能分析，就是<strong>监控分析</strong>某个程序占用内存、CPU、线程、耗时…需要了解Java程序执行过程 ——<strong>JVM</strong>内存模型</big></p>
+<h4 id="JVisualVM"><a href="#JVisualVM" class="headerlink" title="JVisualVM"></a>JVisualVM</h4><p>动态检测内存工具</p>
+<p>其中，visual GC插件可以检测Minor GC，Full GC等行为</p>
+<h5 id="中间件对性能的影响："><a href="#中间件对性能的影响：" class="headerlink" title="中间件对性能的影响："></a>中间件对性能的影响：</h5><p><code>由于在项目环境中，请求的传发流程是：浏览器发送请求先到达Linux虚拟机（192.168.56.10）中的Nginx（80端口），Nginx完成负载均衡，动静分离，将必要的请求转发到Gateway网关，网关通过配置文件各种断言匹配所来的请求，将其路由到不同微服务，最终执行后台逻辑代码。</code></p>
+<p>ATTENTION：</p>
+<p><strong>为什么要原路返回</strong> ？ 因为要对上层屏蔽细节？</p>
+<ol>
+<li><p>Nginx</p>
+<p>检测方法：</p>
+<ol>
+<li><p>用Jmeter直接向Nginx服务器发送请求（不会路由下去的请求，由于Nginx只能识别对域名的访问，于是只要直接对IP地址访问就不会被路由匹配），测试响应的时间、吞吐量…</p>
+</li>
+<li><p>由于Nginx在docker中，通过命令：docker stats查看容器的性能</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-24-20-29-01-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+</li>
+<li><p>Gateway</p>
+<p>检测方法：</p>
+<ol>
+<li><p>Jmeter向网关发送请求，检测响应的时间、吞吐量…</p>
+</li>
+<li><p>由于Fateway是Java进程，可以用JvisualVM进行可视化检测</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>结果：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-24-20-41-53-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>访问网关大概时间13s，直接访问Java后台时间大概10s，于是访问网关+简单服务大概是二者之和</p>
+<p>由于访问时间大致翻倍了，导致吞吐量大致砍一半了—— 线程数是一定的，每个线程耗时长导致来回次数少。</p>
+<p>结论：</p>
+<ul>
+<li><p>中间件越多，性能损失越大</p>
+</li>
+<li><p>性能大多都损失在性能交互</p>
+</li>
+<li><p>目标优化方向：</p>
+<ol>
+<li><p>增强中间件的吞吐量</p>
+</li>
+<li><p>之间的传输效率提高</p>
+<p>更好的网线，效率更高的传输协议…</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-24-20-49-08-image.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<hr>
+<hr>
+<hr>
+<p>myComputer测试结果</p>
+<ol>
+<li><p>Nginx</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-15-39-32-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-15-47-36-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>测试发现：</p>
+<p>正常：</p>
+</li>
+</ol>
+<ul>
+<li><p>Nginx对CPU的消耗较高，网络IO也较高</p>
+<p>因为Nginx的作用只是接收请求完成匹配进行路由</p>
+<p>关键在于：需要有更多的线程来接收各种请求，所以CPU需要在线程之间切换跑</p>
+<p>不正常：</p>
+</li>
+<li><p>内存占用过高（视频里只有1.5兆）</p>
+<p>盲目分析：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-15-51-27-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>我的吞吐量为13W，视频中只有2k，可能是由于请求量太多导致的</p>
+</li>
+<li><p>当我关闭了Jmeter对Nginx的请求，发现CPU使用立马为0了，但内存依旧1个G，但重启Nginx后内存就清空了</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p>Gateway</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-16-16-52-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-16-17-09-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-16-19-52-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>测试发现：</p>
+<p>正常：</p>
+<ul>
+<li>CPU利用率很高（维护的线程数很多），内存占用不高</li>
+</ul>
+</li>
+<li><p>简单服务</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-16-27-18-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-16-27-28-image.png" srcset="/img/loading.gif" lazyload><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-16-27-38-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-16-28-04-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>测试发现：</p>
+<p>正常：</p>
+<ul>
+<li>由于没用复杂的运算逻辑，只有高高的线程数，导致CPU不高也不低，内存较低</li>
+</ul>
+</li>
+<li><p>Gateway+简单服务、</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-16-39-13-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-16-39-26-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>全链路：</p>
+<ol>
+<li>简单服务（直接返回String）</li>
+</ol>
+</li>
+</ol>
+<p>      <img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-17-11-17-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-17-11-31-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>        2. 涉及数据库的服务</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-17-19-01-image.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-17-19-16-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>        3. 对首页的直接访问</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-17-30-27-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>        4. 对首页完全加载的访问（每张静态图片也去访问Tomcat）</p>
+<p>吞吐量为10</p>
+<p>sumUp</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-17-43-23-image.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>所以：主要的性能损耗——</p>
+<ul>
+<li><p>发生在<strong>业务逻辑</strong>上</p>
+</li>
+<li><p>发生在<strong>加载静态资源</strong>上</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<p> @硅谷测试结果</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-17-53-20-image.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h2><p>场景描述：</p>
+<ul>
+<li><p>老版本业务部署是：浏览器的一个基础页面请求要过Nginx，Gateway才能到达Tomcat，并且一次页面请求中，html中还包含其他静态资源的请求，当将其部署在Tomcat时，第一次的页面请求就会连带众多对Tomcat的请求。</p>
+<p>不仅导致后台Tomcat占用了许多线程，也必须跑完Nginx-Gateway全套。</p>
+<p>当一个用户进行访问，占用了大量Tomcat线程，导致第二个用户的请求时延增加，往后甚至导致Tomcat宕机。</p>
+</li>
+</ul>
+<p>动静分离：</p>
+<ul>
+<li><p>将不需要过业务逻辑的请求在业务部署的最前端就返回掉，尽量不占用任何不必要的资源 —— 在Nginx中部署静态资源。</p>
+</li>
+<li><p>做法：</p>
+<ol>
+<li><p>将项目的静态资源放在Nginx中</p>
+</li>
+<li><p>定义Nginx能够扫描到的规则：规定&#x2F;static&#x2F;**的所有请求都有Nginx直接返回</p>
+<p><big><span style="color:red"><strong>注意Nginx的规则</strong></span></big></p>
+</li>
+</ol>
+</li>
+</ul>
+<p>动静分离后的压测：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-20-03-17-image.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="缓存！"><a href="#缓存！" class="headerlink" title="缓存！"></a>缓存！</h3><p>适合存入缓存的数据</p>
+<ol>
+<li><p>及时性、数据一致性要求不高的</p>
+<p>比如物流信息对及时性要求不高</p>
+<p>数据一致性：在数据库的真实信息和查询得到的信息是否一致</p>
+</li>
+<li><p>访问量大且更新频率不高的数据（读多，写少）</p>
+</li>
+</ol>
+<p><strong>配合缓存的读模式：</strong></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-20-30-30-image.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="如何实现缓存："><a href="#如何实现缓存：" class="headerlink" title="如何实现缓存："></a>如何实现缓存：</h4><ol>
+<li><p><strong>本地缓存</strong></p>
+<p>思路：</p>
+<p>对于要调用的方法：在第一次调用后将结果保存为临时变量，下次调用时现场检查变量是否为null即可</p>
+<p>将一堆变量集合到一起就是一个<strong>map</strong>。</p>
+<p>定义：</p>
+<p>本地缓存：和用户线程存储在同一个栈帧中的数据</p>
+<p>问题：</p>
+<p>在单服务器模式下，OK，但是在分布式集群模式下存在弊端</p>
+<ol>
+<li><p>每台服务器都需要本地缓存同样的数据。</p>
+</li>
+<li><p>如果要更改缓存的数据，在单体服务器时，一次同步刷新即可，但在集群模式下，需要全部大改，并且如果是通过请求重新访问数据库来刷新数据，一次刷新只能更改随即一台服务器的缓存，难以实现全部刷新。</p>
+</li>
+</ol>
+</li>
+<li><p><strong>分布式缓存—Redis</strong></p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-08-25-20-59-44-image.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<p>项目的做法：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-09-04-18-47-56-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>就是从判断本地有无缓存转化到判断redis有无缓存</p>
+<p>潜在问题：（缓存失效）</p>
+<ul>
+<li><p><strong>缓存穿透</strong>：大并发查询缓存中不存在的信息。每个线程都跑了一次数据库，但却因为查不到信息导致后来同样的请求仍需跑数据库</p>
+<ul>
+<li><p>风险：</p>
+<p>数据库压力瞬时增大，导致崩溃</p>
+</li>
+<li><p>解决：</p>
+<p>将null值缓存，并加入短暂过期时间</p>
+<p>短暂就是为了防止一时的缓存穿透，不能时间过长是因为有可能数据库中真的更新到词条数据，于是需要Redis同步更新。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>缓存雪崩</strong>：当缓存中的key采用了相同的过期时间，缓存在某一时刻同时失效，导致请求全部转发到DB。</p>
+<ul>
+<li><p>风险：</p>
+<p>雪崩——原本程序正常运行，某时刻redis压力突然减少，数据库压力猛增</p>
+</li>
+<li><p>解决：</p>
+<p>失效时间分散</p>
+<p>动态设置热点的失效时间</p>
+<ul>
+<li><p><strong>缓存击穿</strong>：当一个超级热点的key过期了，但过期后的某一时刻被高并发的访问，由于第一个访问数据库的线程是有时延的，还来不及放进redis中，导致高并发的请求全部落到数据库</p>
+<ul>
+<li><p>风险：</p>
+<p>在一个热点数据高并发爆炸访问——击穿</p>
+</li>
+<li><p>解决：</p>
+<p>加锁——高并发导致的问题都可通过加锁来降低性能，提高可用性</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="缓存击穿之加锁方法"><a href="#缓存击穿之加锁方法" class="headerlink" title="缓存击穿之加锁方法"></a>缓存击穿之加锁方法</h3><h1 id="回来吧谷粒商城！"><a href="#回来吧谷粒商城！" class="headerlink" title="回来吧谷粒商城！"></a>回来吧谷粒商城！</h1><h3 id="缓存的使用："><a href="#缓存的使用：" class="headerlink" title="缓存的使用："></a>缓存的使用：</h3><p>一般数据库只承担数据持久化的工作，而数据读取需要给数据库降压</p>
+<ul>
+<li><p>哪些数据适合存入缓存？</p>
+<ul>
+<li><p>即时性、数据一致性要求不高的（面临 缓存一致性 问题）</p>
+</li>
+<li><p>访问量大且更新频率不高的数据</p>
+</li>
+</ul>
+</li>
+<li><p>缓存部署在项目中的位置：</p>
+<p><img src="C:\Users\吴松林\AppData\Roaming\marktext\images\2023-11-29-23-40-24-image.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果所有请求都需要先跑redis，redis的并发程度需要巨高无比</p>
+</li>
+</ul>
+<h3 id="Spring-Cache"><a href="#Spring-Cache" class="headerlink" title="Spring Cache"></a>Spring Cache</h3><blockquote>
+<p>由于手动操作Redis的代码很多都是重复的 &#x2F; 固定的，这就是定义接口 + 实现类的意义所在</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>guli-mail学习笔记</div>
+      <div>http://example.com/2025/04/20/my谷粒商城/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
